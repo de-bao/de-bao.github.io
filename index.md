@@ -6,8 +6,8 @@ description: Baud的个人网站 - 分享技术见解和生活思考
 
 <div class="home-hero">
     <div class="container">
-        <h1 class="floating">欢迎来到我的个人网站</h1>
-        <p>{{ site.description }}</p>
+        <h1 class="floating">Hello，大家好！</h1>
+        <p style="font-size: 1.3rem; margin-top: 1rem;">我是Baud，欢迎来到我的个人空间</p>
         <div style="margin-top: 2rem;">
             <a href="{{ '/blog/' | relative_url }}" class="read-more" style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 30px; backdrop-filter: blur(10px);">
                 探索博客 <i class="fas fa-arrow-right"></i>
@@ -17,149 +17,261 @@ description: Baud的个人网站 - 分享技术见解和生活思考
 </div>
 
 <div class="container">
+    <!-- 统计数据 -->
+    <div class="stats-grid" style="margin-bottom: 3rem;">
+        <div class="stat-card">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">项目经验</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-label">技术文章</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="5">0</div>
+            <div class="stat-label">年开发经验</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="1000">0</div>
+            <div class="stat-label">GitHub Stars</div>
+        </div>
+    </div>
+
     <!-- 关于我 -->
     <section class="home-section fade-in">
         <h2>👨💻 关于我</h2>
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">{{ site.author.bio }}</p>
-        <p style="font-weight: 600; margin-bottom: 1rem;">目前专注于：</p>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-code"></i></div>
-                <h3>Web 开发</h3>
-                <p>全栈开发，构建现代化Web应用</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-rocket"></i></div>
-                <h3>开源项目</h3>
-                <p>贡献开源，分享技术成果</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-pen-fancy"></i></div>
-                <h3>技术写作</h3>
-                <p>分享知识，记录成长历程</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
-                <h3>创新思维</h3>
-                <p>探索新技术，解决实际问题</p>
-            </div>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            我是一名热爱技术的全栈开发者，拥有丰富的Web开发和AI LLM开源项目经验。我热衷于探索新技术、解决复杂问题，并分享我的知识和经验。目前专注于构建高性能、可扩展的Web应用和智能系统。
+        </p>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            除了编程，我还喜欢阅读技术文档、参与开源社区、撰写技术博客。我相信技术可以改变世界，希望通过代码创造有价值的产品。
+        </p>
+        
+        <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem;">技能栈</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Java</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C++</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Go</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C#</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">JavaScript</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">TypeScript</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Python</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">React</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Vue.js</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Node.js</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Express</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">MongoDB</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">MySQL</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Redis</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Docker</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Kubernetes</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Git</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">CI/CD</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">AWS</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">微服务</span>
         </div>
     </section>
 
-    <!-- 技术栈 -->
+    <!-- 我的项目 -->
     <section class="home-section fade-in">
-        <h2>🛠️ 技术栈</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-js-square"></i></div>
-                <h3>JavaScript</h3>
-                <p>ES6+, TypeScript, Node.js</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-react"></i></div>
-                <h3>React</h3>
-                <p>React Hooks, Next.js, Redux</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
-                <h3>Vue.js</h3>
-                <p>Vue 3, Nuxt.js, Vuex</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-python"></i></div>
-                <h3>Python</h3>
-                <p>Django, Flask, 数据分析</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-database"></i></div>
-                <h3>数据库</h3>
-                <p>MySQL, MongoDB, Redis</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-docker"></i></div>
-                <h3>DevOps</h3>
-                <p>Docker, CI/CD, Linux</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 项目展示 -->
-    <section class="home-section fade-in">
-        <h2>🚀 精选项目</h2>
+        <h2>🚀 我的项目</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image">
-                    <i class="fas fa-blog"></i>
+                    <i class="fas fa-brain"></i>
                 </div>
                 <div class="project-content">
-                    <h3>个人博客系统</h3>
-                    <p>基于 Jekyll 搭建的现代化技术博客，支持标签分类、归档、RSS订阅等功能。采用响应式设计，完美适配各种设备。</p>
+                    <h3>🚀 智能RAG系统</h3>
+                    <p>基于知识图谱的检索增强生成系统，结合了向量数据库和知识图谱技术，提供精准的问答和文档检索能力。使用Python、FastAPI和Neo4j构建。</p>
                     <div class="project-tags">
-                        <span class="project-tag">Jekyll</span>
-                        <span class="project-tag">GitHub Pages</span>
-                        <span class="project-tag">Markdown</span>
-                    </div>
-                    <a href="{{ '/blog/' | relative_url }}" class="project-link">
-                        查看详情 <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="project-content">
-                    <h3>开发工具集合</h3>
-                    <p>日常开发中常用的工具和小组件集合，包括代码格式化、API测试、数据转换等实用工具，提高开发效率。</p>
-                    <div class="project-tags">
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">Vite</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">FastAPI</span>
+                        <span class="project-tag">Neo4j</span>
+                        <span class="project-tag">LangChain</span>
                     </div>
                     <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
-                        访问项目 <i class="fas fa-external-link-alt"></i>
+                        查看详情 <i class="fas fa-external-link-alt"></i>
                     </a>
                 </div>
             </div>
+            
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="project-content">
+                    <h3>💻 全栈Web应用</h3>
+                    <p>使用React和Node.js开发的企业级Web应用，包含用户认证、实时数据同步、文件上传等功能。采用微服务架构，支持高并发访问。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Express</span>
+                        <span class="project-tag">MongoDB</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
             <div class="project-card">
                 <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="project-content">
+                    <h3>📊 数据分析平台</h3>
+                    <p>Python驱动的数据分析工具，提供数据可视化、统计分析、机器学习模型训练等功能。支持多种数据源导入和实时数据处理。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Pandas</span>
+                        <span class="project-tag">Matplotlib</span>
+                        <span class="project-tag">Flask</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="project-content">
+                    <h3>🤖 AI聊天机器人</h3>
+                    <p>基于大语言模型的智能聊天机器人，支持多轮对话、上下文理解、情感分析等功能。可集成到Web、移动应用和API服务中。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Transformers</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">WebSocket</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="project-content">
+                    <h3>☁️ 云原生应用框架</h3>
+                    <p>基于Kubernetes的云原生应用开发框架，提供自动化部署、服务发现、负载均衡等功能。支持Docker容器化部署。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Go</span>
+                        <span class="project-tag">Kubernetes</span>
+                        <span class="project-tag">Docker</span>
+                        <span class="project-tag">gRPC</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <div class="project-content">
-                    <h3>移动端应用</h3>
-                    <p>跨平台移动应用开发，使用 React Native 构建，支持 iOS 和 Android 平台，提供流畅的用户体验。</p>
+                    <h3>📱 移动端应用</h3>
+                    <p>跨平台移动应用，使用React Native开发，支持iOS和Android平台。包含用户管理、内容展示、社交分享等功能。</p>
                     <div class="project-tags">
                         <span class="project-tag">React Native</span>
-                        <span class="project-tag">移动开发</span>
-                        <span class="project-tag">跨平台</span>
+                        <span class="project-tag">Redux</span>
+                        <span class="project-tag">Firebase</span>
                     </div>
                     <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
-                        查看代码 <i class="fas fa-code"></i>
+                        查看详情 <i class="fas fa-external-link-alt"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 统计数据 -->
+    <!-- 工作经历 -->
     <section class="home-section fade-in">
-        <h2>📊 数据统计</h2>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">技术文章</div>
+        <h2>💼 工作经历</h2>
+        <div style="position: relative; padding-left: 30px; margin-top: 2rem;">
+            <div style="position: absolute; left: 8px; top: 0; bottom: 0; width: 3px; background: var(--primary-gradient);"></div>
+            
+            <div style="position: relative; margin-bottom: 2rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--text-color); margin-bottom: 0.5rem;">🏢 高级全栈工程师</h3>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>2023 - 至今</strong></p>
+                    <p style="line-height: 1.8;">负责企业级Web应用的架构设计和开发，带领团队完成多个重要项目。技术栈包括React、Node.js、微服务架构。</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">10+</div>
-                <div class="stat-label">开源项目</div>
+
+            <div style="position: relative; margin-bottom: 2rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--text-color); margin-bottom: 0.5rem;">💼 后端开发工程师</h3>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>2021 - 2023</strong></p>
+                    <p style="line-height: 1.8;">专注于高性能后端服务开发，使用Java和Go语言构建可扩展的分布式系统。参与设计并实现了多个核心业务模块。</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">GitHub Stars</div>
+
+            <div style="position: relative; margin-bottom: 2rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--text-color); margin-bottom: 0.5rem;">🎓 初级开发工程师</h3>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>2020 - 2021</strong></p>
+                    <p style="line-height: 1.8;">参与Web应用开发，学习并实践前端和后端技术。完成了多个项目的开发任务，积累了丰富的实战经验。</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">5年</div>
-                <div class="stat-label">开发经验</div>
+        </div>
+    </section>
+
+    <!-- 最新动态 -->
+    <section class="home-section fade-in">
+        <h2>📅 最新动态</h2>
+        <div style="position: relative; padding-left: 30px; margin-top: 2rem;">
+            <div style="position: absolute; left: 8px; top: 0; bottom: 0; width: 3px; background: var(--primary-gradient);"></div>
+            
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年11月</strong> - 开始学习新的前端框架Next.js，并开始构建个人博客系统</p>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年10月</strong> - 发布了新的技术博客文章《构建高性能RAG系统的实践与思考》</p>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年9月</strong> - 创建开源项目，获得1000+ GitHub Stars，社区反响热烈</p>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年8月</strong> - 完成了大型企业级项目的架构设计和开发工作</p>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年7月</strong> - 参加了技术大会，分享了《微服务架构实践》主题演讲</p>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 1rem; padding-left: 30px;">
+                <div style="position: absolute; left: -23px; top: 5px; width: 15px; height: 15px; border-radius: 50%; background: var(--primary-color); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary-color);"></div>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="line-height: 1.8;"><strong>2025年6月</strong> - 开始深入研究AI和LLM技术，启动了知识图谱RAG项目</p>
+                </div>
             </div>
         </div>
     </section>
@@ -203,20 +315,38 @@ description: Baud的个人网站 - 分享技术见解和生活思考
         </div>
     </section>
 
-    <!-- 社交媒体 -->
+    <!-- 联系方式 -->
     <section class="home-section fade-in">
-        <h2>🔗 社交媒体</h2>
+        <h2>🔗 找到我</h2>
         <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">关注我，获取最新技术动态和文章更新</p>
-        <div class="social-links" style="justify-content: center; margin-top: 1rem;">
-            <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="width: 70px; height: 70px; font-size: 1.8rem;">
-                <i class="fab fa-github"></i>
+        <div class="links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" class="link-card" style="background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%); padding: 2rem; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: all 0.3s ease; border-left: 5px solid var(--accent-color);">
+                <h3 style="margin-bottom: 0.8rem; font-size: 1.3rem;">📚 知乎</h3>
+                <p style="color: #7f8c8d; font-size: 0.95em;">分享技术见解和生活思考，关注前沿技术和行业动态</p>
             </a>
-            <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" aria-label="知乎" style="width: 70px; height: 70px; font-size: 1.8rem;">
-                <i class="fab fa-zhihu"></i>
+            
+            <a href="{{ site.social_links.csdn }}" target="_blank" rel="noopener noreferrer" class="link-card" style="background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%); padding: 2rem; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: all 0.3s ease; border-left: 5px solid var(--accent-color);">
+                <h3 style="margin-bottom: 0.8rem; font-size: 1.3rem;">💻 CSDN博客</h3>
+                <p style="color: #7f8c8d; font-size: 0.95em;">技术文章和学习笔记，涵盖Web开发、AI、系统设计等主题</p>
             </a>
-            <a href="{{ site.social_links.csdn }}" target="_blank" rel="noopener noreferrer" aria-label="CSDN" style="width: 70px; height: 70px; font-size: 1.8rem;">
-                <i class="fas fa-blog"></i>
+            
+            <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" class="link-card" style="background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%); padding: 2rem; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: all 0.3s ease; border-left: 5px solid var(--accent-color);">
+                <h3 style="margin-bottom: 0.8rem; font-size: 1.3rem;">🔗 GitHub</h3>
+                <p style="color: #7f8c8d; font-size: 0.95em;">开源项目和技术实践，欢迎Star和Fork</p>
+            </a>
+            
+            <a href="mailto:{{ site.author.email }}" class="link-card" style="background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%); padding: 2rem; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: all 0.3s ease; border-left: 5px solid var(--accent-color);">
+                <h3 style="margin-bottom: 0.8rem; font-size: 1.3rem;">📧 邮箱联系</h3>
+                <p style="color: #7f8c8d; font-size: 0.95em;">欢迎技术交流、项目合作和求职咨询</p>
             </a>
         </div>
     </section>
 </div>
+
+<style>
+.links .link-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-left-color: var(--primary-color);
+}
+</style>

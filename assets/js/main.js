@@ -73,18 +73,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 数字动画
-    function animateValue(element, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const value = Math.floor(progress * (end - start) + start);
-            element.textContent = value + (element.textContent.includes('+') ? '+' : '');
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
+    function animateNumber(element, target) {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target + (target >= 1000 ? '+' : '');
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current) + (target >= 1000 ? '+' : '');
             }
-        };
-        window.requestAnimationFrame(step);
+        }, 30);
     }
 
     // 观察统计数字
@@ -92,11 +92,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const statsObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.dataset.animated) {
-                const text = entry.target.textContent;
-                const number = parseInt(text.replace(/\D/g, ''));
-                if (number && !isNaN(number)) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                if (target && !isNaN(target) && entry.target.textContent === '0') {
                     entry.target.dataset.animated = 'true';
-                    animateValue(entry.target, 0, number, 2000);
+                    animateNumber(entry.target, target);
                 }
             }
         });

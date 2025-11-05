@@ -36,11 +36,11 @@ include:
 # 作者信息
 author:
   name: "Baud"
-  email: "your-email@example.com"
+  email: "debao.cpc@gmail.com"
   github: "de-bao"
   zhihu: "baud-17"
   csdn: "qq_54707385"
-  bio: "热爱技术的开发者，喜欢探索新技术和解决有趣的问题"
+  bio: "我是一名热爱技术的全栈开发者，拥有丰富的Web开发和AI LLM开源项目经验。我热衷于探索新技术、解决复杂问题，并分享我的知识和经验。目前专注于构建高性能、可扩展的Web应用和智能系统。"
 
 # 社交链接
 social_links:
