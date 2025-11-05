@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #3498db; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        a { color: #2980b9; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { padding-left: 20px; }
+        .footer { 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ site.title }}</h1>
+        <p>{{ site.description }}</p>
+    </header>
+    
+    <main>
+        {{ content }}
+    </main>
+    
+    <footer class="footer">
+        <p>© 2024 {{ site.author.name }} | 
+            <a href="{{ site.social_links.github }}">GitHub</a> | 
+            <a href="{{ site.social_links.zhihu }}">知乎</a> | 
+            <a href="{{ site.social_links.csdn }}">CSDN</a>
+        </p>
+    </footer>
+</body>
+</html>
