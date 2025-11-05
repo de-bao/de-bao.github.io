@@ -33,8 +33,22 @@
 de-bao.github.io/
 ├── index.html          # 简历主页
 ├── README.md          # 项目说明
-└── LICENSE            # 许可证文件
+├── LICENSE            # 许可证文件
+├── future/            # 未来规划子目录
+│   └── index.html     # 未来规划页面
+└── life/              # 生活点滴子目录
+    └── index.html     # 生活点滴页面
 ```
+
+## 📂 子目录说明
+
+### 🌟 未来规划 (future)
+
+展示个人未来发展规划、职业目标和愿景。访问地址：[未来规划](future/index.html)
+
+### 💫 生活点滴 (life)
+
+分享个人生活、兴趣爱好和日常点滴。访问地址：[生活点滴](life/index.html)
 
 ## 🚀 部署说明
 
