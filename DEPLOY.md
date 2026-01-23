@@ -40,7 +40,7 @@ git add . && git commit -m "更新博客" && git push origin main
    ```bash
    git remote -v
    ```
-   应该显示：`origin https://github.com/de-bao/Baud.git`
+   应该显示：`origin https://github.com/de-bao/de-bao.github.io.git`
 
 3. **添加更改**
    ```bash
@@ -60,11 +60,11 @@ git add . && git commit -m "更新博客" && git push origin main
 ## ⏱️ 等待部署
 
 - GitHub Pages 通常需要 **1-5 分钟** 来构建和部署
-- 访问 https://de-bao.github.io/Baud 查看更新后的网站
+- 访问 https://de-bao.github.io 查看更新后的网站
 
 ## 🔍 验证部署
 
-1. 访问你的网站：https://de-bao.github.io/Baud
+1. 访问你的网站：https://de-bao.github.io
 2. 检查 GitHub 仓库的 Actions 标签页（如果有）
 3. 检查 Settings > Pages 查看部署状态
 
@@ -93,7 +93,7 @@ git add . && git commit -m "更新博客" && git push origin main
 ### 问题：样式丢失
 
 **解决方案：**
-- 检查 `baseurl` 配置是否正确（应该是 `/Baud`）
+- 检查 `baseurl` 配置是否正确（应该是空字符串 `""`）
 - 确保 CSS 文件路径正确
 - 检查 `_config.yml` 中的 `url` 设置
 

@@ -64,8 +64,8 @@ if [[ "$REMOTE_URL" == https://* ]]; then
     echo "✅ 推送完成！"
     echo "=========================================="
     echo ""
-    echo "🌐 网站地址: https://de-bao.github.io/Baud"
-    echo "📦 仓库地址: https://github.com/de-bao/Baud"
+    echo "🌐 网站地址: https://de-bao.github.io"
+    echo "📦 仓库地址: https://github.com/de-bao/de-bao.github.io"
     echo ""
 else
     echo "❌ 错误: 远程仓库 URL 不是 HTTPS 格式"

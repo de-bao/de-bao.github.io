@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Jekyll 博客部署脚本
-# 推送到 GitHub Pages: https://github.com/de-bao/Baud
+# 推送到 GitHub Pages: https://github.com/de-bao/de-bao.github.io
 
 set -e
 
@@ -21,7 +21,7 @@ fi
 if ! git remote | grep -q origin; then
     echo "⚠️  警告: 未找到 origin 远程仓库"
     echo "正在添加远程仓库..."
-    git remote add origin https://github.com/de-bao/Baud.git
+    git remote add origin https://github.com/de-bao/de-bao.github.io.git
 fi
 
 # 显示当前状态
@@ -60,8 +60,8 @@ echo "=========================================="
 echo "✅ 部署完成！"
 echo "=========================================="
 echo ""
-echo "🌐 网站地址: https://de-bao.github.io/Baud"
-echo "📦 仓库地址: https://github.com/de-bao/Baud"
+echo "🌐 网站地址: https://de-bao.github.io"
+echo "📦 仓库地址: https://github.com/de-bao/de-bao.github.io"
 echo ""
 echo "💡 提示:"
 echo "   - GitHub Pages 通常需要 1-5 分钟来更新"

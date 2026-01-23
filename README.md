@@ -12,11 +12,14 @@
 - 🔗 RSS Feed 支持
 - 📊 SEO 优化
 - 🎯 快速导航菜单
+- 📄 个人简历页面
+- 🌟 未来规划展示
+- 💫 生活点滴记录
 
 ## 📁 项目结构
 
 ```
-Baud/
+de-bao.github.io/
 ├── _config.yml          # Jekyll 配置文件
 ├── _layouts/            # 页面布局模板
 │   ├── default.html     # 默认布局
@@ -38,6 +41,12 @@ Baud/
 │   │   └── main.css     # 主样式文件
 │   └── js/
 │       └── main.js      # 主脚本文件
+├── resume/              # 简历页面
+│   └── index.html       # 个人简历
+├── future/              # 未来规划页面
+│   └── index.html       # 未来规划内容
+├── life/                # 生活点滴页面
+│   └── index.html       # 生活点滴内容
 ├── index.md             # 首页
 ├── Gemfile              # Ruby 依赖
 ├── deploy.sh            # 部署脚本
@@ -59,7 +68,7 @@ Baud/
    ```
 
 3. **访问网站**
-   打开浏览器访问 `http://localhost:4000/Baud`
+   打开浏览器访问 `http://localhost:4000`
 
 ### 部署到 GitHub Pages
 
@@ -89,7 +98,20 @@ git push origin main
 
 GitHub Pages 会自动构建和部署，通常需要几分钟时间。
 
-访问地址：https://de-bao.github.io/Baud
+访问地址：https://de-bao.github.io
+
+### 页面导航
+
+网站包含以下主要页面：
+
+- **首页** - `https://de-bao.github.io/`
+- **博客** - `https://de-bao.github.io/blog/`
+- **简历** - `https://de-bao.github.io/resume/`
+- **未来规划** - `https://de-bao.github.io/future/`
+- **生活点滴** - `https://de-bao.github.io/life/`
+- **标签** - `https://de-bao.github.io/tags/`
+- **归档** - `https://de-bao.github.io/archive/`
+- **关于** - `https://de-bao.github.io/about/`
 
 ## 📝 编写新文章
 
