@@ -54,6 +54,12 @@ navigation:
     url: /
   - title: 博客
     url: /blog/
+  - title: 简历
+    url: /resume/
+  - title: 未来规划
+    url: /future/
+  - title: 生活点滴
+    url: /life/
   - title: 标签
     url: /tags/
   - title: 归档
