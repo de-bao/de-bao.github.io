@@ -31,8 +31,7 @@ de-bao.github.io/
 ├── _pages/              # 页面文件
 │   ├── blog.html        # 博客页面
 │   ├── tags.html        # 标签页面
-│   ├── archive.html     # 归档页面
-│   └── about.md         # 关于页面
+│   └── archive.html     # 归档页面
 ├── _posts/              # 博客文章目录
 │   ├── 2024-01-01-welcome.md
 │   └── 2024-01-15-jekyll-tips.md
@@ -106,12 +105,11 @@ GitHub Pages 会自动构建和部署，通常需要几分钟时间。
 
 - **首页** - `https://de-bao.github.io/`
 - **博客** - `https://de-bao.github.io/blog/`
-- **简历** - `https://de-bao.github.io/resume/`
-- **未来规划** - `https://de-bao.github.io/future/`
-- **生活点滴** - `https://de-bao.github.io/life/`
+- **简历** - `https://de-bao.github.io/resume/`（包含个人简介、教育背景、项目经验、技能专长、兴趣爱好等）
+- **未来规划** - `https://de-bao.github.io/future/`（职业目标、项目计划、技能提升计划、推荐阅读书籍等）
+- **生活点滴** - `https://de-bao.github.io/life/`（生活理念、旅行经历、阅读兴趣、运动习惯等）
 - **标签** - `https://de-bao.github.io/tags/`
 - **归档** - `https://de-bao.github.io/archive/`
-- **关于** - `https://de-bao.github.io/about/`
 
 ## 📝 编写新文章
 
@@ -155,12 +153,16 @@ navigation:
     url: /
   - title: 博客
     url: /blog/
+  - title: 简历
+    url: /resume/
+  - title: 未来规划
+    url: /future/
+  - title: 生活点滴
+    url: /life/
   - title: 标签
     url: /tags/
   - title: 归档
     url: /archive/
-  - title: 关于
-    url: /about/
 ```
 
 ### 标签系统
