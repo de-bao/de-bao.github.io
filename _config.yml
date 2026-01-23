@@ -64,8 +64,6 @@ navigation:
     url: /tags/
   - title: 归档
     url: /archive/
-  - title: 关于
-    url: /about/
 
 # SEO 设置
 lang: zh-CN
