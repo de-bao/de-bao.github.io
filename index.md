@@ -188,6 +188,68 @@ description: Baud的个人网站 - 分享技术见解和生活思考
                     </a>
                 </div>
             </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="project-content">
+                    <h3>💻 企业级全栈Web应用平台</h3>
+                    <p>为企业开发的内部管理系统，包含用户管理、数据可视化、文件管理等功能模块。使用React + TypeScript开发前端，Node.js + Express构建后端，采用微服务架构。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Express</span>
+                        <span class="project-tag">MongoDB</span>
+                        <span class="project-tag">Redis</span>
+                        <span class="project-tag">Docker</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="project-content">
+                    <h3>🧠 基于深度学习的图像分类系统</h3>
+                    <p>基于卷积神经网络的图像分类系统，用于学术研究和论文发表。使用PyTorch框架构建CNN模型，实现了图像分类功能，分类准确率达到92%。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">PyTorch</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">OpenCV</span>
+                        <span class="project-tag">NumPy</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="project-content">
+                    <h3>☁️ 分布式任务调度系统</h3>
+                    <p>基于微服务架构的分布式任务调度系统，支持任务分配、负载均衡和故障恢复。使用Go语言开发核心模块，Kubernetes进行容器编排，实现了高效的并发处理。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Go</span>
+                        <span class="project-tag">Kubernetes</span>
+                        <span class="project-tag">gRPC</span>
+                        <span class="project-tag">Redis</span>
+                        <span class="project-tag">Docker</span>
+                    </div>
+                    <a href="{{ site.social_links.github }}" target="_blank" class="project-link">
+                        查看详情 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
