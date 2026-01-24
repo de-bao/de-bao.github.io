@@ -160,7 +160,12 @@
         }
 
         /* 教育背景 */
-        .education-item,
+        .education-item {
+            margin-bottom: 8px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
         .experience-item,
         .project-item {
             margin-bottom: 20px;
@@ -169,13 +174,11 @@
             transition: border-color 0.3s ease;
         }
 
-        body.dark-mode .education-item,
         body.dark-mode .experience-item,
         body.dark-mode .project-item {
             border-bottom-color: #444;
         }
 
-        .education-item:last-child,
         .experience-item:last-child,
         .project-item:last-child {
             border-bottom: none;
@@ -218,8 +221,12 @@
         }
 
         .item-description {
-            line-height: 1.8;
-            margin-top: 8px;
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        .education-item .item-description {
+            margin-top: 2px;
         }
 
         .item-description ul {
@@ -373,11 +380,11 @@
                 <font size="2">
                     <a href="/resume/resume.pdf">CV</a>
                     &nbsp;/&nbsp;
+                    <a href="https://github.com/de-bao" target="_blank">GitHub</a>
+                    &nbsp;/&nbsp;
                     <a href="mailto:debao.cpc@gmail.com">de-bao@foxmail.com</a>
                     &nbsp;/&nbsp;
                     +86 156-2322-7696
-                    &nbsp;/&nbsp;
-                    <a href="https://github.com/de-bao" target="_blank">GitHub</a>
                     &nbsp;/&nbsp;
                     南京市
                 </font>
