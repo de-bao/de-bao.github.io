@@ -327,11 +327,40 @@
 
         /* 打印样式 */
         @media print {
+            .theme-toggle {
+                display: none;
+            }
             .resume-container {
                 padding: 0;
             }
             .download-btn {
                 display: none;
+            }
+            /* 打印时确保文字颜色正确 */
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            body.dark-mode {
+                background: white !important;
+                color: black !important;
+            }
+            a {
+                color: black !important;
+            }
+            a:visited {
+                color: black !important;
+            }
+            .item-subtitle,
+            .item-date {
+                color: black !important;
+            }
+            body.dark-mode .item-subtitle,
+            body.dark-mode .item-date {
+                color: black !important;
+            }
+            body.dark-mode .header .subtitle {
+                color: black !important;
             }
         }
 
