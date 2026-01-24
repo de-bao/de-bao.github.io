@@ -72,33 +72,28 @@
         /* 明暗模式切换按钮 */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 80px;
             background: transparent;
             color: #333;
-            border: 1px solid #333;
-            padding: 10px 15px;
-            border-radius: 5px;
+            border: none;
+            padding: 10px;
             cursor: pointer;
-            font-size: 14px;
-            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 24px;
             z-index: 1000;
-            transition: color 0.3s ease, border-color 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .theme-toggle:hover {
             color: #000;
-            border-color: #000;
         }
 
         body.dark-mode .theme-toggle {
             color: #e0e0e0;
-            border-color: #e0e0e0;
         }
 
         body.dark-mode .theme-toggle:hover {
             color: #fff;
-            border-color: #fff;
         }
 
         /* 头部信息 */
@@ -376,17 +371,26 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #1772d0;
-            color: white;
-            padding: 10px 20px;
+            background: transparent;
+            color: #333;
+            border: none;
+            padding: 10px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 24px;
             z-index: 1000;
+            transition: color 0.3s ease;
         }
 
         .download-btn:hover {
-            background: #f09228;
-            color: white;
+            color: #000;
+        }
+
+        body.dark-mode .download-btn {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .download-btn:hover {
+            color: #fff;
         }
 
         @media print {
@@ -398,7 +402,7 @@
 </head>
 <body>
     <!-- 明暗模式切换按钮 -->
-    <button class="theme-toggle" id="themeToggle" title="切换明暗模式">🌓 明暗</button>
+    <button class="theme-toggle" id="themeToggle" title="切换明暗模式">🌓</button>
     
     <div class="resume-container">
         <!-- 头部信息 -->
@@ -616,7 +620,7 @@
         </div>
     </div>
 
-    <a href="javascript:window.print()" class="download-btn">🖨️ 打印简历</a>
+    <a href="javascript:window.print()" class="download-btn" title="打印简历">🖨️</a>
 
     <script>
         // 明暗模式切换功能
@@ -627,9 +631,9 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️ 明亮';
+            themeToggle.textContent = '☀️';
         } else {
-            themeToggle.textContent = '🌓 明暗';
+            themeToggle.textContent = '🌓';
         }
 
         // 切换主题
@@ -637,10 +641,10 @@
             body.classList.toggle('dark-mode');
             
             if (body.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️ 明亮';
+                themeToggle.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             } else {
-                themeToggle.textContent = '🌓 明暗';
+                themeToggle.textContent = '🌓';
                 localStorage.setItem('theme', 'light');
             }
         });
