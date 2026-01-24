@@ -100,9 +100,26 @@
 
         /* 头部信息 */
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 30px;
             padding: 10px 0;
             margin-bottom: 15px;
+        }
+
+        .header-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-image {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .header-image img {
+            width: 200px;
+            border-radius: 15px;
         }
 
         .header h1 {
@@ -323,6 +340,16 @@
             .resume-container {
                 padding: 15px;
             }
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .header-image {
+                order: -1;
+            }
+            .header-image img {
+                width: 150px;
+            }
             .header h1 {
                 font-size: 28px;
             }
@@ -370,25 +397,30 @@
     <div class="resume-container">
         <!-- 头部信息 -->
         <div class="header">
-            <p align="center">
-                <name>鲍德</name>
-            </p>
-            <p align="center">
-                <subname>大模型应用工程师 | AI算法工程师 | AI Infra工程师</subname>
-            </p>
-            <p align="center">
-                <font size="2">
-                    <a href="/resume/resume.pdf">CV</a>
-                    &nbsp;/&nbsp;
-                    <a href="https://github.com/de-bao" target="_blank">GitHub</a>
-                    &nbsp;/&nbsp;
-                    <a href="mailto:debao.cpc@gmail.com">de-bao@foxmail.com</a>
-                    &nbsp;/&nbsp;
-                    +86 156-2322-7696
-                    &nbsp;/&nbsp;
-                    南京市
-                </font>
-            </p>
+            <div class="header-content">
+                <p align="center">
+                    <name>鲍德</name>
+                </p>
+                <p align="center">
+                    <subname>大模型应用工程师 | AI算法工程师 | AI Infra工程师</subname>
+                </p>
+                <p align="center">
+                    <font size="2">
+                        <a href="/resume/resume.pdf">CV</a>
+                        &nbsp;/&nbsp;
+                        <a href="https://github.com/de-bao" target="_blank">GitHub</a>
+                        &nbsp;/&nbsp;
+                        <a href="mailto:debao.cpc@gmail.com">de-bao@foxmail.com</a>
+                        &nbsp;/&nbsp;
+                        +86 156-2322-7696
+                        &nbsp;/&nbsp;
+                        南京市
+                    </font>
+                </p>
+            </div>
+            <div class="header-image">
+                <img src="/resume/photo.jpg" alt="鲍德" onerror="this.style.display='none'">
+            </div>
         </div>
 
         <!-- 教育背景 -->
