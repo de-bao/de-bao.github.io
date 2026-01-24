@@ -40,12 +40,34 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 关于我 -->
     <section class="home-section fade-in">
         <h2>👨💻 关于我</h2>
+        
+        <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem; margin-top: 1.5rem;">个人简介</h3>
         <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-            我是一名热爱技术的全栈开发者，拥有丰富的Web开发和AI LLM开源项目经验。我热衷于探索新技术、解决复杂问题，并分享我的知识和经验。目前专注于构建高性能、可扩展的Web应用和智能系统。
+            计算机专业硕士研究生，拥有扎实的计算机理论基础和丰富的项目实践经验。擅长全栈开发、算法设计与优化、系统架构设计。
+            在Web开发、AI应用、分布式系统等领域有深入研究。具备良好的团队协作能力和问题解决能力，致力于将理论知识转化为实际应用。
+            目前正在寻找软件工程师、全栈开发工程师等相关职位机会。
         </p>
+        
+        <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem;">自我评价</h3>
         <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            具备扎实的计算机理论基础和丰富的项目实践经验，熟悉全栈开发技术栈。在学习和工作中注重理论与实践相结合，
+            能够快速学习新技术并应用到实际项目中。具备良好的团队协作能力和沟通能力，能够高效完成团队任务。
+            对技术充满热情，持续关注行业前沿技术，致力于成为一名优秀的软件工程师。
+            希望能够在优秀的团队中发挥自己的专业能力，为企业创造价值的同时实现个人职业发展。
+        </p>
+        
+        <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem;">兴趣爱好</h3>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem;">
             除了编程，我还喜欢阅读技术文档、参与开源社区、撰写技术博客。我相信技术可以改变世界，希望通过代码创造有价值的产品。
         </p>
+        <ul style="font-size: 1.1rem; line-height: 1.8; margin-left: 20px; margin-bottom: 1.5rem;">
+            <li>编程与开发</li>
+            <li>开源项目贡献</li>
+            <li>技术写作和博客</li>
+            <li>阅读技术文档</li>
+            <li>学习新技术</li>
+            <li>参与技术社区</li>
+        </ul>
         
         <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem;">技能栈</h3>
         <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
