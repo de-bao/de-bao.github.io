@@ -101,8 +101,8 @@
         /* 头部信息 */
         .header {
             text-align: center;
-            padding: 20px 0;
-            margin-bottom: 20px;
+            padding: 10px 0;
+            margin-bottom: 15px;
         }
 
         .header h1 {
@@ -144,7 +144,7 @@
 
         /* 章节样式 */
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding: 0;
         }
 
@@ -168,8 +168,8 @@
 
         .experience-item,
         .project-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #ddd;
             transition: border-color 0.3s ease;
         }
@@ -221,12 +221,21 @@
         }
 
         .item-description {
-            line-height: 1.6;
-            margin-top: 4px;
+            line-height: 1.5;
+            margin-top: 3px;
         }
 
         .education-item .item-description {
             margin-top: 2px;
+        }
+
+        .item-description ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .item-description li {
+            margin-bottom: 4px;
         }
 
         .item-description ul {
@@ -401,13 +410,13 @@
                     <div class="item-date">2022.09-2025.06</div>
                 </div>
                 <div class="item-description">
-                    <p>控制科学与工程(硕士)GPA:3.8/4.0</p>
+                    <p>控制科学与工程(硕士),GPA:3.8/4.0</p>
                 </div>
             </div>
 
             <div class="education-item">
                 <div class="item-header">
-                    <div class="item-title">XX大学|人工智能与自动学院</div>
+                    <div class="item-title">XX大学|人工智能与自动学院<sup>*</sup></div>
                     <div class="item-date">2017.09-2021.06</div>
                 </div>
                 <div class="item-description">
@@ -471,6 +480,18 @@
             </div>
         </div>
 
+        <!-- 发表论文 -->
+        <div class="section">
+            <heading>Publication</heading>
+            <p></p>
+            <p>
+                <papertitle>论文标题示例</papertitle>
+                <br>
+                <strong>鲍德</strong>, 合作者1, 合作者2
+                <br><em>期刊/会议名称, 年份.</em>
+            </p>
+        </div>
+
         <!-- 获奖情况 -->
         <div class="section">
             <heading>获奖情况</heading>
@@ -499,6 +520,11 @@
                 &nbsp;/&nbsp;
                 <a href="/life/">生活点滴</a>
             </p>
+        </div>
+
+        <!-- 脚注 -->
+        <div class="footnote">
+            <p><sup>*</sup> 2021.06-2022.09期间备考清华大学电子信息硕士</p>
         </div>
     </div>
 
