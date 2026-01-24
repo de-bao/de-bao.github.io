@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Baud的个人主页
+title: Baud的个人空间
 description: Baud的个人网站 - 分享技术见解和生活思考
 ---
 
