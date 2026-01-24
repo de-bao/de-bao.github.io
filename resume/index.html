@@ -74,28 +74,31 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #1772d0;
-            color: white;
-            border: none;
+            background: transparent;
+            color: #333;
+            border: 1px solid #333;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
             z-index: 1000;
-            transition: background-color 0.3s ease;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
 
         .theme-toggle:hover {
-            background: #f09228;
+            color: #000;
+            border-color: #000;
         }
 
         body.dark-mode .theme-toggle {
-            background: #f09228;
+            color: #e0e0e0;
+            border-color: #e0e0e0;
         }
 
         body.dark-mode .theme-toggle:hover {
-            background: #1772d0;
+            color: #fff;
+            border-color: #fff;
         }
 
         /* 头部信息 */
@@ -335,32 +338,6 @@
             }
             .download-btn {
                 display: none;
-            }
-            /* 打印时确保文字颜色正确 */
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            body.dark-mode {
-                background: white !important;
-                color: black !important;
-            }
-            a {
-                color: black !important;
-            }
-            a:visited {
-                color: black !important;
-            }
-            .item-subtitle,
-            .item-date {
-                color: black !important;
-            }
-            body.dark-mode .item-subtitle,
-            body.dark-mode .item-date {
-                color: black !important;
-            }
-            body.dark-mode .header .subtitle {
-                color: black !important;
             }
         }
 
@@ -682,25 +659,6 @@
             });
         });
 
-        // 打印功能增强
-        let savedThemeBeforePrint = null;
-        window.addEventListener('beforeprint', () => {
-            // 保存当前主题状态
-            savedThemeBeforePrint = body.classList.contains('dark-mode');
-            // 移除暗色模式，确保打印时是白色背景和黑色文字
-            body.classList.remove('dark-mode');
-            document.body.style.background = 'white';
-            document.body.style.color = 'black';
-        });
-
-        window.addEventListener('afterprint', () => {
-            document.body.style.background = '';
-            document.body.style.color = '';
-            // 恢复之前的主题
-            if (savedThemeBeforePrint) {
-                body.classList.add('dark-mode');
-            }
-        });
     </script>
 </body>
 </html>
