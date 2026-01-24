@@ -53,12 +53,49 @@
             line-height: 1.6;
             color: #333;
             background: #ffffff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 暗色主题 */
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #e0e0e0;
         }
 
         .resume-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 明暗模式切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1772d0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: #f09228;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #f09228;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: #1772d0;
         }
 
         /* 头部信息 */
@@ -78,6 +115,11 @@
             font-size: 20px;
             margin-bottom: 15px;
             color: #666;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .header .subtitle {
+            color: #999;
         }
 
         .contact-info {
@@ -150,12 +192,22 @@
         .item-subtitle {
             font-size: 14px;
             color: #666;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .item-subtitle {
+            color: #999;
         }
 
         .item-date {
             color: #666;
             font-size: 14px;
             white-space: nowrap;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .item-date {
+            color: #999;
         }
 
         .item-description {
@@ -298,6 +350,9 @@
     </style>
 </head>
 <body>
+    <!-- 明暗模式切换按钮 -->
+    <button class="theme-toggle" id="themeToggle" title="切换明暗模式">🌓 明暗</button>
+    
     <div class="resume-container">
         <!-- 头部信息 -->
         <div class="header">
