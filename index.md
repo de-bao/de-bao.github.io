@@ -71,26 +71,42 @@ description: Baud的个人网站 - 分享技术见解和生活思考
         
         <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.3rem;">技能栈</h3>
         <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+            <!-- 编程语言 -->
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Java</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C++</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Go</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C#</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Python</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">JavaScript</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">TypeScript</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Python</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Go</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C++</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">C#</span>
+            <!-- 前端技术 -->
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">React</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Vue.js</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">HTML5</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">CSS3</span>
+            <!-- 后端技术 -->
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Node.js</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Express</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">MongoDB</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">FastAPI</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Spring Boot</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">微服务</span>
+            <!-- 数据库 -->
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">MySQL</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">MongoDB</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Redis</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Neo4j</span>
+            <!-- DevOps -->
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Docker</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Kubernetes</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Git</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">CI/CD</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Git</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">Linux</span>
             <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">AWS</span>
-            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">微服务</span>
+            <!-- AI/ML -->
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">PyTorch</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">TensorFlow</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">LangChain</span>
+            <span class="tag" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">NLP</span>
         </div>
     </section>
 
