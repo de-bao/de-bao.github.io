@@ -683,12 +683,23 @@
         });
 
         // 打印功能增强
+        let savedThemeBeforePrint = null;
         window.addEventListener('beforeprint', () => {
+            // 保存当前主题状态
+            savedThemeBeforePrint = body.classList.contains('dark-mode');
+            // 移除暗色模式，确保打印时是白色背景和黑色文字
+            body.classList.remove('dark-mode');
             document.body.style.background = 'white';
+            document.body.style.color = 'black';
         });
 
         window.addEventListener('afterprint', () => {
             document.body.style.background = '';
+            document.body.style.color = '';
+            // 恢复之前的主题
+            if (savedThemeBeforePrint) {
+                body.classList.add('dark-mode');
+            }
         });
     </script>
 </body>
