@@ -497,6 +497,20 @@
             .sub-project-item {
                 page-break-inside: avoid;
             }
+            /* 获奖情况模块 - 保持两列布局，不换行 */
+            .awards-list,
+            .certificates-list {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1px 30px !important;
+            }
+            .awards-list li,
+            .certificates-list li {
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                page-break-inside: avoid;
+            }
             /* 打印时强制显示图片 */
             .header-image img {
                 display: block !important;
