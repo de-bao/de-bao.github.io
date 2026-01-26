@@ -430,29 +430,66 @@
             .nav-btn {
                 display: none;
             }
-            /* 确保头部布局正确 */
+            /* 确保头部布局正确 - 使用table布局确保打印兼容性 */
             .header {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+                display: table !important;
+                width: 100% !important;
+                table-layout: fixed !important;
                 page-break-inside: avoid;
-            }
-            .header-image {
-                order: 2;
-                flex-shrink: 0;
             }
             .header-content {
-                order: 1;
-                flex: 1;
+                display: table-cell !important;
+                width: 70% !important;
+                vertical-align: middle !important;
+                padding-right: 20px !important;
             }
-            /* 确保时间戳不换行 */
-            .item-date {
-                white-space: nowrap !important;
-                flex-shrink: 0 !important;
+            .header-image {
+                display: table-cell !important;
+                width: 30% !important;
+                vertical-align: middle !important;
+                text-align: right !important;
             }
+            /* 确保时间戳不换行 - 使用table布局 */
             .item-header {
-                flex-wrap: nowrap !important;
+                display: table !important;
+                width: 100% !important;
+                table-layout: fixed !important;
                 page-break-inside: avoid;
+            }
+            /* 处理嵌套div的情况（如AI算法工程师） */
+            .item-header > div[style*="flex"] {
+                display: table-cell !important;
+                width: auto !important;
+                vertical-align: top !important;
+            }
+            .item-header > div[style*="flex"] .item-title {
+                display: block !important;
+            }
+            .item-header > div[style*="flex"] .item-subtitle {
+                display: block !important;
+            }
+            /* 处理直接子元素的情况（如轻量化推理平台） */
+            .item-header > .item-title {
+                display: table-cell !important;
+                width: auto !important;
+                vertical-align: top !important;
+            }
+            .item-header > .item-date {
+                display: table-cell !important;
+                width: 180px !important;
+                white-space: nowrap !important;
+                text-align: right !important;
+                vertical-align: top !important;
+                padding-left: 10px !important;
+            }
+            /* 嵌套div中的item-date */
+            .item-header .item-date {
+                display: table-cell !important;
+                width: 180px !important;
+                white-space: nowrap !important;
+                text-align: right !important;
+                vertical-align: top !important;
+                padding-left: 10px !important;
             }
             /* 确保项目项不被分页 */
             .experience-item,
@@ -463,6 +500,7 @@
             /* 打印时强制显示图片 */
             .header-image img {
                 display: block !important;
+                margin-left: auto !important;
             }
         }
 
