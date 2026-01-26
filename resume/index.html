@@ -120,6 +120,11 @@
         .header-image img {
             width: 200px;
             border-radius: 15px;
+            display: block;
+        }
+
+        .header-image img[style*="display: none"] {
+            display: none !important;
         }
 
         .header h1 {
@@ -442,6 +447,9 @@
             .header-image img {
                 width: 150px;
             }
+            .header-image img[style*="display: none"] {
+                display: none !important;
+            }
             .header h1 {
                 font-size: 28px;
             }
@@ -527,7 +535,7 @@
                 </p>
             </div>
             <div class="header-image">
-                <img src="/resume/photo.jpg" alt="鲍德" onerror="this.style.display='none'">
+                <img src="/resume/photo.jpg" alt="鲍德" onerror="this.style.display='none'; this.onerror=null;">
             </div>
         </div>
 
@@ -650,67 +658,6 @@
                 </div>
                 <div class="item-description">
                     <p>自动化(学士),GPA:3.2/4.0,CET-6</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 技能栈 -->
-        <div class="section">
-            <heading>技能栈</heading>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>编程语言</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">Bash</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>深度学习框架</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Transformers</span>
-                        <span class="skill-tag">DeepSpeed</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>大模型技术</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LoRA/QLoRA</span>
-                        <span class="skill-tag">RAG</span>
-                        <span class="skill-tag">LangChain</span>
-                        <span class="skill-tag">PEFT</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>数据库与存储</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Neo4j</span>
-                        <span class="skill-tag">Vector DB</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">Redis</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>Web开发</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>工具与平台</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Linux</span>
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">MLflow</span>
-                    </div>
                 </div>
             </div>
         </div>
