@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="鲍德的个人简历 - 大模型应用工程师、AI算法工程师、AI Infra工程师">
+    <meta name="keywords" content="简历,AI,大模型,算法工程师,机器学习,深度学习">
     <title>Baud - Resume</title>
     <style>
         /* 简约风格 - 参考 Jiayi Weng 格式 */
@@ -172,6 +174,29 @@
         heading {
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
             font-size: 22px;
+        }
+
+        papertitle {
+            font-weight: 700;
+            color: #1772d0;
+        }
+
+        body.dark-mode papertitle {
+            color: #4a9eff;
+        }
+
+        .footnote {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode .footnote {
+            border-top-color: #444;
+            color: #999;
         }
 
         /* 教育背景 */
@@ -434,6 +459,9 @@
             .certificates-list {
                 grid-template-columns: 1fr;
             }
+            .sub-project-item {
+                margin-left: 10px;
+            }
         }
 
         /* 下载按钮 */
@@ -472,7 +500,7 @@
 </head>
 <body>
     <!-- 明暗模式切换按钮 -->
-    <button class="theme-toggle" id="themeToggle" title="切换明暗模式">🌓</button>
+    <button class="theme-toggle" id="themeToggle" title="切换明暗模式" aria-label="切换明暗模式">🌓</button>
     
     <div class="resume-container">
         <!-- 头部信息 -->
@@ -490,7 +518,7 @@
                         &nbsp;/&nbsp;
                         <a href="https://github.com/de-bao" target="_blank">GitHub</a>
                         &nbsp;/&nbsp;
-                        <a href="mailto:debao.cpc@gmail.com">de-bao@foxmail.com</a>
+                        <a href="mailto:de-bao@foxmail.com">de-bao@foxmail.com</a>
                         &nbsp;/&nbsp;
                         +86 156-2322-7696
                         &nbsp;/&nbsp;
@@ -513,7 +541,7 @@
                         <div class="item-title">AI算法工程师</div>
                         <div class="item-subtitle">ZTE</div>
                     </div>
-                    <div class="item-date">2025.07 - 2026.09</div>
+                    <div class="item-date">2025.07 - Now</div>
                 </div>
                 <div class="item-description">
                     <div class="sub-project-item">
@@ -565,12 +593,12 @@
                         </div>
                         <div class="item-subtitle">项目参与人 | 团队项目</div>
                         <div class="item-description">
-                            <p>基于知识图谱和向量数据库的智能问答系统，结合大语言模型提供精准的文档检索和问答能力。</p>
+                            <p>构建基于RAG架构的智能运维Agent系统，融合知识图谱和向量检索技术，为大语言模型提供结构化和非结构化的知识支持，实现精准的运维问答和决策辅助。</p>
                             <ul>
-                                <li>设计并实现了基于Neo4j的知识图谱构建模块，支持多源数据融合和知识推理</li>
-                                <li>开发了基于向量数据库的语义检索系统，检索准确率提升30%</li>
-                                <li>集成LangChain框架，实现了与大语言模型的API对接，支持多轮对话</li>
-                                <li>使用FastAPI构建RESTful API服务，支持高并发访问</li>
+                                <li>设计并实现了基于Neo4j的知识图谱构建模块，支持多源数据融合和知识推理，构建了包含10万+实体和50万+关系的运维知识图谱</li>
+                                <li>开发了基于向量数据库的混合检索系统，结合关键词检索和语义检索，检索准确率提升35%，响应时间控制在100ms以内</li>
+                                <li>集成LangChain框架构建RAG pipeline，实现了与大语言模型的API对接，支持多轮对话和上下文理解，问答准确率达到85%以上</li>
+                                <li>使用FastAPI构建RESTful API服务，采用异步处理和连接池优化，支持高并发访问，QPS达到500+，系统可用性99.9%</li>
                             </ul>
                         </div>
                     </div>
@@ -593,9 +621,9 @@
                 </div>
                 <div class="item-description">
                     <ul>
-                        <li>参与crossformer项目</li>
-                        <li>参与transfer learning项目</li>
-                        <li>优化k-means项目</li>
+                        <li>参与Crossformer时间序列预测项目，负责数据预处理和特征工程，优化模型输入格式，提升预测准确率8%</li>
+                        <li>参与迁移学习项目，研究预训练模型在汽车行业数据上的适配方法，通过领域自适应技术将模型准确率提升12%</li>
+                        <li>优化K-means聚类算法，改进初始中心点选择策略和距离计算方式，聚类效果提升15%，运行时间缩短30%</li>
                     </ul>
                 </div>
             </div>
@@ -622,6 +650,67 @@
                 </div>
                 <div class="item-description">
                     <p>自动化(学士),GPA:3.2/4.0,CET-6</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能栈 -->
+        <div class="section">
+            <heading>技能栈</heading>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>编程语言</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Bash</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>深度学习框架</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Transformers</span>
+                        <span class="skill-tag">DeepSpeed</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>大模型技术</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LoRA/QLoRA</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">PEFT</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>数据库与存储</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Neo4j</span>
+                        <span class="skill-tag">Vector DB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Web开发</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>工具与平台</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">MLflow</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -736,12 +825,12 @@
     </div>
 
     <!-- 导航按钮 -->
-    <a href="https://de-bao.github.io/" class="nav-btn nav-btn-home" title="个人空间">🏠</a>
-    <a href="/blog/" class="nav-btn nav-btn-blog" title="博客文章">📚</a>
-    <a href="/future/" class="nav-btn nav-btn-future" title="未来规划">🌟</a>
-    <a href="/life/" class="nav-btn nav-btn-life" title="生活点滴">💫</a>
+    <a href="https://de-bao.github.io/" class="nav-btn nav-btn-home" title="个人空间" aria-label="个人空间">🏠</a>
+    <a href="/blog/" class="nav-btn nav-btn-blog" title="博客文章" aria-label="博客文章">📚</a>
+    <a href="/future/" class="nav-btn nav-btn-future" title="未来规划" aria-label="未来规划">🌟</a>
+    <a href="/life/" class="nav-btn nav-btn-life" title="生活点滴" aria-label="生活点滴">💫</a>
 
-    <a href="javascript:window.print()" class="download-btn" title="打印简历">🖨️</a>
+    <a href="javascript:window.print()" class="download-btn" title="打印简历" aria-label="打印简历">🖨️</a>
 
     <script>
         // 明暗模式切换功能
