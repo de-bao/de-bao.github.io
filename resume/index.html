@@ -170,6 +170,16 @@
             padding: 0;
         }
 
+        /* 论文发表模块 - 缩小论文之间的间距 */
+        .publications-content {
+            line-height: 1.4;
+        }
+        .publications-content br + br {
+            line-height: 0.5;
+            display: block;
+            margin-top: -0.8em;
+        }
+
         .section-title {
             font-size: 22px;
             margin-bottom: 2px;
@@ -751,7 +761,7 @@
         <!-- 发表论文 -->
         <div class="section">
             <heading>论文发表</heading>
-            <p>
+            <p class="publications-content">
                 <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10746972">
                     <papertitle>Dynamic Graph Embedding PCA to Extract Spatio–Temporal Information for Fault Detection</papertitle>
                 </a>
