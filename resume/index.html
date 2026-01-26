@@ -305,27 +305,57 @@
         .certificates-list {
             list-style: none;
             padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px 30px;
         }
 
         .awards-list li,
         .certificates-list li {
             padding: 3px 0;
-            margin-bottom: 3px;
+            margin-bottom: 0;
         }
 
-        /* 导航链接 */
-        .nav-links {
-            text-align: center;
-            margin-top: 20px;
+        /* 导航链接按钮 */
+        .nav-btn {
+            position: fixed;
+            bottom: 30px;
+            background: transparent;
+            color: #333;
+            border: none;
+            padding: 3px;
+            text-decoration: none;
+            font-size: 8px;
+            z-index: 1000;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a {
-            color: #1772d0;
-            margin: 0 10px;
+        .nav-btn:hover {
+            color: #000;
         }
 
-        .nav-links a:hover {
-            color: #f09228;
+        body.dark-mode .nav-btn {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .nav-btn:hover {
+            color: #fff;
+        }
+
+        .nav-btn-home {
+            left: 20px;
+        }
+
+        .nav-btn-blog {
+            left: 50px;
+        }
+
+        .nav-btn-future {
+            left: 80px;
+        }
+
+        .nav-btn-life {
+            left: 110px;
         }
 
         /* 打印样式 */
@@ -337,6 +367,9 @@
                 padding: 0;
             }
             .download-btn {
+                display: none;
+            }
+            .nav-btn {
                 display: none;
             }
         }
@@ -367,6 +400,10 @@
                 flex-direction: column;
             }
             .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .awards-list,
+            .certificates-list {
                 grid-template-columns: 1fr;
             }
         }
@@ -631,16 +668,40 @@
             <heading>获奖情况</heading>
             <ul class="awards-list">
                 <li>
-                    <strong>2024年</strong> - 全国大学生计算机设计大赛 二等奖
+                    <strong>2025年</strong> - 校友会云视科技奖学金（同级唯四）
                 </li>
                 <li>
-                    <strong>2023年</strong> - 研究生学业奖学金 一等奖
+                    <strong>2024年</strong> - 张江高科奖励基金会奖学金 （同级唯四）
                 </li>
                 <li>
-                    <strong>2022年</strong> - 优秀毕业生
+                    <strong>2022年</strong> - 东南大学研究生学业奖学金
                 </li>
                 <li>
-                    <strong>2021年</strong> - 全国大学生数学建模竞赛 省级一等奖
+                    <strong>2021年</strong> - 武汉科技大学本科优秀毕业设计 （同级唯二）
+                </li>
+                <li>
+                    <strong>2020年</strong> - 全国大学生数学建模竞赛 国家二等奖
+                </li>
+                <li>
+                    <strong>2020年</strong> - 湖北大学生数学建模竞赛 省级一等奖
+                </li>
+                <li>
+                    <strong>2019年</strong> - 全国大学生数学建模竞赛 国家二等奖
+                </li>
+                <li>
+                    <strong>2019年</strong> - 湖北大学生数学建模竞赛 省级一等奖
+                </li>
+                <li>
+                    <strong>2019年</strong> - 国家励志奖学金
+                </li>
+                <li>
+                    <strong>2019年</strong> - 武汉科技大学二等奖学金
+                </li>
+                <li>
+                    <strong>2018年</strong> - 武汉科技大学三等奖学金
+                </li>
+                <li>
+                    <strong>2018年</strong> - 武汉科技大学优秀学生
                 </li>
             </ul>
         </div>
@@ -649,20 +710,13 @@
         <div class="footnote">
             <p><sup>*</sup> 2021.06-2022.09期间备考清华大学电子信息硕士</p>
         </div>
-
-        <!-- 导航链接 -->
-        <div class="section">
-            <p align="center" class="nav-links">
-                <a href="https://de-bao.github.io/">个人空间</a>
-                &nbsp;/&nbsp;
-                <a href="/blog/">博客文章</a>
-                &nbsp;/&nbsp;
-                <a href="/future/">未来规划</a>
-                &nbsp;/&nbsp;
-                <a href="/life/">生活点滴</a>
-            </p>
-        </div>
     </div>
+
+    <!-- 导航按钮 -->
+    <a href="https://de-bao.github.io/" class="nav-btn nav-btn-home" title="个人空间">🏠</a>
+    <a href="/blog/" class="nav-btn nav-btn-blog" title="博客文章">📚</a>
+    <a href="/future/" class="nav-btn nav-btn-future" title="未来规划">🌟</a>
+    <a href="/life/" class="nav-btn nav-btn-life" title="生活点滴">💫</a>
 
     <a href="javascript:window.print()" class="download-btn" title="打印简历">🖨️</a>
 
