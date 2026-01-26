@@ -430,6 +430,40 @@
             .nav-btn {
                 display: none;
             }
+            /* 确保头部布局正确 */
+            .header {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                page-break-inside: avoid;
+            }
+            .header-image {
+                order: 2;
+                flex-shrink: 0;
+            }
+            .header-content {
+                order: 1;
+                flex: 1;
+            }
+            /* 确保时间戳不换行 */
+            .item-date {
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+            .item-header {
+                flex-wrap: nowrap !important;
+                page-break-inside: avoid;
+            }
+            /* 确保项目项不被分页 */
+            .experience-item,
+            .project-item,
+            .sub-project-item {
+                page-break-inside: avoid;
+            }
+            /* 打印时强制显示图片 */
+            .header-image img {
+                display: block !important;
+            }
         }
 
         /* 响应式设计 */
