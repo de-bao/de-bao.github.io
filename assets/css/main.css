@@ -194,10 +194,16 @@ a:hover {
     white-space: nowrap;
 }
 
-.nav-clock-item i,
-.nav-weather-item i {
-    color: var(--color-accent);
-    font-size: 0.95rem;
+.nav-clock-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.nav-clock-date {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.2;
 }
 
 .nav-clock-time {
@@ -205,11 +211,23 @@ a:hover {
     font-weight: 600;
     color: var(--color-text-primary);
     letter-spacing: 0.05em;
+    font-size: 0.95rem;
+    line-height: 1.2;
 }
 
-.nav-weather-temp {
+.nav-weather-item i {
+    color: var(--color-accent);
+    font-size: 0.95rem;
+}
+
+.nav-weather-info {
     font-weight: 500;
     color: var(--color-text-primary);
+}
+
+.nav-weather-item {
+    cursor: help;
+    position: relative;
 }
 
 /* 移动端隐藏时钟和天气 */
