@@ -20,19 +20,19 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 统计数据 -->
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-number" data-target="6">0</div>
             <div class="stat-label">项目经验</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-number" data-target="23">0</div>
             <div class="stat-label">技术文章</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" data-target="5">0</div>
+            <div class="stat-number" data-target="0.6">0</div>
             <div class="stat-label">年开发经验</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" data-target="1000">0</div>
+            <div class="stat-number" data-target="2">0</div>
             <div class="stat-label">GitHub Stars</div>
         </div>
     </div>
