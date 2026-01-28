@@ -36,4 +36,4 @@ excerpt: "Python驱动的数据分析工具，提供数据可视化、统计分�
 
 ## 项目链接
 
-查看项目源码：[GitHub]({{ site.social_links.github }})
+查看项目源码：[GitHub](https://github.com/de-bao)

@@ -35,4 +35,4 @@ excerpt: "跨平台移动应用，使用React Native开发，支持iOS和Android
 
 ## 项目链接
 
-查看项目源码：[GitHub]({{ site.social_links.github }})
+查看项目源码：[GitHub](https://github.com/de-bao)

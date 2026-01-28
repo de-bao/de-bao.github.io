@@ -36,4 +36,4 @@ excerpt: "使用React和Node.js开发的企业级Web应用，包含用户认证�
 
 ## 项目链接
 
-查看项目源码：[GitHub]({{ site.social_links.github }})
+查看项目源码：[GitHub](https://github.com/de-bao)

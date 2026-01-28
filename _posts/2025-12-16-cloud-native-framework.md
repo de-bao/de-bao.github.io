@@ -36,4 +36,4 @@ excerpt: "基于Kubernetes的云原生应用开发框架，提供自动化部署
 
 ## 项目链接
 
-查看项目源码：[GitHub]({{ site.social_links.github }})
+查看项目源码：[GitHub](https://github.com/de-bao)
