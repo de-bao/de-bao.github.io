@@ -1207,11 +1207,13 @@ a:hover {
 }
 
 .tag-cloud-item {
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     text-decoration: none;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
 }
 
 .tag-cloud-item:hover {
