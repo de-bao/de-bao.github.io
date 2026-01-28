@@ -17,6 +17,29 @@ description: Baud的个人网站 - 分享技术见解和生活思考
 </div>
 
 <div class="container">
+    <!-- 时钟和天气 -->
+    <div class="weather-clock-grid">
+        <div class="weather-clock-card">
+            <div class="weather-clock-header">
+                <i class="fas fa-clock"></i>
+                <span>实时时钟</span>
+            </div>
+            <div class="clock-display">
+                <div class="clock-time" id="clock-time">00:00:00</div>
+                <div class="clock-date" id="clock-date">2025年12月20日 星期五</div>
+            </div>
+        </div>
+        <div class="weather-clock-card">
+            <div class="weather-clock-header">
+                <i class="fas fa-cloud-sun"></i>
+                <span>天气信息</span>
+            </div>
+            <div class="weather-display" id="weather-display">
+                <div class="weather-loading">正在获取天气信息...</div>
+            </div>
+        </div>
+    </div>
+
     <!-- 统计数据 -->
     <div class="stats-grid">
         <div class="stat-card">
@@ -39,7 +62,7 @@ description: Baud的个人网站 - 分享技术见解和生活思考
 
     <!-- 关于我 -->
     <section class="home-section fade-in">
-        <h2>👨💻 关于我</h2>
+        <h2>👨 关于我</h2>
         
         <h3>个人简介</h3>
         <p>
