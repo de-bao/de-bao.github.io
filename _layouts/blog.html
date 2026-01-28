@@ -9,7 +9,8 @@ layout: default
         </header>
 
         <div class="posts-list">
-            {% for post in paginator.posts %}
+            {% if site.posts.size > 0 %}
+            {% for post in site.posts %}
             <article class="post-card">
                 <div class="post-card-header">
                     <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
@@ -36,28 +37,12 @@ layout: default
                 </div>
             </article>
             {% endfor %}
+            {% else %}
+            <div style="text-align: center; padding: 4rem 0;">
+                <p style="font-size: 1.2rem; color: var(--color-text-secondary);">暂无文章，敬请期待！</p>
+            </div>
+            {% endif %}
         </div>
-
-        <!-- 分页 -->
-        {% if paginator.total_pages > 1 %}
-        <nav class="pagination">
-            {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-item">
-                <i class="fas fa-chevron-left"></i> 上一页
-            </a>
-            {% endif %}
-            
-            <span class="pagination-info">
-                第 {{ paginator.page }} / {{ paginator.total_pages }} 页
-            </span>
-            
-            {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-item">
-                下一页 <i class="fas fa-chevron-right"></i>
-            </a>
-            {% endif %}
-        </nav>
-        {% endif %}
     </div>
 </div>
 
