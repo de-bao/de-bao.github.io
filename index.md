@@ -288,30 +288,25 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 工作经历 -->
     <section class="home-section fade-in">
         <h2>💼 工作经历</h2>
-        <div>
-            <div></div>
-            
-            <div>
-                <div></div>
-                <div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <h3>🏢 高级全栈工程师</h3>
                     <p><strong>2023 - 至今</strong></p>
                     <p>负责企业级Web应用的架构设计和开发，带领团队完成多个重要项目。技术栈包括React、Node.js、微服务架构。</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <h3>💼 后端开发工程师</h3>
                     <p><strong>2021 - 2023</strong></p>
                     <p>专注于高性能后端服务开发，使用Java和Go语言构建可扩展的分布式系统。参与设计并实现了多个核心业务模块。</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <h3>🎓 初级开发工程师</h3>
                     <p><strong>2020 - 2021</strong></p>
                     <p>参与Web应用开发，学习并实践前端和后端技术。完成了多个项目的开发任务，积累了丰富的实战经验。</p>
@@ -323,47 +318,39 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 最新动态 -->
     <section class="home-section fade-in">
         <h2>📅 最新动态</h2>
-        <div>
-            <div></div>
-            
-            <div>
-                <div></div>
-                <div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年11月</strong> - 开始学习新的前端框架Next.js，并开始构建个人博客系统</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年10月</strong> - 发布了新的技术博客文章《构建高性能RAG系统的实践与思考》</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年9月</strong> - 创建开源项目，获得1000+ GitHub Stars，社区反响热烈</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年8月</strong> - 完成了大型企业级项目的架构设计和开发工作</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年7月</strong> - 参加了技术大会，分享了《微服务架构实践》主题演讲</p>
                 </div>
             </div>
 
-            <div>
-                <div></div>
-                <div>
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <p><strong>2025年6月</strong> - 开始深入研究AI和LLM技术，启动了知识图谱RAG项目</p>
                 </div>
             </div>
@@ -402,8 +389,8 @@ description: Baud的个人网站 - 分享技术见解和生活思考
             </article>
             {% endfor %}
         </div>
-        <div>
-            <a href="{{ '/blog/' | relative_url }}" class="read-more">
+        <div class="text-center mt-lg">
+            <a href="{{ '/blog/' | relative_url }}" class="btn-primary">
                 查看所有文章 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -412,8 +399,8 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 联系方式 -->
     <section class="home-section fade-in">
         <h2>🔗 找到我</h2>
-        <p>关注我，获取最新技术动态和文章更新</p>
-        <div class="links">
+        <p class="text-center" style="margin-bottom: 2rem; color: var(--color-text-secondary);">关注我，获取最新技术动态和文章更新</p>
+        <div class="links-grid">
             <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" class="link-card">
                 <h3>📚 知乎</h3>
                 <p>分享技术见解和生活思考，关注前沿技术和行业动态</p>
@@ -436,11 +423,3 @@ description: Baud的个人网站 - 分享技术见解和生活思考
         </div>
     </section>
 </div>
-
-<style>
-.links .link-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    border-left-color: var(--primary-color);
-}
-</style>
