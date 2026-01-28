@@ -56,9 +56,9 @@ navigation:
     url: /blog/
   - title: 简历
     url: /resume/
-  - title: 未来规划
+  - title: 未来
     url: /future/
-  - title: 生活点滴
+  - title: 生活
     url: /life/
 
 # SEO 设置

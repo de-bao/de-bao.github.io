@@ -1,161 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生活点滴 - Baud的个人主页</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .tagline {
-            color: #7f8c8d;
-            font-size: 1.2em;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .link-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid #3498db;
-        }
-        
-        .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .project-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .skill-tag {
-            background: #3498db;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
-            color: #7f8c8d;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .links, .projects {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="avatar">💫</div>
-            <h1>生活点滴</h1>
-            <p class="tagline">记录生活中的美好时光</p>
-        </div>
+---
+layout: default
+title: 生活
+permalink: /life/
+---
 
-        <div class="section">
+<div class="home-section fade-in">
+    <div class="container">
+        <header class="page-header" style="text-align: center; margin-bottom: 3rem; padding-top: 2rem;">
+            <h1>💫 生活</h1>
+            <p style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.8;">记录生活中的美好时光</p>
+        </header>
+
+        <section class="home-section">
             <h2>生活理念</h2>
             <p>我相信技术可以改变世界，但生活同样重要。在追求技术卓越的同时，我也注重生活的品质和内心的平衡。工作之余，我喜欢阅读、旅行、运动，这些活动不仅丰富了我的生活，也为我提供了新的灵感和思考。</p>
             <p>生活与工作相互滋养，好的生活状态能让我以更好的状态投入到技术学习和项目开发中。</p>
-        </div>
+        </section>
 
-        <div class="section">
+        <section class="home-section">
             <h2>旅行经历</h2>
             <p>旅行是我放松心情、开阔视野的重要方式。我喜欢探索不同的城市和文化，感受各地的风土人情。</p>
-            <div class="links">
+            <div class="links-grid" style="margin-top: 2rem;">
                 <div class="link-card">
                     <h3>🌆 国内旅行</h3>
                     <p>曾游历北京、上海、杭州、成都、西安等城市，体验不同城市的文化氛围和美食。特别喜欢南京的历史文化底蕴和现代都市气息的完美结合。</p>
@@ -166,87 +31,85 @@
                     <p>计划未来有机会游历欧洲、日本、东南亚等地，体验不同国家的文化，学习新的思维方式，这些经历将成为我人生中的宝贵财富。</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
+        <section class="home-section">
             <h2>阅读兴趣</h2>
             <p>阅读是我获取知识、提升思维的重要途径。我喜欢阅读技术类书籍，也喜欢阅读人文、历史、科幻等类型的书籍。</p>
-            <div class="projects">
+            <div class="projects-grid" style="margin-top: 2rem;">
                 <div class="project-card">
-                    <h3>📚 技术书籍</h3>
-                    <p><strong>《深度学习》（Deep Learning）</strong> - Ian Goodfellow等著。深度学习领域的经典教材，系统介绍了神经网络、卷积网络、循环网络等核心概念。这本书帮助我深入理解了深度学习的理论基础。</p>
-                    <p><strong>《设计数据密集型应用》</strong> - Martin Kleppmann著。深入讲解了分布式系统的设计原理，让我对数据存储、复制、分片等核心概念有了更清晰的认识。</p>
+                    <div class="project-content">
+                        <h3>📚 技术书籍</h3>
+                        <p><strong>《深度学习》（Deep Learning）</strong> - Ian Goodfellow等著。深度学习领域的经典教材，系统介绍了神经网络、卷积网络、循环网络等核心概念。这本书帮助我深入理解了深度学习的理论基础。</p>
+                        <p><strong>《设计数据密集型应用》</strong> - Martin Kleppmann著。深入讲解了分布式系统的设计原理，让我对数据存储、复制、分片等核心概念有了更清晰的认识。</p>
+                    </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>📖 人文社科</h3>
-                    <p><strong>《人类简史》</strong> - 尤瓦尔·赫拉利著。这本书从宏观视角审视人类历史，让我对人类社会的发展有了更深的理解，也启发了我在技术之外思考问题的角度。</p>
-                    <p><strong>《未来简史》</strong> - 探讨了人工智能、生物技术等前沿科技对未来社会的影响，与我正在研究的AI技术领域高度相关。</p>
+                    <div class="project-content">
+                        <h3>📖 人文社科</h3>
+                        <p><strong>《人类简史》</strong> - 尤瓦尔·赫拉利著。这本书从宏观视角审视人类历史，让我对人类社会的发展有了更深的理解，也启发了我在技术之外思考问题的角度。</p>
+                        <p><strong>《未来简史》</strong> - 探讨了人工智能、生物技术等前沿科技对未来社会的影响，与我正在研究的AI技术领域高度相关。</p>
+                    </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>🚀 科幻小说</h3>
-                    <p><strong>《三体》系列</strong> - 刘慈欣著。硬科幻的经典之作，让我在享受科幻故事的同时，也思考了科技发展、宇宙探索等深刻话题。</p>
-                    <p><strong>《基地》系列</strong> - 阿西莫夫著。科幻大师的经典作品，启发了我对人工智能、机器人伦理等问题的思考。</p>
+                    <div class="project-content">
+                        <h3>🚀 科幻小说</h3>
+                        <p><strong>《三体》系列</strong> - 刘慈欣著。硬科幻的经典之作，让我在享受科幻故事的同时，也思考了科技发展、宇宙探索等深刻话题。</p>
+                        <p><strong>《基地》系列</strong> - 阿西莫夫著。科幻大师的经典作品，启发了我对人工智能、机器人伦理等问题的思考。</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
+        <section class="home-section">
             <h2>运动习惯</h2>
             <p>保持健康的身体是高效工作的基础。我注重运动，通过运动来保持身心健康。</p>
-            <ul style="list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>🏃 跑步</strong> - 我喜欢晨跑和夜跑，每周坚持3-4次跑步，每次5-10公里。跑步不仅能锻炼身体，还能让我在运动中思考问题，获得新的灵感。
-                </li>
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>🧘 瑜伽</strong> - 瑜伽是我放松身心的好方式。通过瑜伽练习，我学会了专注和平衡，这些品质也帮助我在编程和系统设计中保持清晰的思路。
-                </li>
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>🏓 乒乓球</strong> - 我喜欢打乒乓球，这是一项需要快速反应和策略的运动，就像编程一样，需要快速思考和精准执行。
-                </li>
-            </ul>
-        </div>
+            <div class="projects-grid" style="margin-top: 2rem;">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🏃 跑步</h3>
+                        <p>我喜欢晨跑和夜跑，每周坚持3-4次跑步，每次5-10公里。跑步不仅能锻炼身体，还能让我在运动中思考问题，获得新的灵感。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🧘 瑜伽</h3>
+                        <p>瑜伽是我放松身心的好方式。通过瑜伽练习，我学会了专注和平衡，这些品质也帮助我在编程和系统设计中保持清晰的思路。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🏓 乒乓球</h3>
+                        <p>我喜欢打乒乓球，这是一项需要快速反应和策略的运动，就像编程一样，需要快速思考和精准执行。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="section">
+        <section class="home-section">
             <h2>兴趣爱好</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>🎵 音乐</strong> - 我喜欢听音乐，特别是轻音乐和电子音乐。编程时听音乐能让我更专注，提高工作效率。
-                </li>
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>🎬 电影</strong> - 我喜欢看科幻电影和技术相关的纪录片，这些作品不仅娱乐，也启发了我的技术思考。
-                </li>
-                <li style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>☕ 咖啡</strong> - 我喜欢品味不同种类的咖啡，享受制作和品尝咖啡的过程，这也是一种生活的小确幸。
-                </li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            <p>© 2025 Baud - 生活点滴 | 由GitHub Pages托管</p>
-            <p>记录生活中的美好时光 | 最后更新: 2025年11月</p>
-            <p style="margin-top: 15px;">
-                <a href="/resume/" style="color: #3498db; text-decoration: none; margin-right: 20px;">← 返回简历主页</a>
-                <a href="/blog/" style="color: #3498db; text-decoration: none; margin-right: 20px;">📚 博客文章</a>
-                <a href="/future/" style="color: #3498db; text-decoration: none;">未来规划 →</a>
-            </p>
-        </div>
+            <div class="projects-grid" style="margin-top: 2rem;">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🎵 音乐</h3>
+                        <p>我喜欢听音乐，特别是轻音乐和电子音乐。编程时听音乐能让我更专注，提高工作效率。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🎬 电影</h3>
+                        <p>我喜欢看科幻电影和技术相关的纪录片，这些作品不仅娱乐，也启发了我的技术思考。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>☕ 咖啡</h3>
+                        <p>我喜欢品味不同种类的咖啡，享受制作和品尝咖啡的过程，这也是一种生活的小确幸。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <script>
-        // 简单的访问统计
-        console.log('欢迎访问我的个人主页！');
-        
-        // 可以添加更多交互功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.link-card');
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    console.log('点击了:', this.querySelector('h3').textContent);
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+</div>
