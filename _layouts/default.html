@@ -99,6 +99,67 @@
             const menu = document.querySelector('.nav-menu');
             menu.classList.toggle('active');
         });
+
+        // 实时时钟 - 直接在页面底部执行，确保导航栏已渲染
+        (function initClock() {
+            function updateClock() {
+                const navClockTimeEl = document.getElementById('nav-clock-time');
+                if (navClockTimeEl) {
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    const seconds = String(now.getSeconds()).padStart(2, '0');
+                    navClockTimeEl.textContent = `${hours}:${minutes}:${seconds}`;
+                }
+            }
+            
+            // 立即更新一次
+            updateClock();
+            // 每秒更新
+            setInterval(updateClock, 1000);
+        })();
+
+        // 获取天气信息 - 直接在页面底部执行
+        (function initWeather() {
+            function getWeather() {
+                const navWeatherTempEl = document.getElementById('nav-weather-temp');
+                if (!navWeatherTempEl) return;
+
+                // 使用Open-Meteo免费API（更稳定）
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=32.0603&longitude=118.7969&current=temperature_2m&timezone=Asia/Shanghai`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.current && data.current.temperature_2m) {
+                            const temp = Math.round(data.current.temperature_2m);
+                            navWeatherTempEl.textContent = `${temp}°C`;
+                        } else {
+                            throw new Error('天气数据格式错误');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('获取天气失败:', error);
+                        // 备用方案：使用wttr.in
+                        fetch(`https://wttr.in/Nanjing?format=j1&lang=zh`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data && data.current_condition && data.current_condition[0]) {
+                                    const temp = data.current_condition[0].temp_C;
+                                    navWeatherTempEl.textContent = `${temp}°C`;
+                                } else {
+                                    navWeatherTempEl.textContent = '--°C';
+                                }
+                            })
+                            .catch(() => {
+                                navWeatherTempEl.textContent = '--°C';
+                            });
+                    });
+            }
+            
+            // 立即获取天气
+            getWeather();
+            // 每30分钟更新一次
+            setInterval(getWeather, 30 * 60 * 1000);
+        })();
     </script>
 </body>
 </html>
