@@ -7,12 +7,12 @@
 - 🎨 现代化响应式设计（深色主题）
 - 📱 移动端友好
 - 📝 文章分类和标签系统
-- 🔍 标签云和归档页面
+- 🔍 博客页面集成标签、年份和搜索筛选功能
 - 📄 文章分页功能
 - 🔗 RSS Feed 支持
 - 📊 SEO 优化
 - 🎯 快速导航菜单
-- 📄 个人简历页面
+- 📄 个人简历页面（支持明暗模式切换和PDF打印）
 - 🌟 未来规划展示
 - 💫 生活点滴记录
 
@@ -29,8 +29,8 @@ de-bao.github.io/
 │   ├── archive.html     # 归档页布局
 │   └── page.html        # 普通页面布局
 ├── _pages/              # 页面文件
-│   ├── archive.html     # 归档页面
-│   └── tags.html        # 标签页面
+│   ├── archive.html     # 归档页面（重定向到博客）
+│   └── tags.html        # 标签页面（重定向到博客）
 ├── _posts/              # 博客文章目录
 ├── assets/              # 静态资源
 │   ├── css/
@@ -43,9 +43,9 @@ de-bao.github.io/
 │   ├── photo.jpg        # 个人照片
 │   └── resume.pdf       # PDF简历
 ├── future/              # 未来规划页面
-│   └── index.html       # 未来规划内容
+│   └── index.html       # 未来规划内容（使用Jekyll布局，样式与首页一致）
 ├── life/                # 生活点滴页面
-│   └── index.html       # 生活点滴内容
+│   └── index.html       # 生活点滴内容（使用Jekyll布局，样式与首页一致）
 ├── blog/                # 博客目录
 │   └── index.html       # 博客列表页
 ├── index.md             # 首页
@@ -167,13 +167,13 @@ read_time: 5
 
 网站包含以下主要页面：
 
-- **首页** - `https://de-bao.github.io/`
-- **博客** - `https://de-bao.github.io/blog/`
-- **简历** - `https://de-bao.github.io/resume/`
-- **未来规划** - `https://de-bao.github.io/future/`
-- **生活点滴** - `https://de-bao.github.io/life/`
-- **标签** - `https://de-bao.github.io/tags/`
-- **归档** - `https://de-bao.github.io/archive/`
+- **首页** - `https://de-bao.github.io/` - 个人介绍、项目展示、技能栈、联系方式
+- **博客** - `https://de-bao.github.io/blog/` - 博客文章列表，支持标签、年份和搜索筛选
+- **简历** - `https://de-bao.github.io/resume/` - 个人简历，支持明暗模式切换和PDF打印
+- **未来** - `https://de-bao.github.io/future/` - 职业目标、项目计划、技能提升计划、推荐书籍
+- **生活** - `https://de-bao.github.io/life/` - 生活理念、旅行经历、阅读兴趣、运动习惯、兴趣爱好
+
+> **注意**：标签和归档功能已整合到博客页面，不再有独立页面。
 
 ## 🛠️ 自定义配置
 
@@ -195,19 +195,24 @@ navigation:
     url: /blog/
   - title: 简历
     url: /resume/
-  - title: 未来规划
+  - title: 未来
     url: /future/
-  - title: 生活点滴
+  - title: 生活
     url: /life/
-  - title: 标签
-    url: /tags/
-  - title: 归档
-    url: /archive/
 ```
+
+> **注意**：标签和归档功能已整合到博客页面，可通过博客页面的筛选器使用。
 
 ## 📚 功能说明
 
-### 标签系统
+### 博客筛选功能
+
+博客页面（`/blog/`）集成了强大的筛选功能：
+
+1. **标签筛选** - 点击标签按钮筛选对应标签的文章
+2. **年份筛选** - 按年份查看文章
+3. **搜索功能** - 实时搜索文章标题和内容
+4. **组合筛选** - 支持多条件组合筛选
 
 文章可以添加多个标签：
 
@@ -217,8 +222,7 @@ tags: [Jekyll, 博客, 教程]
 
 标签会自动出现在：
 - 文章详情页
-- 标签云页面
-- 归档页面
+- 博客页面的标签筛选器
 
 ### 分页功能
 
