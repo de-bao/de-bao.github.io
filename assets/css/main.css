@@ -182,12 +182,15 @@ a:hover {
     color: var(--color-text-primary);
     letter-spacing: -0.02em;
     transition: color var(--transition-fast);
-    /* 隐藏文字但保留链接功能 */
+    /* 隐藏文字但保留链接功能和布局 */
+    font-size: 0;
+    line-height: 0;
     text-indent: -9999px;
     overflow: hidden;
     display: inline-block;
-    width: 0;
-    height: 0;
+    /* 保留最小可点击区域 */
+    min-width: 1px;
+    min-height: 1px;
 }
 
 .nav-brand a:hover {
