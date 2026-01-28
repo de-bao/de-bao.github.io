@@ -117,39 +117,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 实时时钟
     function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        // 更新导航栏时钟
-        const navClockTimeEl = document.getElementById('nav-clock-time');
-        if (navClockTimeEl) {
-            navClockTimeEl.textContent = `${hours}:${minutes}:${seconds}`;
+        try {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            // 更新导航栏时钟
+            const navClockTimeEl = document.getElementById('nav-clock-time');
+            if (navClockTimeEl) {
+                navClockTimeEl.textContent = `${hours}:${minutes}:${seconds}`;
+            } else {
+                console.warn('时钟元素未找到: nav-clock-time');
+            }
+        } catch (error) {
+            console.error('更新时钟失败:', error);
         }
     }
 
-    // 立即更新一次时钟
-    updateClock();
-    // 每秒更新时钟 - 使用 setInterval 定时器，每1000毫秒（1秒）执行一次
-    setInterval(updateClock, 1000);
+    // 确保DOM加载完成后再初始化时钟
+    const navClockTimeEl = document.getElementById('nav-clock-time');
+    if (navClockTimeEl) {
+        // 立即更新一次时钟
+        updateClock();
+        // 每秒更新时钟 - 使用 setInterval 定时器，每1000毫秒（1秒）执行一次
+        setInterval(updateClock, 1000);
+    } else {
+        console.warn('时钟元素未找到，延迟初始化');
+        setTimeout(() => {
+            updateClock();
+            setInterval(updateClock, 1000);
+        }, 100);
+    }
 
     // 获取天气信息
     function getWeather() {
         const navWeatherTempEl = document.getElementById('nav-weather-temp');
-        if (!navWeatherTempEl) return;
+        if (!navWeatherTempEl) {
+            console.warn('天气元素未找到: nav-weather-temp');
+            return;
+        }
 
-        // 使用wttr.in免费天气API（不需要API key）
-        // 获取南京天气
-        const city = 'Nanjing'; // 南京
-        
-        // 方法1：使用wttr.in（简单但可能不稳定）
-        fetch(`https://wttr.in/${city}?format=j1&lang=zh`)
-            .then(response => response.json())
+        // 先显示加载状态
+        navWeatherTempEl.textContent = '加载中...';
+
+        // 使用Open-Meteo免费API（更稳定，不需要key）
+        // 南京经纬度：32.0603°N, 118.7969°E
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=32.0603&longitude=118.7969&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia/Shanghai`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                if (data && data.current_condition && data.current_condition[0]) {
-                    const current = data.current_condition[0];
-                    const temp = current.temp_C;
+                if (data && data.current) {
+                    const current = data.current;
+                    const temp = Math.round(current.temperature_2m);
                     
                     // 更新导航栏天气
                     if (navWeatherTempEl) {
@@ -160,17 +184,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('获取天气失败:', error);
-                // 如果wttr.in失败，尝试使用Open-Meteo免费API（不需要key）
-                // 南京经纬度：32.0603°N, 118.7969°E
-                fetch(`https://api.open-meteo.com/v1/forecast?latitude=32.0603&longitude=118.7969&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia/Shanghai`)
-                    .then(response => response.json())
+                console.error('获取天气失败，尝试备用API:', error);
+                // 备用方案：使用wttr.in
+                const city = 'Nanjing';
+                fetch(`https://wttr.in/${city}?format=j1&lang=zh`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP错误! 状态: ${response.status}`);
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        if (data && data.current) {
-                            const current = data.current;
-                            const temp = Math.round(current.temperature_2m);
+                        if (data && data.current_condition && data.current_condition[0]) {
+                            const current = data.current_condition[0];
+                            const temp = current.temp_C;
                             
-                            // 更新导航栏天气
                             if (navWeatherTempEl) {
                                 navWeatherTempEl.textContent = `${temp}°C`;
                             }
@@ -179,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     })
                     .catch(error => {
-                        console.error('获取天气失败:', error);
+                        console.error('所有天气API都失败:', error);
                         if (navWeatherTempEl) {
                             navWeatherTempEl.textContent = '--°C';
                         }
@@ -187,8 +215,18 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // 获取天气信息
-    getWeather();
-    // 每30分钟更新一次天气
-    setInterval(getWeather, 30 * 60 * 1000);
+    // 确保DOM加载完成后再获取天气
+    const navWeatherTempEl = document.getElementById('nav-weather-temp');
+    if (navWeatherTempEl) {
+        // 立即获取天气信息
+        getWeather();
+        // 每30分钟更新一次天气
+        setInterval(getWeather, 30 * 60 * 1000);
+    } else {
+        console.warn('天气元素未找到，延迟初始化');
+        setTimeout(() => {
+            getWeather();
+            setInterval(getWeather, 30 * 60 * 1000);
+        }, 100);
+    }
 });
