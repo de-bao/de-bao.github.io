@@ -173,6 +173,50 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-lg);
+}
+
+/* 导航栏时钟和天气 */
+.nav-weather-clock {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.nav-clock-item,
+.nav-weather-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.nav-clock-item i,
+.nav-weather-item i {
+    color: var(--color-accent);
+    font-size: 0.95rem;
+}
+
+.nav-clock-time {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+}
+
+.nav-weather-temp {
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+/* 移动端隐藏时钟和天气 */
+@media (max-width: 768px) {
+    .nav-weather-clock {
+        display: none;
+    }
 }
 
 .nav-brand a {

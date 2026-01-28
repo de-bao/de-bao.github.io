@@ -21,6 +21,17 @@
         <!-- 导航栏 -->
         <nav class="navbar">
             <div class="container">
+                <!-- 时钟和天气 -->
+                <div class="nav-weather-clock">
+                    <div class="nav-clock-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="nav-clock-time" id="nav-clock-time">00:00:00</span>
+                    </div>
+                    <div class="nav-weather-item" id="nav-weather-item">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span class="nav-weather-temp" id="nav-weather-temp">--°C</span>
+                    </div>
+                </div>
                 <div class="nav-brand">
                     <a href="{{ '/' | relative_url }}" aria-label="返回首页">{{ site.title }}</a>
                 </div>
