@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="dark">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,99 +16,77 @@
     <!-- 字体图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="min-h-screen flex flex-col">
-    <!-- 导航栏 - 磨砂玻璃效果 -->
-    <nav class="navbar-glass sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+<body>
+    <div class="wrapper">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="container">
                 <div class="nav-brand">
-                    <a href="{{ '/' | relative_url }}" class="text-xl font-heading font-bold text-accent-amber hover:text-accent-amber/80 transition-colors">
-                        {{ site.title }}
-                    </a>
+                    <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
                 </div>
-                <ul class="hidden md:flex space-x-8">
+                <ul class="nav-menu">
                     {% for item in site.navigation %}
                     <li>
-                        <a href="{{ item.url | relative_url }}" 
-                           class="text-dark-text hover:text-accent-amber transition-colors {% if page.url == item.url %}text-accent-amber{% endif %}">
+                        <a href="{{ item.url | relative_url }}" {% if page.url == item.url %}class="active"{% endif %}>
                             {{ item.title }}
                         </a>
                     </li>
                     {% endfor %}
                 </ul>
-                <button class="md:hidden text-dark-text hover:text-accent-amber transition-colors" aria-label="切换菜单" id="nav-toggle">
-                    <i class="fas fa-bars text-xl"></i>
+                <button class="nav-toggle" aria-label="切换菜单" id="nav-toggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <!-- 移动端菜单 -->
-            <div class="md:hidden hidden" id="mobile-menu">
-                <ul class="flex flex-col space-y-4 pb-4">
-                    {% for item in site.navigation %}
-                    <li>
-                        <a href="{{ item.url | relative_url }}" 
-                           class="text-dark-text hover:text-accent-amber transition-colors block {% if page.url == item.url %}text-accent-amber{% endif %}">
-                            {{ item.title }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- 主要内容 -->
-    <main class="flex-grow">
-        {{ content }}
-    </main>
+        <!-- 主要内容 -->
+        <main class="main-content">
+            {{ content }}
+        </main>
 
-    <!-- 页脚 -->
-    <footer class="bg-dark-card border-t border-dark-card/50 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div class="footer-section">
-                    <h3 class="text-accent-amber font-heading font-bold text-lg mb-4">关于</h3>
-                    <p class="text-dark-text/80">{{ site.description }}</p>
-                </div>
-                <div class="footer-section">
-                    <h3 class="text-accent-amber font-heading font-bold text-lg mb-4">社交链接</h3>
-                    <div class="flex space-x-4">
-                        <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" 
-                           class="w-10 h-10 flex items-center justify-center bg-dark-bg rounded-full text-dark-text hover:text-accent-amber hover:bg-dark-card transition-all" 
-                           aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" 
-                           class="w-10 h-10 flex items-center justify-center bg-dark-bg rounded-full text-dark-text hover:text-accent-amber hover:bg-dark-card transition-all" 
-                           aria-label="知乎">
-                            <i class="fab fa-zhihu"></i>
-                        </a>
-                        <a href="{{ site.social_links.csdn }}" target="_blank" rel="noopener noreferrer" 
-                           class="w-10 h-10 flex items-center justify-center bg-dark-bg rounded-full text-dark-text hover:text-accent-amber hover:bg-dark-card transition-all" 
-                           aria-label="CSDN">
-                            <i class="fas fa-blog"></i>
-                        </a>
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>关于</h3>
+                        <p>{{ site.description }}</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>社交链接</h3>
+                        <div class="social-links">
+                            <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" aria-label="知乎">
+                                <i class="fab fa-zhihu"></i>
+                            </a>
+                            <a href="{{ site.social_links.csdn }}" target="_blank" rel="noopener noreferrer" aria-label="CSDN">
+                                <i class="fas fa-blog"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>订阅</h3>
+                        <p>
+                            <a href="{{ '/feed.xml' | relative_url }}">RSS Feed</a>
+                        </p>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3 class="text-accent-amber font-heading font-bold text-lg mb-4">订阅</h3>
-                    <p class="text-dark-text/80">
-                        <a href="{{ '/feed.xml' | relative_url }}" class="hover:text-accent-amber transition-colors">RSS Feed</a>
-                    </p>
+                <div class="footer-bottom">
+                    <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. 保留所有权利.</p>
+                    <p>由 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 托管</p>
                 </div>
             </div>
-            <div class="border-t border-dark-card/50 pt-8 text-center text-dark-text/60 text-sm">
-                <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. 保留所有权利.</p>
-                <p class="mt-2">由 <a href="https://pages.github.com/" target="_blank" class="text-accent-amber hover:text-accent-amber/80">GitHub Pages</a> 托管</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script>
         // 移动端菜单切换
         document.getElementById('nav-toggle')?.addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('active');
         });
     </script>
 </body>
