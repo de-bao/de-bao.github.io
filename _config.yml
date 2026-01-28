@@ -60,10 +60,6 @@ navigation:
     url: /future/
   - title: 生活点滴
     url: /life/
-  - title: 标签
-    url: /tags/
-  - title: 归档
-    url: /archive/
 
 # SEO 设置
 lang: zh-CN
