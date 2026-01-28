@@ -1,13 +1,12 @@
-// 现代化交互效果
+// 现代化交互效果和动画
 document.addEventListener('DOMContentLoaded', function() {
     // 移动端导航菜单切换
-    const navToggle = document.querySelector('.nav-toggle');
+    const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
         });
 
         // 点击菜单项后关闭移动端菜单
@@ -15,28 +14,23 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
             });
         });
     }
 
     // 导航栏滚动效果
     const navbar = document.querySelector('.navbar');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        lastScroll = currentScroll;
-    });
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
 
-    // 滚动动画
+    // Intersection Observer - 滚动动画
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -72,10 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 数字动画
+    // 数字动画 - 统计数字
     function animateNumber(element, target) {
         let current = 0;
-        const increment = target / 50;
+        const duration = 2000;
+        const increment = target / (duration / 16);
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -84,16 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 element.textContent = Math.floor(current) + (target >= 1000 ? '+' : '');
             }
-        }, 30);
+        }, 16);
     }
 
     // 观察统计数字
-    const statNumbers = document.querySelectorAll('.stat-number');
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
     const statsObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.dataset.animated) {
                 const target = parseInt(entry.target.getAttribute('data-target'));
-                if (target && !isNaN(target) && entry.target.textContent === '0') {
+                if (target && !isNaN(target)) {
                     entry.target.dataset.animated = 'true';
                     animateNumber(entry.target, target);
                 }
@@ -106,20 +101,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 卡片悬停效果增强
-    const cards = document.querySelectorAll('.post-card, .project-card, .skill-card');
+    const cards = document.querySelectorAll('.card, .post-card, .project-card, .skill-card, .stat-card');
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         });
     });
 
-    // 标签云动画
-    const tagCloudItems = document.querySelectorAll('.tag-cloud-item');
-    tagCloudItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    // 页面加载动画
+    // 页面加载淡入效果
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.transition = 'opacity 0.5s ease';
