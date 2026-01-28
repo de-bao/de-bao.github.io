@@ -399,7 +399,7 @@ description: Baud的个人网站 - 分享技术见解和生活思考
     <!-- 联系方式 -->
     <section class="home-section fade-in">
         <h2>🔗 找到我</h2>
-        <p class="text-center" style="margin-bottom: 2rem; color: var(--color-text-secondary);">关注我，获取最新技术动态和文章更新</p>
+        <p class="text-center section-intro">关注我，获取最新技术动态和文章更新</p>
         <div class="links-grid">
             <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" class="link-card">
                 <h3>📚 知乎</h3>

@@ -1089,6 +1089,11 @@ a:hover {
     margin-top: var(--spacing-lg);
 }
 
+.section-intro {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
