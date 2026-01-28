@@ -1,61 +1,64 @@
 ---
 layout: default
 ---
-<article class="post">
-    <header class="post-header">
-        <div class="container">
-            <h1 class="post-title">{{ page.title }}</h1>
-            <div class="post-meta">
-                <time datetime="{{ page.date | date: '%Y-%m-%d' }}">
-                    <i class="far fa-calendar"></i> {{ page.date | date: "%Y年%m月%d日" }}
-                </time>
-                {% if page.author %}
-                <span class="post-author">
-                    <i class="far fa-user"></i> {{ page.author }}
-                </span>
-                {% endif %}
-                {% if page.read_time %}
-                <span class="read-time">
-                    <i class="far fa-clock"></i> {{ page.read_time }} 分钟阅读
-                </span>
-                {% endif %}
-            </div>
-            {% if page.tags.size > 0 %}
-            <div class="post-tags">
-                {% for tag in page.tags %}
-                <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag">#{{ tag }}</a>
-                {% endfor %}
-            </div>
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-accent-amber mb-6">{{ page.title }}</h1>
+        <div class="flex items-center gap-6 text-dark-text/60 mb-6 flex-wrap">
+            <time datetime="{{ page.date | date: '%Y-%m-%d' }}" class="flex items-center gap-2">
+                <i class="far fa-calendar"></i> {{ page.date | date: "%Y年%m月%d日" }}
+            </time>
+            {% if page.author %}
+            <span class="flex items-center gap-2">
+                <i class="far fa-user"></i> {{ page.author }}
+            </span>
+            {% endif %}
+            {% if page.read_time %}
+            <span class="flex items-center gap-2">
+                <i class="far fa-clock"></i> {{ page.read_time }} 分钟阅读
+            </span>
             {% endif %}
         </div>
+        {% if page.tags.size > 0 %}
+        <div class="flex gap-2 flex-wrap">
+            {% for tag in page.tags %}
+            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" 
+               class="px-3 py-1 bg-dark-card rounded-full text-sm text-accent-amber hover:bg-accent-amber hover:text-dark-bg transition-colors border border-dark-card/50 hover:border-accent-amber/50">
+                #{{ tag }}
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
     </header>
 
-    <div class="post-content container">
-        {{ content }}
+    <div class="prose prose-invert prose-lg max-w-none">
+        <div class="text-dark-text leading-relaxed">
+            {{ content }}
+        </div>
     </div>
 
-    <footer class="post-footer">
-        <div class="container">
-            <div class="post-nav">
-                {% if page.previous %}
-                <a href="{{ page.previous.url | relative_url }}" class="prev-post">
-                    <i class="fas fa-chevron-left"></i>
-                    <div>
-                        <span>上一篇</span>
-                        <strong>{{ page.previous.title }}</strong>
-                    </div>
-                </a>
-                {% endif %}
-                {% if page.next %}
-                <a href="{{ page.next.url | relative_url }}" class="next-post">
-                    <div>
-                        <span>下一篇</span>
-                        <strong>{{ page.next.title }}</strong>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-                {% endif %}
-            </div>
+    <footer class="mt-16 pt-8 border-t border-dark-card/50">
+        <div class="flex flex-col md:flex-row justify-between gap-6">
+            {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}" 
+               class="flex items-center gap-4 p-4 bg-dark-card rounded-lg hover:bg-dark-card/80 transition-all group">
+                <i class="fas fa-chevron-left text-accent-amber"></i>
+                <div class="text-left">
+                    <span class="text-sm text-dark-text/60 block">上一篇</span>
+                    <strong class="text-dark-text group-hover:text-accent-amber transition-colors">{{ page.previous.title }}</strong>
+                </div>
+            </a>
+            {% endif %}
+            {% if page.next %}
+            <a href="{{ page.next.url | relative_url }}" 
+               class="flex items-center gap-4 p-4 bg-dark-card rounded-lg hover:bg-dark-card/80 transition-all group md:ml-auto">
+                <div class="text-right md:text-left">
+                    <span class="text-sm text-dark-text/60 block">下一篇</span>
+                    <strong class="text-dark-text group-hover:text-accent-amber transition-colors">{{ page.next.title }}</strong>
+                </div>
+                <i class="fas fa-chevron-right text-accent-amber"></i>
+            </a>
+            {% endif %}
         </div>
     </footer>
 </article>
