@@ -52,12 +52,12 @@ social_links:
 navigation:
   - title: 首页
     url: /
-  - title: 博客
-    url: /blog/
   - title: 未来
     url: /future/
   - title: 生活
     url: /life/
+  - title: 博客
+    url: /blog/
   - title: 简历
     url: /resume/
 

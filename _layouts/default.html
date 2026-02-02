@@ -31,14 +31,14 @@
                         <span class="nav-weather-city-desc" id="nav-weather-city-desc">南京 --</span>
                         <span class="nav-weather-temp" id="nav-weather-temp">--°C~--°C</span>
                     </div>
-                    <div class="nav-lang-item" id="nav-lang-item">
+                    <div class="nav-lang-item" id="nav-lang-item" data-translate="no">
                         <button class="lang-dropdown-btn" id="lang-dropdown-btn">
-                            <span id="lang-current">语言</span>
+                            <span id="lang-current" data-translate="no">语言</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="lang-dropdown-menu" id="lang-dropdown-menu">
-                            <button class="lang-option" data-lang="zh">中</button>
-                            <button class="lang-option" data-lang="en">英</button>
+                            <button class="lang-option" data-lang="zh" data-translate="no">中文</button>
+                            <button class="lang-option" data-lang="en" data-translate="no">English</button>
                         </div>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
             
             // 更新当前语言显示
             function updateCurrentLang() {
-                langCurrent.textContent = currentLang === 'en' ? '英' : '中';
+                langCurrent.textContent = currentLang === 'en' ? 'English' : '中文';
                 // 更新选项状态
                 document.querySelectorAll('.lang-option').forEach(option => {
                     if (option.dataset.lang === currentLang) {
@@ -262,6 +262,14 @@
                             if (['script', 'style', 'noscript', 'code', 'pre'].includes(tagName)) {
                                 return NodeFilter.FILTER_REJECT;
                             }
+                            // 跳过标记为不翻译的元素
+                            if (parent.closest('[data-translate="no"]') || parent.hasAttribute('data-translate') && parent.getAttribute('data-translate') === 'no') {
+                                return NodeFilter.FILTER_REJECT;
+                            }
+                            // 跳过语言切换相关的元素
+                            if (parent.closest('.nav-lang-item') || parent.closest('.resume-lang-item')) {
+                                return NodeFilter.FILTER_REJECT;
+                            }
                             // 只翻译非空文本
                             if (node.textContent.trim().length > 0) {
                                 return NodeFilter.FILTER_ACCEPT;
@@ -280,6 +288,11 @@
             
             // 翻译页面内容
             async function translatePage() {
+                // 如果已经翻译过，先恢复中文
+                if (originalTexts.size > 0) {
+                    restoreChinese();
+                }
+                
                 // 翻译整个页面，包括导航栏和页脚
                 const textNodes = getTextNodes(document.body);
                 
@@ -291,29 +304,37 @@
                 document.body.appendChild(loadingMsg);
                 
                 try {
-                    // 批量翻译（每次最多500字符，避免超过API限制）
+                    // 批量翻译（每次最多10个节点，避免超过API限制）
                     const batchSize = 10;
+                    let translatedCount = 0;
+                    
                     for (let i = 0; i < textNodes.length; i += batchSize) {
                         const batch = textNodes.slice(i, i + batchSize);
                         const promises = batch.map(async (node) => {
                             const text = node.textContent.trim();
                             if (!text || text.length === 0) return;
                             
-                            // 保存原始文本
+                            // 跳过已经是英文的文本（简单判断）
+                            if (/^[a-zA-Z0-9\s\.,!?;:'"()\[\]{}\-]+$/.test(text) && text.length > 3) {
+                                return;
+                            }
+                            
+                            // 保存原始文本（只保存一次）
                             if (!originalTexts.has(node)) {
                                 originalTexts.set(node, text);
                             }
                             
                             // 翻译文本
                             const translated = await translateText(text);
-                            if (translated) {
+                            if (translated && translated !== text) {
                                 node.textContent = translated;
+                                translatedCount++;
                             }
                         });
                         
                         await Promise.all(promises);
                         // 添加延迟避免请求过快
-                        await new Promise(resolve => setTimeout(resolve, 200));
+                        await new Promise(resolve => setTimeout(resolve, 300));
                     }
                     
                     // 移除加载提示
@@ -322,11 +343,12 @@
                     // 显示完成提示
                     const successMsg = document.createElement('div');
                     successMsg.style.cssText = 'position:fixed;top:20px;right:20px;background:#10b981;color:white;padding:12px 20px;border-radius:8px;z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
-                    successMsg.textContent = '翻译完成！';
+                    successMsg.textContent = `翻译完成！已翻译 ${translatedCount} 处文本`;
                     document.body.appendChild(successMsg);
                     setTimeout(() => successMsg.remove(), 2000);
                     
                 } catch (error) {
+                    console.error('翻译错误:', error);
                     loadingMsg.remove();
                     // 如果API失败，尝试使用浏览器翻译
                     tryBrowserTranslation();
