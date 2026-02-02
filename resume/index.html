@@ -1017,7 +1017,7 @@
             // 使用MyMemory Translation API翻译文本（主API）
             async function translateTextMyMemory(text, fromLang = 'zh', toLang = 'en') {
                 try {
-                    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
+                    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}&de=debao.cpc@gmail.com`;
                     const response = await fetch(url, {
                         method: 'GET',
                         mode: 'cors',
