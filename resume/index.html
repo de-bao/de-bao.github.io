@@ -871,13 +871,20 @@
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        // 从localStorage读取保存的主题
+        // 从localStorage读取保存的主题，如果没有保存则默认使用暗色
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        if (savedTheme === 'light') {
+            // 只有明确保存为light时才使用亮色
+            body.classList.remove('dark-mode');
+            themeToggle.textContent = '🌓';
+        } else {
+            // 默认使用暗色（包括savedTheme为null或'dark'的情况）
             body.classList.add('dark-mode');
             themeToggle.textContent = '☀️';
-        } else {
-            themeToggle.textContent = '🌓';
+            if (!savedTheme) {
+                // 如果是首次访问，保存默认暗色偏好
+                localStorage.setItem('theme', 'dark');
+            }
         }
 
         // 切换主题

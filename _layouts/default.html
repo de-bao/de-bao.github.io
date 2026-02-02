@@ -31,6 +31,11 @@
                         <span class="nav-weather-city-desc" id="nav-weather-city-desc">南京 --</span>
                         <span class="nav-weather-temp" id="nav-weather-temp">--°C~--°C</span>
                     </div>
+                    <div class="nav-lang-item" id="nav-lang-item">
+                        <button class="lang-btn" id="lang-btn-zh" data-lang="zh">中</button>
+                        <span class="lang-separator">/</span>
+                        <button class="lang-btn" id="lang-btn-en" data-lang="en">英</button>
+                    </div>
                 </div>
                 <div class="nav-brand">
                     <a href="{{ '/' | relative_url }}" aria-label="返回首页">{{ site.title }}</a>
@@ -194,6 +199,113 @@
             // 每10分钟更新一次
             setInterval(getWeather, 10 * 60 * 1000);
         })();
+
+        // 语言切换功能 - 使用Google Translate免费网页版
+        (function initLanguage() {
+            const langBtnZh = document.getElementById('lang-btn-zh');
+            const langBtnEn = document.getElementById('lang-btn-en');
+            const html = document.documentElement;
+            
+            // 从localStorage读取保存的语言
+            let currentLang = localStorage.getItem('lang') || 'zh';
+            let translateWidget = null;
+            
+            // 初始化语言按钮状态
+            function updateLangButtons() {
+                if (currentLang === 'en') {
+                    langBtnZh.classList.remove('active');
+                    langBtnEn.classList.add('active');
+                } else {
+                    langBtnZh.classList.add('active');
+                    langBtnEn.classList.remove('active');
+                }
+            }
+            
+            // 加载Google Translate
+            function loadGoogleTranslate() {
+                if (window.google && window.google.translate) {
+                    return Promise.resolve();
+                }
+                
+                return new Promise((resolve) => {
+                    if (document.getElementById('google-translate-script')) {
+                        resolve();
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.id = 'google-translate-script';
+                    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                    script.async = true;
+                    document.head.appendChild(script);
+                    
+                    window.googleTranslateElementInit = function() {
+                        resolve();
+                    };
+                });
+            }
+            
+            // 切换语言
+            async function switchLanguage(lang) {
+                currentLang = lang;
+                localStorage.setItem('lang', lang);
+                html.lang = lang;
+                updateLangButtons();
+                
+                if (lang === 'en') {
+                    // 切换到英文，使用Google Translate
+                    try {
+                        await loadGoogleTranslate();
+                        
+                        // 创建或更新翻译widget
+                        const container = document.getElementById('google_translate_element');
+                        if (!translateWidget) {
+                            translateWidget = new google.translate.TranslateElement({
+                                pageLanguage: 'zh',
+                                includedLanguages: 'en',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                                autoDisplay: false
+                            }, 'google_translate_element');
+                        }
+                        
+                        // 触发翻译
+                        setTimeout(() => {
+                            const select = document.querySelector('.goog-te-combo');
+                            if (select && select.value !== 'en') {
+                                select.value = 'en';
+                                select.dispatchEvent(new Event('change'));
+                            }
+                        }, 100);
+                    } catch (error) {
+                        console.error('翻译加载失败:', error);
+                    }
+                } else {
+                    // 切换回中文
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select && select.value !== 'zh') {
+                        select.value = 'zh';
+                        select.dispatchEvent(new Event('change'));
+                    }
+                }
+            }
+            
+            // 绑定按钮事件
+            langBtnZh.addEventListener('click', () => switchLanguage('zh'));
+            langBtnEn.addEventListener('click', () => switchLanguage('en'));
+            
+            // 初始化
+            updateLangButtons();
+            html.lang = currentLang;
+            
+            // 如果默认是英文，自动触发翻译
+            if (currentLang === 'en') {
+                setTimeout(() => {
+                    switchLanguage('en');
+                }, 1000);
+            }
+        })();
     </script>
+    <!-- Google Translate 容器（隐藏） -->
+    <div id="google_translate_element" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"></div>
 </body>
 </html>
