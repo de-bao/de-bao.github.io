@@ -874,8 +874,8 @@
     <!-- 语言切换按钮 -->
     <div class="resume-lang-item" id="resume-lang-item" style="position: fixed; bottom: 30px; right: 55px; z-index: 1000;">
         <button class="resume-lang-btn" id="resume-lang-btn" title="语言切换" aria-label="语言切换">
-            <span id="resume-lang-current">🌐</span>
-            <i class="fas fa-chevron-down" style="font-size: 6px; margin-left: 2px; transition: transform 0.3s ease;"></i>
+            <span id="resume-lang-current" style="font-size: 8px; display: inline-block;">🌐</span>
+            <i class="fas fa-chevron-down" style="font-size: 4px; margin-left: 1px; transition: transform 0.3s ease; vertical-align: middle;"></i>
         </button>
         <div class="resume-lang-menu" id="resume-lang-menu" style="position: absolute; bottom: 100%; right: 0; margin-bottom: 4px; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 4px; min-width: 60px; display: none; flex-direction: column; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
             <button class="resume-lang-option" data-lang="zh" data-translate="no" style="background: transparent; border: none; color: #666; font-size: 14px; cursor: pointer; padding: 6px 12px; border-radius: 4px; text-align: left; transition: all 0.2s;">中文</button>
@@ -892,6 +892,10 @@
             cursor: pointer;
             padding: 3px;
             transition: color 0.3s ease;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .resume-lang-btn:hover {
             color: #000;
