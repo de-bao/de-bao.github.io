@@ -37,9 +37,9 @@ description: Baud的个人网站 - 分享技术见解和生活思考
         </div>
     </div>
 
-    <!-- 关于我 -->
+    <!-- 赛博生活 -->
     <section class="home-section fade-in">
-        <h2>👨 关于我</h2>
+        <h2><a href="{{ '/life/' | relative_url }}" style="text-decoration: none; color: inherit;">💫 赛博生活</a></h2>
         
         <h3>个人简介</h3>
         <p>
@@ -102,11 +102,9 @@ description: Baud的个人网站 - 分享技术见解和生活思考
             <span class="skill-tag-item">LangChain</span>
             <span class="skill-tag-item">NLP</span>
         </div>
-    </section>
-
-    <!-- 最新动态 -->
-    <section class="home-section fade-in">
-        <h2>📅 最新动态</h2>
+        
+        <!-- 最新动态 -->
+        <h3 style="margin-top: 2rem;">📅 最新动态</h3>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
