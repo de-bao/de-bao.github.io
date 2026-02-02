@@ -230,41 +230,95 @@
                 });
             }
             
-            // 使用MyMemory Translation API翻译文本
-            async function translateText(text, fromLang = 'zh', toLang = 'en') {
+            // 使用MyMemory Translation API翻译文本（主API）
+            async function translateTextMyMemory(text, fromLang = 'zh', toLang = 'en') {
                 try {
                     const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
-                    console.log('[翻译调试] 请求URL:', url);
+                    console.log('[翻译调试] MyMemory请求URL:', url);
                     
                     const response = await fetch(url, {
                         method: 'GET',
                         mode: 'cors',
-                        cache: 'no-cache'
+                        cache: 'no-cache',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
                     });
                     
-                    console.log('[翻译调试] 响应状态:', response.status, response.statusText);
+                    console.log('[翻译调试] MyMemory响应状态:', response.status, response.statusText);
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     
                     const data = await response.json();
-                    console.log('[翻译调试] 响应数据:', data);
+                    console.log('[翻译调试] MyMemory响应数据:', data);
                     
                     if (data.responseStatus === 200 && data.responseData) {
-                        console.log('[翻译调试] 翻译成功:', text, '->', data.responseData.translatedText);
+                        console.log('[翻译调试] MyMemory翻译成功:', text, '->', data.responseData.translatedText);
                         return data.responseData.translatedText;
                     }
                     throw new Error('Translation failed: ' + JSON.stringify(data));
                 } catch (error) {
-                    console.error('[翻译调试] 翻译错误:', error);
-                    console.error('[翻译调试] 错误详情:', {
-                        message: error.message,
-                        stack: error.stack,
-                        name: error.name
-                    });
+                    console.error('[翻译调试] MyMemory翻译错误:', error);
                     return null;
                 }
+            }
+            
+            // 使用LibreTranslate API翻译文本（备用API）
+            async function translateTextLibreTranslate(text, fromLang = 'zh', toLang = 'en') {
+                try {
+                    // 使用公共的LibreTranslate实例
+                    const url = 'https://libretranslate.de/translate';
+                    console.log('[翻译调试] LibreTranslate请求...');
+                    
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            q: text,
+                            source: fromLang,
+                            target: toLang,
+                            format: 'text'
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log('[翻译调试] LibreTranslate响应:', data);
+                    
+                    if (data.translatedText) {
+                        console.log('[翻译调试] LibreTranslate翻译成功:', text, '->', data.translatedText);
+                        return data.translatedText;
+                    }
+                    throw new Error('Translation failed: ' + JSON.stringify(data));
+                } catch (error) {
+                    console.error('[翻译调试] LibreTranslate翻译错误:', error);
+                    return null;
+                }
+            }
+            
+            // 统一的翻译函数，自动尝试多个API
+            async function translateText(text, fromLang = 'zh', toLang = 'en') {
+                // 先尝试MyMemory
+                let result = await translateTextMyMemory(text, fromLang, toLang);
+                if (result) return result;
+                
+                // 如果MyMemory失败，尝试LibreTranslate
+                console.log('[翻译调试] MyMemory失败，尝试LibreTranslate...');
+                result = await translateTextLibreTranslate(text, fromLang, toLang);
+                if (result) return result;
+                
+                // 都失败了
+                console.error('[翻译调试] 所有翻译API都失败了');
+                return null;
             }
             
             // 提取需要翻译的文本节点
@@ -340,9 +394,11 @@
                     console.log('[翻译调试] 测试API连接...');
                     const testResult = await translateText('测试', 'zh', 'en');
                     if (!testResult) {
-                        throw new Error('API连接测试失败，请检查网络连接或浏览器控制台');
+                        console.warn('[翻译调试] API连接测试失败，将直接尝试翻译（可能部分失败）');
+                        // 不直接抛出错误，继续尝试翻译，可能部分API可用
+                    } else {
+                        console.log('[翻译调试] API连接测试成功:', testResult);
                     }
-                    console.log('[翻译调试] API连接测试成功:', testResult);
                     
                     // 批量翻译（每次最多10个节点，避免超过API限制）
                     const batchSize = 10;
@@ -417,25 +473,43 @@
                 const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
                 const isEdge = /Edg/.test(navigator.userAgent);
                 
-                if (isChrome || isEdge) {
-                    // 尝试自动触发浏览器翻译（如果可能）
-                    // 注意：由于浏览器安全限制，无法直接调用，但可以提示用户
-                    const useBrowser = confirm(
-                        '自动翻译API暂时不可用。\n\n' +
-                        '是否使用浏览器内置翻译功能？\n\n' +
-                        '点击"确定"后，请在浏览器地址栏右侧点击翻译图标，或右键页面选择"翻译为英语"。\n\n' +
-                        '点击"取消"将自动在新标签页打开Google Translate。'
-                    );
-                    
-                    if (!useBrowser) {
-                        // 自动打开Google Translate
-                        const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
-                        window.open(translateUrl, '_blank');
+                // 显示友好的提示信息
+                const errorMsg = document.createElement('div');
+                errorMsg.style.cssText = 'position:fixed;top:20px;right:20px;background:#ef4444;color:white;padding:16px 24px;border-radius:8px;z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,0.3);max-width:450px;line-height:1.6;';
+                errorMsg.innerHTML = `
+                    <strong>自动翻译API暂时不可用</strong><br>
+                    <small style="opacity:0.9;">
+                    ${isChrome || isEdge ? 
+                        '请使用浏览器内置翻译：<br>1. 点击地址栏右侧的翻译图标<br>2. 或右键页面选择"翻译为英语"' : 
+                        '正在为您打开Google Translate...'
                     }
+                    </small>
+                `;
+                document.body.appendChild(errorMsg);
+                
+                if (isChrome || isEdge) {
+                    // Chrome/Edge：提示使用浏览器翻译
+                    setTimeout(() => {
+                        errorMsg.remove();
+                        const useBrowser = confirm(
+                            '自动翻译API暂时不可用。\n\n' +
+                            '是否使用浏览器内置翻译功能？\n\n' +
+                            '点击"确定"后，请在浏览器地址栏右侧点击翻译图标，或右键页面选择"翻译为英语"。\n\n' +
+                            '点击"取消"将自动在新标签页打开Google Translate。'
+                        );
+                        
+                        if (!useBrowser) {
+                            const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
+                            window.open(translateUrl, '_blank');
+                        }
+                    }, 3000);
                 } else {
                     // 其他浏览器，自动打开Google Translate
-                    const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
-                    window.open(translateUrl, '_blank');
+                    setTimeout(() => {
+                        errorMsg.remove();
+                        const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
+                        window.open(translateUrl, '_blank');
+                    }, 2000);
                 }
             }
             

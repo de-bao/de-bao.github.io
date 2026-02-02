@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 导航栏滚动效果
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
     }
 
     // Intersection Observer - 滚动动画
