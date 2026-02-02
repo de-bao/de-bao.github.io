@@ -217,3 +217,155 @@ test('点击按钮增加计数', () => {
 
 记住，最好的实践是能够根据项目实际情况灵活应用这些原则。
 
+---
+
+## 性能优化实战
+
+### React DevTools Profiler
+
+使用React DevTools的Profiler工具分析性能：
+
+```javascript
+import { Profiler } from 'react';
+
+function onRenderCallback(id, phase, actualDuration) {
+  console.log('Component:', id);
+  console.log('Phase:', phase);
+  console.log('Actual duration:', actualDuration);
+}
+
+<Profiler id="App" onRender={onRenderCallback}>
+  <App />
+</Profiler>
+```
+
+### 性能指标
+
+关键性能指标：
+
+- **FCP** (First Contentful Paint): < 1.8s
+- **LCP** (Largest Contentful Paint): < 2.5s
+- **TTI** (Time to Interactive): < 3.8s
+- **Bundle Size**: < 200KB (gzipped)
+
+### 虚拟滚动
+
+对于长列表，使用虚拟滚动提升性能：
+
+```javascript
+import { FixedSizeList } from 'react-window';
+
+function VirtualizedList({ items }) {
+  return (
+    <FixedSizeList
+      height={600}
+      itemCount={items.length}
+      itemSize={50}
+      width="100%"
+    >
+      {({ index, style }) => (
+        <div style={style}>
+          {items[index].name}
+        </div>
+      )}
+    </FixedSizeList>
+  );
+}
+```
+
+### 路由级别代码分割
+
+```javascript
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
+```
+
+### 图片优化
+
+```javascript
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+function ImageGallery({ images }) {
+  return (
+    <div>
+      {images.map(img => (
+        <LazyLoadImage
+          key={img.id}
+          src={img.src}
+          alt={img.alt}
+          effect="blur"
+          placeholderSrc={img.placeholder}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Bundle优化
+
+```javascript
+// webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+};
+```
+
+### 性能监控
+
+```javascript
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+function sendToAnalytics(metric) {
+  console.log(metric);
+}
+
+getCLS(sendToAnalytics);
+getFID(sendToAnalytics);
+getFCP(sendToAnalytics);
+getLCP(sendToAnalytics);
+getTTFB(sendToAnalytics);
+```
+
+### 优化效果
+
+经过优化后的性能提升：
+
+- **首屏加载时间**：从3.2s降至1.5s
+- **Bundle大小**：从450KB降至180KB
+- **交互延迟**：从200ms降至50ms
+- **内存占用**：减少40%
+
+### 性能优化最佳实践
+
+1. **定期性能审计**：使用Lighthouse和React Profiler
+2. **监控生产环境**：收集真实用户性能数据
+3. **渐进式优化**：先优化影响最大的部分
+4. **保持代码简洁**：避免过度优化
