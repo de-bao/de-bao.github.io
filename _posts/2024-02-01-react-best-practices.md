@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "React 最佳实践与性能优化指南"
+title: "React 最佳实践与性能优化完整指南"
 date: 2024-02-01
 tags: [React, 前端, 性能优化, 最佳实践]
 categories: [前端开发]
-excerpt: "深入探讨 React 开发中的最佳实践，包括组件设计、状态管理、性能优化等核心话题，帮助开发者构建高质量的应用。"
-read_time: 10
+excerpt: "深入探讨 React 开发中的最佳实践和性能优化技巧，包括组件设计、状态管理、性能优化等核心话题，帮助开发者构建高质量的应用。"
+read_time: 20
 ---
 
 # React 最佳实践与性能优化指南

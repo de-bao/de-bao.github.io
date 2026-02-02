@@ -205,7 +205,7 @@
             setInterval(getWeather, 10 * 60 * 1000);
         })();
 
-        // 语言切换功能 - 使用Google Translate免费网页版
+        // 语言切换功能 - 使用浏览器内置翻译或Google Translate
         (function initLanguage() {
             const langDropdownBtn = document.getElementById('lang-dropdown-btn');
             const langDropdownMenu = document.getElementById('lang-dropdown-menu');
@@ -215,8 +215,6 @@
             
             // 从localStorage读取保存的语言，默认中文
             let currentLang = localStorage.getItem('lang') || 'zh';
-            let translateWidget = null;
-            let googleTranslateLoaded = false;
             
             // 更新当前语言显示
             function updateCurrentLang() {
@@ -231,47 +229,8 @@
                 });
             }
             
-            // 加载Google Translate
-            function loadGoogleTranslate() {
-                if (googleTranslateLoaded && window.google && window.google.translate) {
-                    return Promise.resolve();
-                }
-                
-                return new Promise((resolve, reject) => {
-                    if (document.getElementById('google-translate-script')) {
-                        // 等待Google Translate加载完成
-                        const checkInterval = setInterval(() => {
-                            if (window.google && window.google.translate) {
-                                clearInterval(checkInterval);
-                                googleTranslateLoaded = true;
-                                resolve();
-                            }
-                        }, 100);
-                        setTimeout(() => {
-                            clearInterval(checkInterval);
-                            if (!googleTranslateLoaded) {
-                                reject(new Error('Google Translate加载超时'));
-                            }
-                        }, 5000);
-                        return;
-                    }
-                    
-                    const script = document.createElement('script');
-                    script.id = 'google-translate-script';
-                    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-                    script.async = true;
-                    script.onerror = () => reject(new Error('Google Translate脚本加载失败'));
-                    document.head.appendChild(script);
-                    
-                    window.googleTranslateElementInit = function() {
-                        googleTranslateLoaded = true;
-                        resolve();
-                    };
-                });
-            }
-            
-            // 切换语言
-            async function switchLanguage(lang) {
+            // 切换语言 - 使用Google Translate免费API
+            function switchLanguage(lang) {
                 if (lang === currentLang) return;
                 
                 currentLang = lang;
@@ -281,50 +240,102 @@
                 closeDropdown();
                 
                 if (lang === 'en') {
-                    // 切换到英文，使用Google Translate
-                    try {
-                        await loadGoogleTranslate();
-                        
-                        // 创建翻译widget（如果还没有）
-                        const container = document.getElementById('google_translate_element');
-                        if (!translateWidget && container) {
-                            translateWidget = new google.translate.TranslateElement({
-                                pageLanguage: 'zh',
-                                includedLanguages: 'en',
-                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                                autoDisplay: false
-                            }, 'google_translate_element');
-                        }
-                        
-                        // 等待widget创建完成，然后触发翻译
-                        setTimeout(() => {
-                            const select = document.querySelector('.goog-te-combo');
-                            if (select) {
-                                select.value = 'en';
-                                select.dispatchEvent(new Event('change'));
-                            } else {
-                                // 如果select还没出现，重试
-                                setTimeout(() => {
-                                    const select2 = document.querySelector('.goog-te-combo');
-                                    if (select2) {
-                                        select2.value = 'en';
-                                        select2.dispatchEvent(new Event('change'));
-                                    }
-                                }, 500);
-                            }
-                        }, 300);
-                    } catch (error) {
-                        console.error('翻译加载失败:', error);
-                        alert('翻译功能暂时不可用，请稍后重试');
-                    }
+                    // 加载Google Translate并自动翻译
+                    loadGoogleTranslate().then(() => {
+                        translatePage('en');
+                    }).catch(() => {
+                        // 如果加载失败，提示用户使用浏览器翻译
+                        alert('自动翻译功能暂时不可用。\n\n请使用浏览器的翻译功能：\nChrome/Edge: 右键 -> 翻译为英语\n或访问: https://translate.google.com/translate?sl=zh&tl=en&u=' + encodeURIComponent(window.location.href));
+                    });
                 } else {
-                    // 切换回中文
-                    const select = document.querySelector('.goog-te-combo');
-                    if (select && select.value !== 'zh') {
-                        select.value = 'zh';
-                        select.dispatchEvent(new Event('change'));
+                    // 切换回中文，重新加载页面
+                    if (window.location.href.includes('translate.googleusercontent.com')) {
+                        // 从翻译URL中提取原始URL
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const originalUrl = urlParams.get('u');
+                        if (originalUrl) {
+                            window.location.href = decodeURIComponent(originalUrl);
+                        }
+                    } else {
+                        // 清除翻译状态
+                        location.reload();
                     }
                 }
+            }
+            
+            // 加载Google Translate
+            function loadGoogleTranslate() {
+                return new Promise((resolve, reject) => {
+                    if (window.google && window.google.translate) {
+                        resolve();
+                        return;
+                    }
+                    
+                    if (document.getElementById('google-translate-script')) {
+                        // 等待加载完成
+                        const checkInterval = setInterval(() => {
+                            if (window.google && window.google.translate) {
+                                clearInterval(checkInterval);
+                                resolve();
+                            }
+                        }, 100);
+                        setTimeout(() => {
+                            clearInterval(checkInterval);
+                            if (!window.google || !window.google.translate) {
+                                reject();
+                            }
+                        }, 5000);
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.id = 'google-translate-script';
+                    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                    script.async = true;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                    
+                    window.googleTranslateElementInit = function() {
+                        resolve();
+                    };
+                });
+            }
+            
+            // 翻译页面
+            function translatePage(targetLang) {
+                if (!window.google || !window.google.translate) return;
+                
+                // 创建翻译容器（如果还没有）
+                let container = document.getElementById('google_translate_element');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'google_translate_element';
+                    container.style.position = 'absolute';
+                    container.style.left = '-9999px';
+                    container.style.width = '1px';
+                    container.style.height = '1px';
+                    container.style.overflow = 'hidden';
+                    document.body.appendChild(container);
+                }
+                
+                // 创建翻译widget
+                if (!window.translateWidget) {
+                    window.translateWidget = new google.translate.TranslateElement({
+                        pageLanguage: 'zh',
+                        includedLanguages: 'en',
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                        autoDisplay: false
+                    }, 'google_translate_element');
+                }
+                
+                // 触发翻译
+                setTimeout(() => {
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select) {
+                        select.value = targetLang;
+                        select.dispatchEvent(new Event('change'));
+                    }
+                }, 500);
             }
             
             // 打开/关闭下拉菜单
@@ -361,16 +372,7 @@
             // 初始化
             updateCurrentLang();
             html.lang = currentLang;
-            
-            // 如果默认是英文，自动触发翻译
-            if (currentLang === 'en') {
-                setTimeout(() => {
-                    switchLanguage('en');
-                }, 1500);
-            }
         })();
     </script>
-    <!-- Google Translate 容器（隐藏） -->
-    <div id="google_translate_element" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"></div>
 </body>
 </html>
