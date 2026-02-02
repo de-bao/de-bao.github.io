@@ -40,8 +40,7 @@ de-bao.github.io/
 │   └── favicon.svg      # 网站图标
 ├── resume/              # 简历页面
 │   ├── index.html       # 个人简历
-│   ├── photo.jpg        # 个人照片
-│   └── resume.pdf       # PDF简历
+│   └── photo.jpg        # 个人照片
 ├── future/              # 未来规划页面
 │   └── index.html       # 未来规划内容（使用Jekyll布局，样式与首页一致）
 ├── life/                # 生活点滴页面

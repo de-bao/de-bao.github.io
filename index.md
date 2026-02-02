@@ -210,7 +210,7 @@ description: Baud的个人网站 - 分享技术见解和生活思考
                 <p>欢迎技术交流、项目合作和求职咨询</p>
             </a>
             
-            <a href="{{ '/resume/resume.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer" class="link-card">
+            <a href="{{ '/resume/?print=true' | relative_url }}" class="link-card">
                 <h3>📄 简历下载</h3>
                 <p>查看我的完整简历，了解我的技能和项目经验</p>
             </a>
