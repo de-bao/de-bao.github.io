@@ -32,9 +32,14 @@
                         <span class="nav-weather-temp" id="nav-weather-temp">--°C~--°C</span>
                     </div>
                     <div class="nav-lang-item" id="nav-lang-item">
-                        <button class="lang-btn" id="lang-btn-zh" data-lang="zh">中</button>
-                        <span class="lang-separator">/</span>
-                        <button class="lang-btn" id="lang-btn-en" data-lang="en">英</button>
+                        <button class="lang-dropdown-btn" id="lang-dropdown-btn">
+                            <span id="lang-current">语言</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="lang-dropdown-menu" id="lang-dropdown-menu">
+                            <button class="lang-option" data-lang="zh">中</button>
+                            <button class="lang-option" data-lang="en">英</button>
+                        </div>
                     </div>
                 </div>
                 <div class="nav-brand">
@@ -202,34 +207,52 @@
 
         // 语言切换功能 - 使用Google Translate免费网页版
         (function initLanguage() {
-            const langBtnZh = document.getElementById('lang-btn-zh');
-            const langBtnEn = document.getElementById('lang-btn-en');
+            const langDropdownBtn = document.getElementById('lang-dropdown-btn');
+            const langDropdownMenu = document.getElementById('lang-dropdown-menu');
+            const langCurrent = document.getElementById('lang-current');
+            const langItem = document.getElementById('nav-lang-item');
             const html = document.documentElement;
             
-            // 从localStorage读取保存的语言
+            // 从localStorage读取保存的语言，默认中文
             let currentLang = localStorage.getItem('lang') || 'zh';
             let translateWidget = null;
+            let googleTranslateLoaded = false;
             
-            // 初始化语言按钮状态
-            function updateLangButtons() {
-                if (currentLang === 'en') {
-                    langBtnZh.classList.remove('active');
-                    langBtnEn.classList.add('active');
-                } else {
-                    langBtnZh.classList.add('active');
-                    langBtnEn.classList.remove('active');
-                }
+            // 更新当前语言显示
+            function updateCurrentLang() {
+                langCurrent.textContent = currentLang === 'en' ? '英' : '中';
+                // 更新选项状态
+                document.querySelectorAll('.lang-option').forEach(option => {
+                    if (option.dataset.lang === currentLang) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
             }
             
             // 加载Google Translate
             function loadGoogleTranslate() {
-                if (window.google && window.google.translate) {
+                if (googleTranslateLoaded && window.google && window.google.translate) {
                     return Promise.resolve();
                 }
                 
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     if (document.getElementById('google-translate-script')) {
-                        resolve();
+                        // 等待Google Translate加载完成
+                        const checkInterval = setInterval(() => {
+                            if (window.google && window.google.translate) {
+                                clearInterval(checkInterval);
+                                googleTranslateLoaded = true;
+                                resolve();
+                            }
+                        }, 100);
+                        setTimeout(() => {
+                            clearInterval(checkInterval);
+                            if (!googleTranslateLoaded) {
+                                reject(new Error('Google Translate加载超时'));
+                            }
+                        }, 5000);
                         return;
                     }
                     
@@ -237,9 +260,11 @@
                     script.id = 'google-translate-script';
                     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
                     script.async = true;
+                    script.onerror = () => reject(new Error('Google Translate脚本加载失败'));
                     document.head.appendChild(script);
                     
                     window.googleTranslateElementInit = function() {
+                        googleTranslateLoaded = true;
                         resolve();
                     };
                 });
@@ -247,19 +272,22 @@
             
             // 切换语言
             async function switchLanguage(lang) {
+                if (lang === currentLang) return;
+                
                 currentLang = lang;
                 localStorage.setItem('lang', lang);
                 html.lang = lang;
-                updateLangButtons();
+                updateCurrentLang();
+                closeDropdown();
                 
                 if (lang === 'en') {
                     // 切换到英文，使用Google Translate
                     try {
                         await loadGoogleTranslate();
                         
-                        // 创建或更新翻译widget
+                        // 创建翻译widget（如果还没有）
                         const container = document.getElementById('google_translate_element');
-                        if (!translateWidget) {
+                        if (!translateWidget && container) {
                             translateWidget = new google.translate.TranslateElement({
                                 pageLanguage: 'zh',
                                 includedLanguages: 'en',
@@ -268,16 +296,26 @@
                             }, 'google_translate_element');
                         }
                         
-                        // 触发翻译
+                        // 等待widget创建完成，然后触发翻译
                         setTimeout(() => {
                             const select = document.querySelector('.goog-te-combo');
-                            if (select && select.value !== 'en') {
+                            if (select) {
                                 select.value = 'en';
                                 select.dispatchEvent(new Event('change'));
+                            } else {
+                                // 如果select还没出现，重试
+                                setTimeout(() => {
+                                    const select2 = document.querySelector('.goog-te-combo');
+                                    if (select2) {
+                                        select2.value = 'en';
+                                        select2.dispatchEvent(new Event('change'));
+                                    }
+                                }, 500);
                             }
-                        }, 100);
+                        }, 300);
                     } catch (error) {
                         console.error('翻译加载失败:', error);
+                        alert('翻译功能暂时不可用，请稍后重试');
                     }
                 } else {
                     // 切换回中文
@@ -289,19 +327,46 @@
                 }
             }
             
-            // 绑定按钮事件
-            langBtnZh.addEventListener('click', () => switchLanguage('zh'));
-            langBtnEn.addEventListener('click', () => switchLanguage('en'));
+            // 打开/关闭下拉菜单
+            function toggleDropdown() {
+                langItem.classList.toggle('active');
+            }
+            
+            function closeDropdown() {
+                langItem.classList.remove('active');
+            }
+            
+            // 绑定事件
+            langDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDropdown();
+            });
+            
+            // 点击选项
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const lang = option.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+            
+            // 点击外部关闭下拉菜单
+            document.addEventListener('click', (e) => {
+                if (!langItem.contains(e.target)) {
+                    closeDropdown();
+                }
+            });
             
             // 初始化
-            updateLangButtons();
+            updateCurrentLang();
             html.lang = currentLang;
             
             // 如果默认是英文，自动触发翻译
             if (currentLang === 'en') {
                 setTimeout(() => {
                     switchLanguage('en');
-                }, 1000);
+                }, 1500);
             }
         })();
     </script>
