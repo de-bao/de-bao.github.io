@@ -280,8 +280,8 @@
             
             // 翻译页面内容
             async function translatePage() {
-                const mainContent = document.querySelector('main') || document.body;
-                const textNodes = getTextNodes(mainContent);
+                // 翻译整个页面，包括导航栏和页脚
+                const textNodes = getTextNodes(document.body);
                 
                 // 显示翻译提示
                 const loadingMsg = document.createElement('div');
@@ -340,31 +340,24 @@
                 const isEdge = /Edg/.test(navigator.userAgent);
                 
                 if (isChrome || isEdge) {
-                    // 提示用户使用浏览器翻译
+                    // 尝试自动触发浏览器翻译（如果可能）
+                    // 注意：由于浏览器安全限制，无法直接调用，但可以提示用户
                     const useBrowser = confirm(
                         '自动翻译API暂时不可用。\n\n' +
                         '是否使用浏览器内置翻译功能？\n\n' +
-                        '点击"确定"后，请在浏览器地址栏右侧点击翻译图标，或右键页面选择"翻译为英语"。'
+                        '点击"确定"后，请在浏览器地址栏右侧点击翻译图标，或右键页面选择"翻译为英语"。\n\n' +
+                        '点击"取消"将自动在新标签页打开Google Translate。'
                     );
                     
                     if (!useBrowser) {
-                        // 如果用户不想用浏览器翻译，提供Google Translate链接
-                        const useGoogle = confirm('是否在新标签页打开Google Translate翻译此页面？');
-                        if (useGoogle) {
-                            const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
-                            window.open(translateUrl, '_blank');
-                        }
-                    }
-                } else {
-                    // 其他浏览器，提供Google Translate链接
-                    const useGoogle = confirm(
-                        '自动翻译API暂时不可用。\n\n' +
-                        '是否在新标签页打开Google Translate翻译此页面？'
-                    );
-                    if (useGoogle) {
+                        // 自动打开Google Translate
                         const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
                         window.open(translateUrl, '_blank');
                     }
+                } else {
+                    // 其他浏览器，自动打开Google Translate
+                    const translateUrl = `https://translate.google.com/translate?sl=zh&tl=en&u=${encodeURIComponent(window.location.href)}`;
+                    window.open(translateUrl, '_blank');
                 }
             }
             
@@ -429,6 +422,18 @@
             // 初始化
             updateCurrentLang();
             html.lang = currentLang;
+            
+            // 如果页面加载时已经是英文状态，自动翻译
+            if (currentLang === 'en') {
+                // 等待页面完全加载后再翻译
+                if (document.readyState === 'complete') {
+                    setTimeout(() => translatePage(), 500);
+                } else {
+                    window.addEventListener('load', () => {
+                        setTimeout(() => translatePage(), 500);
+                    });
+                }
+            }
         })();
     </script>
 </body>
