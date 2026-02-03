@@ -16,30 +16,17 @@
     <!-- 字体图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- ClustrMaps Map Widget 样式 -->
+    <!-- ClustrMaps 基本样式 -->
     <style>
-        /* 限制 ClustrMaps 地图大小为页面宽度的 20% */
-        .clustrmaps-container {
-            max-width: 20vw !important;
-            width: 20vw !important;
-            height: auto !important;
-            overflow: hidden !important;
-        }
-        
-        /* ClustrMaps 生成的元素样式 */
-        .clustrmaps-container #clustrmaps-widget-v2,
-        .clustrmaps-container .clustrmaps-map-control,
-        .clustrmaps-container .clustrmaps-map-container,
-        .clustrmaps-container .clustrmaps-map,
-        .clustrmaps-container canvas,
-        .clustrmaps-container iframe,
-        .clustrmaps-container div,
-        .clustrmaps-container img {
-            max-width: 100% !important;
-            width: 100% !important;
-            height: auto !important;
+        /* 确保 ClustrMaps 地图可见 */
+        #clustrmaps-widget-v2,
+        .clustrmaps-map-control {
+            display: block !important;
+            visibility: visible !important;
+            position: relative !important;
         }
     </style>
+    
 </head>
 <body>
     <div class="wrapper">
@@ -647,70 +634,6 @@
     </script>
     
     <!-- ClustrMaps Map Widget -->
-    <div class="clustrmaps-container" id="clustrmaps-wrapper"></div>
-    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI"></script>
-    <script>
-        // 等待 ClustrMaps Map Widget 加载完成后调整大小
-        (function() {
-            function resizeClustrMaps() {
-                const wrapper = document.getElementById('clustrmaps-wrapper');
-                if (!wrapper) return;
-                
-                // 查找 ClustrMaps 生成的元素（匹配参考文件的类名）
-                const selectors = [
-                    '#clustrmaps-widget-v2',
-                    '.clustrmaps-map-control',
-                    '.clustrmaps-map-container',
-                    '.clustrmaps-map',
-                    '[id*="clustr"]',
-                    '[id*="clustrmaps"]',
-                    '[class*="clustr"]',
-                    '[class*="clustrmaps"]'
-                ];
-                
-                selectors.forEach(function(selector) {
-                    try {
-                        const elements = document.querySelectorAll(selector);
-                        elements.forEach(function(el) {
-                            // 确保是 ClustrMaps 相关的元素
-                            const id = el.id || '';
-                            const className = el.className || '';
-                            if (id.includes('clustr') || id.includes('clustrmaps') || 
-                                className.includes('clustr') || className.includes('clustrmaps')) {
-                                el.style.maxWidth = '20vw';
-                                el.style.width = '20vw';
-                                
-                                // 将元素移动到容器中
-                                if (el.parentNode !== wrapper && !wrapper.contains(el)) {
-                                    wrapper.appendChild(el);
-                                }
-                            }
-                        });
-                    } catch (e) {
-                        // 忽略选择器错误
-                    }
-                });
-            }
-            
-            // 页面加载完成后执行
-            if (document.readyState === 'complete') {
-                setTimeout(resizeClustrMaps, 1000);
-            } else {
-                window.addEventListener('load', function() {
-                    setTimeout(resizeClustrMaps, 1000);
-                });
-            }
-            
-            // 定期检查（因为 ClustrMaps 可能异步加载）
-            let checkCount = 0;
-            const checkInterval = setInterval(function() {
-                resizeClustrMaps();
-                checkCount++;
-                if (checkCount > 10) { // 10秒后停止检查
-                    clearInterval(checkInterval);
-                }
-            }, 1000);
-        })();
-    </script>
+    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI'></script>
 </body>
 </html>
