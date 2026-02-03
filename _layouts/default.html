@@ -18,12 +18,22 @@
     
     <!-- ClustrMaps 基本样式 -->
     <style>
-        /* 确保 ClustrMaps 地图可见 */
+        /* 确保 ClustrMaps 地图可见并缩小到50% */
         #clustrmaps-widget-v2,
-        .clustrmaps-map-control {
+        .clustrmaps-map-control,
+        .clustrmaps-map-container,
+        .clustrmaps-map {
             display: block !important;
             visibility: visible !important;
             position: relative !important;
+            transform: scale(0.5) !important;
+            transform-origin: center top !important;
+        }
+        
+        /* 调整容器高度以适应缩放 */
+        .clustrmaps-wrapper {
+            height: auto !important;
+            overflow: visible !important;
         }
     </style>
     
@@ -111,8 +121,8 @@
                     <p>由 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 托管</p>
                 </div>
                 <!-- ClustrMaps Map Widget -->
-                <div style="text-align: center; margin-top: 20px;">
-                    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI'></script>
+                <div class="clustrmaps-wrapper" style="text-align: center; margin-top: 20px;">
+                    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI&co=010c14&cmo=897474&cmn=11ef11'></script>
                 </div>
             </div>
         </footer>
