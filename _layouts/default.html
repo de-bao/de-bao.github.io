@@ -15,6 +15,25 @@
     
     <!-- 字体图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- ClustrMaps Globe Widget 样式 -->
+    <style>
+        /* 限制 ClustrMaps 地球仪大小为页面宽度的 20% */
+        .clustrmaps-container {
+            max-width: 20vw !important;
+            width: 20vw !important;
+            height: auto !important;
+            overflow: hidden !important;
+        }
+        
+        .clustrmaps-container canvas,
+        .clustrmaps-container iframe,
+        .clustrmaps-container div {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -622,6 +641,71 @@
     </script>
     
     <!-- ClustrMaps Globe Widget -->
+    <div class="clustrmaps-container" id="clustrmaps-wrapper"></div>
     <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI"></script>
+    <script>
+        // 等待 ClustrMaps 加载完成后调整大小
+        (function() {
+            function resizeClustrMaps() {
+                // 查找 ClustrMaps 生成的元素（更精确的选择器）
+                const selectors = [
+                    '[id*="clustr"]',
+                    '[id*="clustrmaps"]',
+                    '[class*="clustr"]',
+                    '[class*="clustrmaps"]'
+                ];
+                
+                selectors.forEach(function(selector) {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(function(el) {
+                        // 确保是 ClustrMaps 相关的元素
+                        const id = el.id || '';
+                        const className = el.className || '';
+                        if (id.includes('clustr') || id.includes('clustrmaps') || 
+                            className.includes('clustr') || className.includes('clustrmaps')) {
+                            el.style.maxWidth = '20vw';
+                            el.style.width = '20vw';
+                            el.style.height = 'auto';
+                            
+                            // 如果是 canvas，保持宽高比
+                            if (el.tagName === 'CANVAS' && el.width && el.height) {
+                                const aspectRatio = el.height / el.width;
+                                el.style.height = (20 * aspectRatio) + 'vw';
+                            }
+                        }
+                    });
+                });
+                
+                // 将元素移动到容器中
+                const wrapper = document.getElementById('clustrmaps-wrapper');
+                if (wrapper) {
+                    clustrElements.forEach(function(el) {
+                        if (el.parentNode !== wrapper && !wrapper.contains(el)) {
+                            wrapper.appendChild(el);
+                        }
+                    });
+                }
+            }
+            
+            // 页面加载完成后执行
+            if (document.readyState === 'complete') {
+                setTimeout(resizeClustrMaps, 1000);
+            } else {
+                window.addEventListener('load', function() {
+                    setTimeout(resizeClustrMaps, 1000);
+                });
+            }
+            
+            // 定期检查（因为 ClustrMaps 可能异步加载）
+            let checkCount = 0;
+            const checkInterval = setInterval(function() {
+                resizeClustrMaps();
+                checkCount++;
+                if (checkCount > 10) { // 10秒后停止检查
+                    clearInterval(checkInterval);
+                }
+            }, 1000);
+        })();
+    </script>
 </body>
 </html>
