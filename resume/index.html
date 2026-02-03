@@ -604,6 +604,24 @@
                 display: none;
             }
         }
+        
+        /* 隐藏 ClustrMaps 地图但保留统计功能 */
+        #clustrmaps-widget-v2,
+        .clustrmaps-map-control,
+        .clustrmaps-map-container,
+        .clustrmaps-map,
+        [id*="clustr"],
+        [id*="clustrmaps"],
+        [class*="clustr"],
+        [class*="clustrmaps"] {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
     </style>
 </head>
 <body>
@@ -1303,6 +1321,9 @@
         })();
 
     </script>
+    
+    <!-- ClustrMaps 统计脚本（隐藏地图，只用于统计） -->
+    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI&co=010c14&cmo=897474&cmn=11ef11'></script>
 </body>
 </html>
 
