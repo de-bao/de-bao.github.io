@@ -16,9 +16,9 @@
     <!-- 字体图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- ClustrMaps Globe Widget 样式 -->
+    <!-- ClustrMaps Map Widget 样式 -->
     <style>
-        /* 限制 ClustrMaps 地球仪大小为页面宽度的 20% */
+        /* 限制 ClustrMaps 地图大小为页面宽度的 20% */
         .clustrmaps-container {
             max-width: 20vw !important;
             width: 20vw !important;
@@ -28,7 +28,8 @@
         
         .clustrmaps-container canvas,
         .clustrmaps-container iframe,
-        .clustrmaps-container div {
+        .clustrmaps-container div,
+        .clustrmaps-container img {
             max-width: 100% !important;
             width: 100% !important;
             height: auto !important;
@@ -640,20 +641,23 @@
         })();
     </script>
     
-    <!-- ClustrMaps Globe Widget -->
+    <!-- ClustrMaps Map Widget -->
     <div class="clustrmaps-container" id="clustrmaps-wrapper"></div>
-    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI"></script>
+    <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=I_kcB5dWikqitdTbwCNpq76yRHZY-el4GrjzEGxRpFI&cl=ffffff&w=a"></script>
     <script>
-        // 等待 ClustrMaps 加载完成后调整大小
+        // 等待 ClustrMaps Map Widget 加载完成后调整大小
         (function() {
             function resizeClustrMaps() {
-                // 查找 ClustrMaps 生成的元素（更精确的选择器）
+                // 查找 ClustrMaps 生成的元素
                 const selectors = [
                     '[id*="clustr"]',
                     '[id*="clustrmaps"]',
                     '[class*="clustr"]',
                     '[class*="clustrmaps"]'
                 ];
+                
+                const wrapper = document.getElementById('clustrmaps-wrapper');
+                if (!wrapper) return;
                 
                 selectors.forEach(function(selector) {
                     const elements = document.querySelectorAll(selector);
@@ -667,24 +671,13 @@
                             el.style.width = '20vw';
                             el.style.height = 'auto';
                             
-                            // 如果是 canvas，保持宽高比
-                            if (el.tagName === 'CANVAS' && el.width && el.height) {
-                                const aspectRatio = el.height / el.width;
-                                el.style.height = (20 * aspectRatio) + 'vw';
+                            // 将元素移动到容器中
+                            if (el.parentNode !== wrapper && !wrapper.contains(el)) {
+                                wrapper.appendChild(el);
                             }
                         }
                     });
                 });
-                
-                // 将元素移动到容器中
-                const wrapper = document.getElementById('clustrmaps-wrapper');
-                if (wrapper) {
-                    clustrElements.forEach(function(el) {
-                        if (el.parentNode !== wrapper && !wrapper.contains(el)) {
-                            wrapper.appendChild(el);
-                        }
-                    });
-                }
             }
             
             // 页面加载完成后执行
