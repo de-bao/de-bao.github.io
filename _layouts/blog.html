@@ -181,7 +181,7 @@ function filterPosts() {
     }
 }
 
-// 维基百科搜索函数
+// 维基百科搜索函数（改进版：获取详细摘要）
 function wikiSearch() {
     const query = document.getElementById('search-input').value.trim();
     const resultsDiv = document.getElementById('wiki-results');
@@ -198,66 +198,79 @@ function wikiSearch() {
     resultsDiv.style.display = 'block';
     resultsDiv.innerHTML = '<div class="wiki-loading">📡 正在搜索维基百科...</div>';
     
-    // 生成唯一回调函数名（防冲突）
-    const cbName = 'wikiCallback_' + Date.now();
-    const scriptId = 'wikiScript_' + Date.now();
+    // 第一步：使用 search API 查找相关文章
+    const searchUrl = `https://zh.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&srlimit=8&srprop=size|wordcount|timestamp|snippet&format=json&origin=*&_=${Date.now()}`;
     
-    // 创建 JSONP 脚本
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.src = `https://zh.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(query)}&limit=8&format=json&callback=${cbName}&_=${Date.now()}`;
-    
-    // 定义回调函数
-    window[cbName] = function(data) {
-        // data[1]=标题, data[2]=摘要(部分有), data[3]=URL
-        if (!data[1] || data[1].length === 0) {
-            resultsDiv.innerHTML = '<div class="wiki-error">❌ 未找到相关结果</div>';
-            cleanup();
-            return;
-        }
-        
-        // 生成结果 HTML
-        let html = `<div style="margin-bottom:10px"><strong>共找到 ${data[1].length} 个结果：</strong></div><ul style="padding-left:20px; list-style:none;">`;
-        for (let i = 0; i < data[1].length; i++) {
-            // 优先使用 data[2] 的摘要（如果有）
-            const desc = data[2][i] ? `<div style="color:var(--color-text-secondary);font-size:14px;margin-top:3px">${data[2][i]}</div>` : '';
-            html += `
-                <li style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--color-border);">
-                    <a href="${data[3][i]}" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:none;display:block;">
-                        <strong style="font-size:1rem;">${data[1][i]}</strong>
-                    </a>
-                    ${desc}
-                </li>`;
-        }
-        html += '</ul><div style="font-size:13px;color:var(--color-text-muted);margin-top:10px">💡 点击标题跳转至维基百科原文（新标签页）</div>';
-        resultsDiv.innerHTML = html;
-        cleanup();
-    };
-    
-    // 错误处理
-    script.onerror = () => {
-        resultsDiv.innerHTML = '<div class="wiki-error">⚠️ 维基百科服务暂时不可用，请稍后再试</div>';
-        cleanup();
-    };
-    
-    // 清理函数（移除脚本+回调）
-    function cleanup() {
-        if (document.getElementById(scriptId)) {
-            document.body.removeChild(document.getElementById(scriptId));
-        }
-        delete window[cbName];
-    }
-    
-    // 超时保护（5秒）
-    setTimeout(() => {
-        if (document.getElementById(scriptId)) {
-            resultsDiv.innerHTML = '<div class="wiki-error">⏱️ 请求超时，请重试</div>';
-            cleanup();
-        }
-    }, 5000);
-    
-    // 注入脚本
-    document.body.appendChild(script);
+    fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.query || !data.query.search || data.query.search.length === 0) {
+                resultsDiv.innerHTML = '<div class="wiki-error">❌ 未找到相关结果</div>';
+                return;
+            }
+            
+            const searchResults = data.query.search;
+            const titles = searchResults.map(item => item.title).join('|');
+            
+            // 第二步：获取这些文章的详细摘要
+            const extractUrl = `https://zh.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(titles)}&prop=extracts|info&exintro=true&exchars=500&explaintext=true&inprop=url&format=json&origin=*&_=${Date.now()}`;
+            
+            return fetch(extractUrl)
+                .then(response => response.json())
+                .then(extractData => {
+                    const pages = extractData.query.pages || {};
+                    let html = `<div style="margin-bottom:15px"><strong>共找到 ${searchResults.length} 个结果：</strong></div><ul style="padding-left:0; list-style:none;">`;
+                    
+                    searchResults.forEach((item, index) => {
+                        const pageId = String(item.pageid);
+                        const page = pages[pageId] || Object.values(pages).find(p => p.title === item.title);
+                        const extract = page && page.extract ? page.extract.trim() : '';
+                        const url = page && page.fullurl ? page.fullurl : `https://zh.wikipedia.org/wiki/${encodeURIComponent(item.title)}`;
+                        const wordcount = item.wordcount || 0;
+                        const size = item.size || 0;
+                        
+                        // 格式化摘要：优先使用 extract（更详细），否则使用 snippet
+                        let description = extract || (item.snippet ? item.snippet.replace(/<[^>]*>/g, '') : '');
+                        // 清理多余的空白字符
+                        description = description.replace(/\s+/g, ' ').trim();
+                        // 限制长度（extract 可能较长，snippet 通常较短）
+                        if (description.length > 400) {
+                            description = description.substring(0, 400) + '...';
+                        }
+                        
+                        // 格式化日期
+                        const updateDate = item.timestamp ? new Date(item.timestamp).toLocaleDateString('zh-CN', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        }) : '';
+                        
+                        html += `
+                            <li style="margin-bottom:20px; padding:15px; background:var(--color-bg-card); border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                                <a href="${url}" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:none;display:block;margin-bottom:10px;">
+                                    <strong style="font-size:1.1rem;font-weight:600;">${item.title}</strong>
+                                </a>
+                                ${description ? `<div style="color:var(--color-text-primary);font-size:0.95rem;line-height:1.7;margin-top:10px;margin-bottom:12px;text-align:justify;">${description}</div>` : '<div style="color:var(--color-text-muted);font-size:0.9rem;margin-top:8px;margin-bottom:12px;">暂无摘要</div>'}
+                                <div style="font-size:0.85rem;color:var(--color-text-muted);margin-top:12px;padding-top:10px;border-top:1px solid var(--color-border);display:flex;gap:15px;flex-wrap:wrap;align-items:center;">
+                                    ${wordcount > 0 ? `<span title="文章字数">📝 ${wordcount.toLocaleString()} 字</span>` : ''}
+                                    ${size > 0 ? `<span title="文章大小">📄 ${(size / 1024).toFixed(1)} KB</span>` : ''}
+                                    ${updateDate ? `<span title="最后更新">🕒 ${updateDate}</span>` : ''}
+                                </div>
+                            </li>`;
+                    });
+                    
+                    html += '</ul><div style="font-size:13px;color:var(--color-text-muted);margin-top:15px;text-align:center;padding-top:15px;border-top:1px solid var(--color-border);">💡 点击标题跳转至维基百科原文（新标签页）</div>';
+                    resultsDiv.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('获取摘要失败:', error);
+                    resultsDiv.innerHTML = '<div class="wiki-error">⚠️ 获取详细内容失败，请稍后再试</div>';
+                });
+        })
+        .catch(error => {
+            console.error('搜索失败:', error);
+            resultsDiv.innerHTML = '<div class="wiki-error">⚠️ 维基百科服务暂时不可用，请稍后再试</div>';
+        });
 }
 
 // 清除筛选函数
@@ -348,7 +361,7 @@ document.querySelectorAll('input[name="search-type"]').forEach(radio => {
                 filterPosts();
             }
         } else {
-            searchInput.placeholder = '🔍 搜索维基百科（如：人工智能、量子计算）';
+            searchInput.placeholder = '搜索维基百科...';
             wikiResults.style.display = 'none';
             postsList.style.display = 'block';
             // 如果有搜索内容，执行维基百科搜索
