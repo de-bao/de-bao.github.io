@@ -1610,6 +1610,106 @@ a:hover {
     box-shadow: 0 0 0 3px var(--color-accent-light);
 }
 
+/* 搜索类型切换 */
+.search-type-toggle {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.search-type-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    user-select: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.search-type-option:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.search-type-option input[type="radio"] {
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--color-accent);
+}
+
+.search-type-option input[type="radio"]:checked + span {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+/* 维基百科搜索结果样式 */
+.wiki-results {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    line-height: 1.6;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.wiki-results ul {
+    margin: 0;
+    padding: 0;
+}
+
+.wiki-results li {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.wiki-results li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.wiki-results a {
+    display: block;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.wiki-results a:hover {
+    color: var(--color-accent-hover);
+}
+
+.wiki-results strong {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.wiki-loading {
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: var(--spacing-lg);
+    font-size: 0.95rem;
+}
+
+.wiki-error {
+    color: #d32f2f;
+    padding: var(--spacing-md);
+    background: rgba(211, 47, 47, 0.1);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-sm);
+    border-left: 3px solid #d32f2f;
+    font-size: 0.95rem;
+}
+
 .search-input::placeholder {
     color: var(--color-text-muted);
 }
