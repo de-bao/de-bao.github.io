@@ -1499,7 +1499,7 @@ a:hover {
         display: flex !important;
         flex-direction: row-reverse !important;
         flex-wrap: nowrap;
-        justify-content: flex-start !important;
+        justify-content: flex-end !important;
         gap: var(--spacing-sm);
         font-size: 0.85rem;
         margin-left: 0 !important;
