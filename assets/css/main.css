@@ -176,6 +176,10 @@ a:hover {
     gap: var(--spacing-lg);
 }
 
+.nav-menu {
+    margin-left: auto;
+}
+
 /* 导航栏时钟和天气 */
 .nav-weather-clock {
     display: flex;
