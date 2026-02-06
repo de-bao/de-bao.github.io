@@ -49,18 +49,17 @@ social_links:
   csdn: "https://blog.csdn.net/qq_54707385"
 
 # 导航菜单（从右往左显示：简历、博客、生活、未来、首页）
-# 数组顺序与显示顺序相反，因为使用了 row-reverse
 navigation:
-  - title: 首页
-    url: /
-  - title: 未来
-    url: /future/
-  - title: 生活
-    url: /life/
-  - title: 博客
-    url: /blog/
   - title: 简历
     url: /resume/
+  - title: 博客
+    url: /blog/
+  - title: 生活
+    url: /life/
+  - title: 未来
+    url: /future/
+  - title: 首页
+    url: /
 
 # SEO 设置
 lang: zh-CN

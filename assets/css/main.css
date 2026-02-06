@@ -178,7 +178,7 @@ a:hover {
 
 .nav-menu {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: flex-end;
 }
 
@@ -1497,7 +1497,7 @@ a:hover {
         order: 2;
         width: 100%;
         display: flex !important;
-        flex-direction: row-reverse !important;
+        flex-direction: row !important;
         flex-wrap: nowrap;
         justify-content: flex-end !important;
         gap: var(--spacing-sm);
