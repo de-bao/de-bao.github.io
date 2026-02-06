@@ -1453,17 +1453,21 @@ a:hover {
     .navbar .container {
         flex-wrap: wrap;
         position: relative;
+        min-height: 50px;
     }
     
     .nav-weather-clock {
         order: 1;
         width: 100%;
         margin-bottom: var(--spacing-xs);
+        padding-bottom: var(--spacing-xs);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .nav-brand {
         order: 2;
         flex: 1;
+        min-width: 0;
     }
     
     .nav-menu {
@@ -1489,9 +1493,12 @@ a:hover {
     
     .nav-toggle {
         display: block !important;
-        order: 4;
+        order: 3;
         z-index: 1001;
         position: relative;
+        margin-left: auto;
+        min-width: 40px;
+        min-height: 40px;
     }
     
     .home-hero {
