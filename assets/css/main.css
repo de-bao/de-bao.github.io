@@ -177,10 +177,9 @@ a:hover {
 }
 
 .nav-menu {
-    margin-left: auto;
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 /* 导航栏时钟和天气 */
@@ -1503,8 +1502,8 @@ a:hover {
         justify-content: flex-end !important;
         gap: var(--spacing-sm);
         font-size: 0.85rem;
-        margin-left: 0 !important;
-        margin-top: var(--spacing-xs);
+        margin: 0 !important;
+        padding: var(--spacing-xs) 0 !important;
     }
     
     .nav-menu li {
