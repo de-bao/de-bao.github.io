@@ -1495,25 +1495,38 @@ a:hover {
     }
     
     .nav-menu {
-        order: 2;
-        width: 100%;
+        order: 2 !important;
+        width: 100% !important;
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         flex-direction: row !important;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap !important;
         justify-content: flex-end !important;
-        gap: var(--spacing-sm);
-        font-size: 0.85rem;
-        margin: 0 !important;
+        align-items: center !important;
+        gap: var(--spacing-sm) !important;
+        font-size: 0.85rem !important;
+        margin: var(--spacing-xs) 0 0 0 !important;
         padding: var(--spacing-xs) 0 !important;
+        min-height: 40px !important;
+        height: auto !important;
+        overflow: visible !important;
     }
     
     .nav-menu li {
-        flex-shrink: 0;
+        flex-shrink: 0 !important;
+        display: list-item !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .nav-menu a {
-        padding: var(--spacing-xs) var(--spacing-sm);
-        white-space: nowrap;
+        display: block !important;
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+        white-space: nowrap !important;
+        color: var(--color-text-secondary) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .nav-toggle {
