@@ -147,6 +147,7 @@ function TodoList() {
 
 对于需要跨层级共享的状态，使用 Context API。
 
+{% raw %}
 ```jsx
 const ThemeContext = createContext();
 
@@ -160,6 +161,7 @@ function ThemeProvider({ children }) {
   );
 }
 ```
+{% endraw %}
 
 ## 错误处理
 
