@@ -1572,6 +1572,8 @@ a:hover {
     
     body.menu-open .nav-menu-overlay {
         display: block;
+        height: 100vh !important;
+        width: 100vw !important;
     }
     
     .nav-toggle {
