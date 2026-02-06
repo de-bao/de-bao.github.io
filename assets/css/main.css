@@ -164,6 +164,12 @@ a:hover {
     transition: all var(--transition-base);
 }
 
+@media (max-width: 768px) {
+    .navbar {
+        border-bottom: none !important;
+    }
+}
+
 .navbar.scrolled {
     background: rgba(10, 10, 10, 0.95);
     box-shadow: var(--shadow-md);
@@ -1474,17 +1480,17 @@ a:hover {
     
     .navbar .container {
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: stretch !important;
-        gap: var(--spacing-xs) !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: var(--spacing-sm) !important;
         padding-top: var(--spacing-xs);
         padding-bottom: var(--spacing-xs);
     }
     
     .nav-weather-clock {
         order: 1;
-        width: 100%;
+        width: auto;
         flex-shrink: 0;
         display: flex !important;
         flex-direction: row;
