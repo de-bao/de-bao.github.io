@@ -177,6 +177,7 @@ a:hover {
 }
 
 .nav-menu {
+    margin-left: auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
