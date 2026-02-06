@@ -1528,32 +1528,8 @@ a:hover {
         display: none;
     }
     
-    .nav-menu.active {
-        left: 0 !important;
-        /* 菜单打开时恢复尺寸 */
-        width: 100% !important;
-        max-width: 280px !important;
-        height: 100vh !important;
-        padding: var(--spacing-xl) var(--spacing-lg) !important;
-    }
-    
-    /* 菜单打开时的遮罩层 */
-    .nav-menu-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1001;
-        backdrop-filter: blur(2px);
-    }
-    
     body.menu-open .nav-menu-overlay {
-        display: block;
-        height: 100vh !important;
-        width: 100vw !important;
+        display: block !important;
     }
     
     .nav-toggle {
