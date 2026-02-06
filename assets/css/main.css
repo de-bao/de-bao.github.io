@@ -1525,6 +1525,8 @@ a:hover {
     
     .nav-toggle {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         order: 3;
         z-index: 1003;
         position: relative;
@@ -1534,13 +1536,26 @@ a:hover {
         min-height: 44px;
         padding: var(--spacing-xs);
         margin-left: auto;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 4px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .nav-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
     }
     
     .nav-toggle:active {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(0.95);
+    }
+    
+    .nav-toggle i {
+        pointer-events: none;
     }
     
     .home-hero {

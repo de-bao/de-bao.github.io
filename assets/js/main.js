@@ -1,22 +1,7 @@
 // 现代化交互效果和动画
 document.addEventListener('DOMContentLoaded', function() {
-    // 移动端导航菜单切换
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
-
-        // 点击菜单项后关闭移动端菜单
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-            });
-        });
-    }
+    // 移动端导航菜单切换 - 已移到 default.html 中处理，这里不再重复绑定
+    // 避免事件监听器冲突
 
     // 导航栏滚动效果
     const navbar = document.querySelector('.navbar');

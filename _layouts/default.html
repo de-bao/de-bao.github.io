@@ -124,38 +124,55 @@
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script>
-        // 移动端菜单切换
+        // 移动端菜单切换 - 确保在DOM加载后执行
         (function() {
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            const navOverlay = document.getElementById('nav-menu-overlay');
-            
-            function closeMenu() {
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-                document.body.style.overflow = '';
-            }
-            
-            function openMenu() {
-                navMenu.classList.add('active');
-                document.body.classList.add('menu-open');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            if (navToggle && navMenu) {
-                // 切换菜单
-                navToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
+            function initMobileMenu() {
+                const navToggle = document.getElementById('nav-toggle');
+                const navMenu = document.querySelector('.nav-menu');
+                const navOverlay = document.getElementById('nav-menu-overlay');
+                
+                if (!navToggle || !navMenu) {
+                    console.error('导航元素未找到', { navToggle, navMenu });
+                    return;
+                }
+                
+                function closeMenu() {
+                    if (navMenu) navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    document.body.style.overflow = '';
+                }
+                
+                function openMenu() {
+                    if (navMenu) navMenu.classList.add('active');
+                    document.body.classList.add('menu-open');
+                    document.body.style.overflow = 'hidden';
+                }
+                
+                // 切换菜单 - 使用多种事件确保触发
+                function handleToggle(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                     if (navMenu.classList.contains('active')) {
                         closeMenu();
                     } else {
                         openMenu();
                     }
+                }
+                
+                // 绑定点击事件
+                navToggle.addEventListener('click', handleToggle);
+                navToggle.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    handleToggle(e);
                 });
                 
                 // 点击遮罩层关闭菜单
                 if (navOverlay) {
-                    navOverlay.addEventListener('click', function() {
+                    navOverlay.addEventListener('click', closeMenu);
+                    navOverlay.addEventListener('touchend', function(e) {
+                        e.preventDefault();
                         closeMenu();
                     });
                 }
@@ -163,9 +180,7 @@
                 // 点击菜单项后关闭菜单
                 const navLinks = navMenu.querySelectorAll('a');
                 navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        closeMenu();
-                    });
+                    link.addEventListener('click', closeMenu);
                 });
                 
                 // ESC键关闭菜单
@@ -174,6 +189,14 @@
                         closeMenu();
                     }
                 });
+            }
+            
+            // 确保DOM完全加载后执行
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                // DOM已加载，立即执行
+                setTimeout(initMobileMenu, 100);
             }
         })();
 
