@@ -1501,7 +1501,7 @@ a:hover {
         visibility: visible !important;
         opacity: 1 !important;
         flex-direction: row !important;
-        flex-wrap: nowrap !important;
+        flex-wrap: wrap !important;
         justify-content: flex-end !important;
         align-items: center !important;
         gap: var(--spacing-sm) !important;
@@ -1511,22 +1511,26 @@ a:hover {
         min-height: 40px !important;
         height: auto !important;
         overflow: visible !important;
+        list-style: none !important;
     }
     
     .nav-menu li {
         flex-shrink: 0 !important;
-        display: list-item !important;
+        display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     .nav-menu a {
-        display: block !important;
+        display: inline-block !important;
         padding: var(--spacing-xs) var(--spacing-sm) !important;
         white-space: nowrap !important;
         color: var(--color-text-secondary) !important;
         visibility: visible !important;
         opacity: 1 !important;
+        text-decoration: none !important;
     }
     
     .nav-toggle {
