@@ -1490,8 +1490,18 @@ a:hover {
     
     .nav-brand {
         order: 2;
-        flex: 1;
-        min-width: 0;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex: 0 !important;
+    }
+    
+    .nav-brand a {
         display: none !important;
     }
     
