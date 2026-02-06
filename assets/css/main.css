@@ -1664,7 +1664,20 @@ a:hover {
         opacity: 1 !important;
         padding: var(--spacing-md) 0 !important;
         margin-bottom: var(--spacing-xl) !important;
+        margin-top: 0 !important;
         color: var(--color-text-primary) !important;
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    .home-section .container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 var(--spacing-sm) !important;
     }
     
     .home-section h2 {
