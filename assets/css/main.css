@@ -1627,6 +1627,12 @@ a:hover {
         padding: var(--spacing-md) 0 !important;
     }
     
+    /* 移动端强制显示 fade-in 元素 */
+    .fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
     .page-header {
         display: block !important;
         visibility: visible !important;
