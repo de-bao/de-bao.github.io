@@ -1466,12 +1466,15 @@ a:hover {
     }
     
     .navbar .container {
-        flex-wrap: nowrap;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
         position: relative;
         min-height: auto;
-        align-items: center;
+        align-items: stretch;
         padding-top: var(--spacing-xs);
         padding-bottom: var(--spacing-xs);
+        gap: 0 !important;
     }
     
     .nav-weather-clock {
@@ -1486,21 +1489,11 @@ a:hover {
         justify-content: space-between;
         gap: var(--spacing-sm);
         flex-wrap: nowrap;
+        flex-shrink: 0;
     }
     
     .nav-brand {
-        order: 2;
         display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        flex: 0 !important;
-        position: absolute !important;
-        left: -9999px !important;
     }
     
     .nav-brand a {
@@ -1508,7 +1501,6 @@ a:hover {
     }
     
     .nav-menu {
-        order: 4;
         position: fixed;
         top: 0;
         left: -100%;
@@ -1604,6 +1596,77 @@ a:hover {
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* 未来页移动端优化 */
+    .page-header {
+        padding-top: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .page-header h1 {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+    
+    .page-header p {
+        font-size: 0.95rem;
+    }
+    
+    .home-section {
+        padding: var(--spacing-md) 0;
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .home-section h2 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .home-section h3 {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        margin-top: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .home-section p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .project-card {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .project-card h3 {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    }
+    
+    .project-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .timeline {
+        margin-top: var(--spacing-md);
+    }
+    
+    .timeline-item {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .timeline-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .skill-tags-container {
+        gap: var(--spacing-xs);
+    }
+    
+    .skill-tag-item {
+        font-size: 0.85rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
     }
 }
 
