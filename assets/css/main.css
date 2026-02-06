@@ -180,6 +180,7 @@ a:hover {
     margin-left: auto;
     display: flex;
     flex-direction: row-reverse;
+    justify-content: flex-start;
 }
 
 /* 导航栏时钟和天气 */
