@@ -323,8 +323,9 @@ a:hover {
         gap: var(--spacing-sm);
         align-items: center;
         font-size: 0.75rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         width: 100%;
+        justify-content: space-between;
     }
     
     .nav-clock-item,
@@ -351,6 +352,14 @@ a:hover {
     .lang-dropdown-btn {
         font-size: 0.75rem;
         padding: 2px 6px;
+    }
+    
+    .nav-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0;
+        margin-left: auto;
     }
 }
 
@@ -1472,6 +1481,11 @@ a:hover {
         padding-bottom: var(--spacing-xs);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-sm);
+        flex-wrap: nowrap;
     }
     
     .nav-brand {
@@ -1527,7 +1541,7 @@ a:hover {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        order: 3;
+        order: 1;
         z-index: 1003;
         position: relative;
         align-items: center;
@@ -1542,6 +1556,7 @@ a:hover {
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
+        flex-shrink: 0;
     }
     
     .nav-toggle:hover {

@@ -53,6 +53,9 @@
                             <button class="lang-option" data-lang="en" data-translate="no">English</button>
                         </div>
                     </div>
+                    <button class="nav-toggle" aria-label="切换菜单" id="nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
                 <div class="nav-brand">
                     <a href="{{ '/' | relative_url }}" aria-label="返回首页">{{ site.title }}</a>
@@ -66,9 +69,6 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <button class="nav-toggle" aria-label="切换菜单" id="nav-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
                 <div class="nav-menu-overlay" id="nav-menu-overlay"></div>
             </div>
         </nav>
