@@ -1620,25 +1620,44 @@ a:hover {
     }
     
     /* 未来页移动端优化 - 确保内容可见 */
+    .main-content {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: var(--spacing-md) 0 !important;
+    }
+    
     .page-header {
-        padding-top: var(--spacing-md);
-        margin-bottom: var(--spacing-lg);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding-top: var(--spacing-md) !important;
+        margin-bottom: var(--spacing-lg) !important;
         color: var(--color-text-primary) !important;
     }
     
     .page-header h1 {
-        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
         color: var(--color-text-primary) !important;
     }
     
     .page-header p {
-        font-size: 0.95rem;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.95rem !important;
         color: var(--color-text-secondary) !important;
     }
     
     .home-section {
-        padding: var(--spacing-md) 0;
-        margin-bottom: var(--spacing-xl);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: var(--spacing-md) 0 !important;
+        margin-bottom: var(--spacing-xl) !important;
         color: var(--color-text-primary) !important;
     }
     
@@ -1663,49 +1682,91 @@ a:hover {
     }
     
     .project-card {
-        margin-bottom: var(--spacing-md);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-bottom: var(--spacing-md) !important;
         background: var(--color-bg-card) !important;
         color: var(--color-text-primary) !important;
     }
     
     .project-card h3 {
-        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem) !important;
         color: var(--color-text-primary) !important;
     }
     
     .project-card p {
-        font-size: 0.9rem;
-        line-height: 1.7;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
         color: var(--color-text-secondary) !important;
     }
     
     .timeline {
-        margin-top: var(--spacing-md);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-top: var(--spacing-md) !important;
     }
     
     .timeline-item {
-        margin-bottom: var(--spacing-sm);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-bottom: var(--spacing-sm) !important;
     }
     
     .timeline-content {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         color: var(--color-text-secondary) !important;
     }
     
     .timeline-content p {
-        font-size: 0.9rem;
-        line-height: 1.7;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
         color: var(--color-text-secondary) !important;
     }
     
     .skill-tags-container {
-        gap: var(--spacing-xs);
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        gap: var(--spacing-xs) !important;
+        flex-wrap: wrap !important;
     }
     
     .skill-tag-item {
-        font-size: 0.85rem;
-        padding: var(--spacing-xs) var(--spacing-sm);
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.85rem !important;
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
         color: var(--color-text-primary) !important;
         background: var(--color-bg-card) !important;
+    }
+    
+    .stats-grid {
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: var(--spacing-md) !important;
+    }
+    
+    .stat-card {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 
