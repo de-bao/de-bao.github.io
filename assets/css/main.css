@@ -1570,8 +1570,8 @@ a:hover {
     }
     
     .nav-menu-overlay {
-        display: none;
-        position: fixed;
+        display: none !important;
+        position: fixed !important;
         top: 0;
         left: 0;
         right: 0;
@@ -1579,10 +1579,16 @@ a:hover {
         background: rgba(0, 0, 0, 0.5);
         z-index: 1001;
         backdrop-filter: blur(2px);
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     body.menu-open .nav-menu-overlay {
         display: block !important;
+        width: 100vw !important;
+        height: 100vh !important;
     }
     
     .nav-toggle i {
