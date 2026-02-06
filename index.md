@@ -103,45 +103,6 @@ description: Baud的个人网站 - 分享技术见解和生活思考
             <span class="skill-tag-item">NLP</span>
         </div>
         
-        <!-- 最新动态 -->
-        <h3 style="margin-top: 2rem;">📅 最新动态</h3>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年11月</strong> - 开始学习新的前端框架Next.js，并开始构建个人博客系统</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年10月</strong> - 发布了新的技术博客文章《构建高性能RAG系统的实践与思考》</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年9月</strong> - 创建开源项目，获得1000+ GitHub Stars，社区反响热烈</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年8月</strong> - 完成了大型企业级项目的架构设计和开发工作</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年7月</strong> - 参加了技术大会，分享了《微服务架构实践》主题演讲</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p><strong>2025年6月</strong> - 开始深入研究AI和LLM技术，启动了知识图谱RAG项目</p>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- 最新文章 -->
@@ -183,30 +144,4 @@ description: Baud的个人网站 - 分享技术见解和生活思考
         </div>
     </section>
 
-    <!-- 联系方式 -->
-    <section class="home-section fade-in">
-        <h2>🔗 找到我</h2>
-        <p class="text-center section-intro">关注我，获取最新技术动态和文章更新</p>
-        <div class="links-grid">
-            <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" class="link-card">
-                <h3>🔗 GitHub</h3>
-                <p>开源项目和技术实践，欢迎Star和Fork</p>
-            </a>
-            
-            <a href="{{ site.social_links.zhihu }}" target="_blank" rel="noopener noreferrer" class="link-card">
-                <h3>📚 知乎</h3>
-                <p>分享技术见解和生活思考，关注前沿技术和行业动态</p>
-            </a>
-            
-            <a href="{{ site.social_links.csdn }}" target="_blank" rel="noopener noreferrer" class="link-card">
-                <h3>💻 CSDN博客</h3>
-                <p>技术文章和学习笔记，涵盖Web开发、AI、系统设计等主题</p>
-            </a>
-            
-            <a href="{{ '/resume/?print=true' | relative_url }}" class="link-card">
-                <h3>📄 简历下载</h3>
-                <p>查看我的完整简历，了解我的技能和项目经验</p>
-            </a>
-        </div>
-    </section>
 </div>
