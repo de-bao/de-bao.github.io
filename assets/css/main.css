@@ -1473,8 +1473,9 @@ a:hover {
         min-height: auto;
         align-items: stretch;
         padding-top: var(--spacing-xs);
-        padding-bottom: var(--spacing-xs);
+        padding-bottom: 0 !important;
         gap: 0 !important;
+        height: auto !important;
     }
     
     .nav-weather-clock {
@@ -1524,15 +1525,32 @@ a:hover {
         box-shadow: var(--shadow-lg);
         z-index: 1002;
         overflow-y: auto;
-        /* 从flex布局中移除 */
-        position: fixed !important;
+        /* 完全从flex布局中移除 */
+        height: 0 !important;
+        width: 0 !important;
         margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+        flex: 0 0 0 !important;
+        flex-basis: 0 !important;
+        flex-grow: 0 !important;
+        flex-shrink: 0 !important;
     }
     
     .nav-menu-overlay {
-        /* 从flex布局中移除 */
+        /* 完全从flex布局中移除 */
         position: fixed !important;
+        height: 0 !important;
+        width: 0 !important;
         margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+        flex: 0 0 0 !important;
+        flex-basis: 0 !important;
+        flex-grow: 0 !important;
+        flex-shrink: 0 !important;
     }
     
     .nav-menu.active {
