@@ -1662,22 +1662,31 @@ a:hover {
     }
     
     .home-section h2 {
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        margin-bottom: var(--spacing-md);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: clamp(1.5rem, 4vw, 2rem) !important;
+        margin-bottom: var(--spacing-md) !important;
         color: var(--color-text-primary) !important;
     }
     
     .home-section h3 {
-        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
-        margin-top: var(--spacing-md);
-        margin-bottom: var(--spacing-sm);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem) !important;
+        margin-top: var(--spacing-md) !important;
+        margin-bottom: var(--spacing-sm) !important;
         color: var(--color-text-primary) !important;
     }
     
     .home-section p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: var(--spacing-sm);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
+        margin-bottom: var(--spacing-sm) !important;
         color: var(--color-text-secondary) !important;
     }
     
