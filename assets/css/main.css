@@ -1494,6 +1494,13 @@ a:hover {
     
     .nav-brand {
         display: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
     }
     
     .nav-brand a {
@@ -1501,9 +1508,9 @@ a:hover {
     }
     
     .nav-menu {
-        position: fixed;
-        top: 0;
-        left: -100%;
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
         flex-direction: column;
         background: var(--color-bg-secondary);
         backdrop-filter: blur(20px);
@@ -1517,6 +1524,15 @@ a:hover {
         box-shadow: var(--shadow-lg);
         z-index: 1002;
         overflow-y: auto;
+        /* 从flex布局中移除 */
+        position: fixed !important;
+        margin: 0 !important;
+    }
+    
+    .nav-menu-overlay {
+        /* 从flex布局中移除 */
+        position: fixed !important;
+        margin: 0 !important;
     }
     
     .nav-menu.active {
@@ -1598,53 +1614,64 @@ a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    /* 未来页移动端优化 */
+    /* 未来页移动端优化 - 确保内容可见 */
     .page-header {
         padding-top: var(--spacing-md);
         margin-bottom: var(--spacing-lg);
+        color: var(--color-text-primary) !important;
     }
     
     .page-header h1 {
         font-size: clamp(1.8rem, 5vw, 2.5rem);
+        color: var(--color-text-primary) !important;
     }
     
     .page-header p {
         font-size: 0.95rem;
+        color: var(--color-text-secondary) !important;
     }
     
     .home-section {
         padding: var(--spacing-md) 0;
         margin-bottom: var(--spacing-xl);
+        color: var(--color-text-primary) !important;
     }
     
     .home-section h2 {
         font-size: clamp(1.5rem, 4vw, 2rem);
         margin-bottom: var(--spacing-md);
+        color: var(--color-text-primary) !important;
     }
     
     .home-section h3 {
         font-size: clamp(1.2rem, 3.5vw, 1.5rem);
         margin-top: var(--spacing-md);
         margin-bottom: var(--spacing-sm);
+        color: var(--color-text-primary) !important;
     }
     
     .home-section p {
         font-size: 0.9rem;
         line-height: 1.7;
         margin-bottom: var(--spacing-sm);
+        color: var(--color-text-secondary) !important;
     }
     
     .project-card {
         margin-bottom: var(--spacing-md);
+        background: var(--color-bg-card) !important;
+        color: var(--color-text-primary) !important;
     }
     
     .project-card h3 {
         font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        color: var(--color-text-primary) !important;
     }
     
     .project-card p {
         font-size: 0.9rem;
         line-height: 1.7;
+        color: var(--color-text-secondary) !important;
     }
     
     .timeline {
@@ -1655,9 +1682,14 @@ a:hover {
         margin-bottom: var(--spacing-sm);
     }
     
+    .timeline-content {
+        color: var(--color-text-secondary) !important;
+    }
+    
     .timeline-content p {
         font-size: 0.9rem;
         line-height: 1.7;
+        color: var(--color-text-secondary) !important;
     }
     
     .skill-tags-container {
@@ -1667,6 +1699,8 @@ a:hover {
     .skill-tag-item {
         font-size: 0.85rem;
         padding: var(--spacing-xs) var(--spacing-sm);
+        color: var(--color-text-primary) !important;
+        background: var(--color-bg-card) !important;
     }
 }
 
