@@ -1506,8 +1506,7 @@ a:hover {
         max-width: 280px;
         height: 100vh;
         padding: var(--spacing-xl) var(--spacing-lg);
-        border-right: 1px solid var(--color-border);
-        border-bottom: none !important;
+        border: none !important;
         transition: left 0.3s ease;
         gap: var(--spacing-md);
         box-shadow: var(--shadow-lg);
