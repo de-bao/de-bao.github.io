@@ -178,6 +178,8 @@ a:hover {
 
 .nav-menu {
     margin-left: auto;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 /* 导航栏时钟和天气 */
@@ -1471,15 +1473,17 @@ a:hover {
     
     .navbar .container {
         display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        gap: var(--spacing-sm) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        gap: var(--spacing-xs) !important;
         padding-top: var(--spacing-xs);
         padding-bottom: var(--spacing-xs);
     }
     
     .nav-weather-clock {
+        order: 1;
+        width: 100%;
         flex-shrink: 0;
         display: flex !important;
         flex-direction: row;
@@ -1490,11 +1494,16 @@ a:hover {
     }
     
     .nav-menu {
+        order: 2;
+        width: 100%;
         display: flex !important;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: row-reverse !important;
+        flex-wrap: nowrap;
+        justify-content: flex-start !important;
         gap: var(--spacing-sm);
         font-size: 0.85rem;
+        margin-left: 0 !important;
+        margin-top: var(--spacing-xs);
     }
     
     .nav-menu li {

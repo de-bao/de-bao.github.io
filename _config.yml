@@ -48,18 +48,18 @@ social_links:
   zhihu: "https://www.zhihu.com/people/baud-17"
   csdn: "https://blog.csdn.net/qq_54707385"
 
-# 导航菜单
+# 导航菜单（从右往左显示：简历、博客、生活、未来、首页）
 navigation:
-  - title: 首页
-    url: /
-  - title: 未来
-    url: /future/
-  - title: 生活
-    url: /life/
-  - title: 博客
-    url: /blog/
   - title: 简历
     url: /resume/
+  - title: 博客
+    url: /blog/
+  - title: 生活
+    url: /life/
+  - title: 未来
+    url: /future/
+  - title: 首页
+    url: /
 
 # SEO 设置
 lang: zh-CN
