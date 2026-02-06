@@ -1466,10 +1466,10 @@ a:hover {
     }
     
     .navbar .container {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         position: relative;
         min-height: auto;
-        align-items: flex-start;
+        align-items: center;
         padding-top: var(--spacing-xs);
         padding-bottom: var(--spacing-xs);
     }
@@ -1477,7 +1477,7 @@ a:hover {
     .nav-weather-clock {
         order: 1;
         width: 100%;
-        margin-bottom: var(--spacing-xs);
+        margin-bottom: 0 !important;
         padding-bottom: var(--spacing-xs);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: flex !important;
@@ -1499,6 +1499,8 @@ a:hover {
         margin: 0 !important;
         padding: 0 !important;
         flex: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
     }
     
     .nav-brand a {
