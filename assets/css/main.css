@@ -315,37 +315,41 @@ a:hover {
     background: rgba(99, 102, 241, 0.1);
 }
 
-/* 移动端调整时钟和天气显示 */
+/* 移动端调整时钟和天气显示 - 确保始终显示 */
 @media (max-width: 768px) {
     .nav-weather-clock {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-xs);
-        align-items: flex-start;
-        font-size: 0.8rem;
+        display: flex !important;
+        flex-direction: row;
+        gap: var(--spacing-sm);
+        align-items: center;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        width: 100%;
     }
     
     .nav-clock-item,
     .nav-weather-item {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        flex-shrink: 0;
     }
     
     .nav-clock-date,
     .nav-weather-city-desc {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
     
     .nav-clock-time,
     .nav-weather-temp {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     .nav-lang-item {
-        margin-top: 4px;
+        margin-top: 0;
+        flex-shrink: 0;
     }
     
     .lang-dropdown-btn {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 2px 6px;
     }
 }
@@ -417,6 +421,8 @@ a:hover {
     color: var(--color-text-primary);
     font-size: 1.5rem;
     padding: var(--spacing-xs);
+    z-index: 1001;
+    position: relative;
 }
 
 /* 主要内容区域 */
@@ -1453,7 +1459,10 @@ a:hover {
     .navbar .container {
         flex-wrap: wrap;
         position: relative;
-        min-height: 50px;
+        min-height: auto;
+        align-items: flex-start;
+        padding-top: var(--spacing-xs);
+        padding-bottom: var(--spacing-xs);
     }
     
     .nav-weather-clock {
@@ -1462,43 +1471,76 @@ a:hover {
         margin-bottom: var(--spacing-xs);
         padding-bottom: var(--spacing-xs);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex !important;
     }
     
     .nav-brand {
         order: 2;
         flex: 1;
         min-width: 0;
+        display: flex;
+        align-items: center;
     }
     
     .nav-menu {
-        order: 3;
+        order: 4;
         position: fixed;
-        top: 60px;
+        top: 0;
         left: -100%;
         flex-direction: column;
         background: var(--color-bg-secondary);
         backdrop-filter: blur(20px);
         width: 100%;
-        padding: var(--spacing-lg);
-        border-bottom: 1px solid var(--color-border);
-        transition: left var(--transition-base);
-        gap: var(--spacing-sm);
+        max-width: 280px;
+        height: 100vh;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        border-right: 1px solid var(--color-border);
+        transition: left 0.3s ease;
+        gap: var(--spacing-md);
         box-shadow: var(--shadow-lg);
-        z-index: 999;
+        z-index: 1002;
+        overflow-y: auto;
     }
     
     .nav-menu.active {
         left: 0;
     }
     
-    .nav-toggle {
-        display: block !important;
-        order: 3;
+    /* 菜单打开时的遮罩层 */
+    .nav-menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
         z-index: 1001;
+        backdrop-filter: blur(2px);
+    }
+    
+    body.menu-open .nav-menu-overlay {
+        display: block;
+    }
+    
+    .nav-toggle {
+        display: flex !important;
+        order: 3;
+        z-index: 1003;
         position: relative;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        padding: var(--spacing-xs);
         margin-left: auto;
-        min-width: 40px;
-        min-height: 40px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    
+    .nav-toggle:active {
+        background: rgba(255, 255, 255, 0.1);
     }
     
     .home-hero {

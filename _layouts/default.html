@@ -69,6 +69,7 @@
                 <button class="nav-toggle" aria-label="切换菜单" id="nav-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
+                <div class="nav-menu-overlay" id="nav-menu-overlay"></div>
             </div>
         </nav>
 
@@ -124,10 +125,57 @@
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script>
         // 移动端菜单切换
-        document.getElementById('nav-toggle')?.addEventListener('click', function() {
-            const menu = document.querySelector('.nav-menu');
-            menu.classList.toggle('active');
-        });
+        (function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const navOverlay = document.getElementById('nav-menu-overlay');
+            
+            function closeMenu() {
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                document.body.style.overflow = '';
+            }
+            
+            function openMenu() {
+                navMenu.classList.add('active');
+                document.body.classList.add('menu-open');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            if (navToggle && navMenu) {
+                // 切换菜单
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (navMenu.classList.contains('active')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+                
+                // 点击遮罩层关闭菜单
+                if (navOverlay) {
+                    navOverlay.addEventListener('click', function() {
+                        closeMenu();
+                    });
+                }
+                
+                // 点击菜单项后关闭菜单
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        closeMenu();
+                    });
+                });
+                
+                // ESC键关闭菜单
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                        closeMenu();
+                    }
+                });
+            }
+        })();
 
         // 实时时钟 - 直接在页面底部执行，确保导航栏已渲染
         (function initClock() {
