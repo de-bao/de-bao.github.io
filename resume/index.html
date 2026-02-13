@@ -761,7 +761,7 @@
         <div class="header">
             <div class="header-content">
                 <p align="center">
-                    <name>鲍德</name>
+                    <name>[Bao De]鲍德</name>
                 </p>
                 <p align="center">
                     <subname>LLM应用 | AI算法 | AI Infra工程师</subname>
@@ -801,7 +801,7 @@
                         </div>
                         <div class="item-subtitle">参与人 | 团队项目</div>
                         <div class="item-description">
-                            <p>面向生产环境的大模型轻量化推理平台，通过模型量化、KV缓存优化和动态批处理等技术，实现高吞吐、低延迟的推理服务。</p>
+                            <p>面向生产环境，通过模型量化、KV缓存优化和动态批处理等技术，实现高吞吐、低延迟的推理服务。</p>
                             <ul>
                                 <li>实现了INT8/INT4量化推理引擎，在保持模型精度损失小于2%的前提下，推理速度提升3-4倍，显存占用降低60%</li>
                                 <li>设计了高效的KV缓存管理机制，支持多轮对话的上下文复用，将长文本推理延迟降低40%</li>
@@ -813,17 +813,17 @@
 
                     <div class="sub-project-item">
                         <div class="item-header">
-                            <div class="item-title">大模型(小尺寸)后训练</div>
+                            <div class="item-title">大模型(1.7B)后训练</div>
                             <div class="item-date">2025.10 - 2025.12</div>
                         </div>
                         <div class="item-subtitle">负责人 | 团队项目</div>
                         <div class="item-description">
-                            <p>针对小尺寸大语言模型进行领域适配的后训练，通过参数高效微调技术提升模型在特定任务上的性能，实现模型轻量化部署。</p>
+                            <p>针对领域适配的后训练，通过全量微调和参数高效微调技术提升模型在特定任务上的性能，实现模型轻量化部署。</p>
                             <ul>
-                                <li>采用LoRA/QLoRA等参数高效微调技术，将训练参数量降低至全量微调的1%以下，显著降低显存占用和训练成本</li>
-                                <li>构建了高质量的训练数据集，通过数据清洗、去重和增强，提升模型在下游任务上的准确率15%以上</li>
-                                <li>优化训练流程，使用DeepSpeed ZeRO和梯度检查点技术，在单卡24GB显存环境下完成7B模型的微调训练</li>
-                                <li>设计了完整的评估体系，包括BLEU、ROUGE等自动指标和人工评估，确保模型质量满足生产要求</li>
+                                <li>构建了高质量的训练数据集（Alpaca/ShareGPT），通过数据清洗、去重和增强，提升模型的数据质量</li>
+                                <li>采用SFT和DFT等FFT技术</li>
+                                <li>采用LoRA/QLoRA等PEFT技术，将训练参数量降低至全量微调的1%以下，显著降低显存占用和训练成本</li>
+                                <li>进行强化学习PPO和GRPO</li>
                             </ul>
                         </div>
                     </div>
@@ -838,9 +838,9 @@
                             <p>在云计算背景下，构建外场私域知识库，维护起向量数据库和图数据库，并设计基于KG2RAG的运维Agent，实现智能问答</p>
                             <ul>
                                 <li>设计并实现了基于Neo4j的知识图谱构建模块，支持多源数据融合和知识推理，构建了包含1万+实体和5万+关系的运维知识图谱</li>
-                                <li>开发了基于Milvus向量数据库的混合检索系统，结合关键词检索和语义检索，检索准确率提升35%，响应时间控制在100ms以内</li>
-                                <li>集成LangChain框架构建RAG pipeline，实现了与大语言模型的API对接，支持多轮对话和上下文理解，问答准确率达到85%以上</li>
-                                <li>使用FastAPI构建RESTful API服务，采用异步处理和连接池优化，支持高并发访问，QPS达到500+，系统可用性99.9%</li>
+                                <li>开发了基于Milvus向量数据库的混合检索系统和RAG评估系统，结合关键词检索和语义检索，协同过滤后响应时间控制在100ms以内</li>
+                                <li>将Neo4j与Milvus集成LangChain框架构建RAG pipeline，实现了与大语言模型的API对接，支持多轮对话和上下文理解与压缩
+                                <li>将workflow与RAG pipeline结合，实现了智能问答，问答准确率达到85%以上，输出对应的专利一份</li>
                             </ul>
                         </div>
                     </div>
