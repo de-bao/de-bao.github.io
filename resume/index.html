@@ -203,14 +203,14 @@
         .footnote {
             margin-top: 20px;
             padding-top: 10px;
-            border-top: 1px solid #ddd;
+            /* border-top: 1px solid #ddd; 移除横线，避免打印时被分页 */
             font-size: 12px;
             color: #666;
-            transition: border-color 0.3s ease, color 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         body.dark-mode .footnote {
-            border-top-color: #444;
+            /* border-top-color: #444; 已移除横线 */
             color: #999;
         }
 
@@ -588,6 +588,14 @@
             }
             .skill-category {
                 page-break-inside: auto;
+            }
+            
+            /* 脚注 - 避免被分页，与上面内容保持在一起 */
+            .footnote {
+                page-break-inside: avoid;
+                page-break-before: avoid;
+                margin-top: 15px;
+                padding-top: 5px;
             }
             
             /* 打印时强制显示图片 */
