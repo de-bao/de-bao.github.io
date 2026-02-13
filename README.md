@@ -28,9 +28,6 @@ de-bao.github.io/
 │   ├── tags.html        # 标签页布局
 │   ├── archive.html     # 归档页布局
 │   └── page.html        # 普通页面布局
-├── _pages/              # 页面文件
-│   ├── archive.html     # 归档页面（重定向到博客）
-│   └── tags.html        # 标签页面（重定向到博客）
 ├── _posts/              # 博客文章目录
 ├── assets/              # 静态资源
 │   ├── css/

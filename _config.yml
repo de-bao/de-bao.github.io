@@ -30,8 +30,8 @@ exclude:
   - .gitignore
 
 # 包含文件
-include:
-  - _pages
+# include:
+#   - _pages  # 已删除，不再需要
 
 # 作者信息
 author:
