@@ -429,6 +429,12 @@
 
         /* 打印样式 */
         @media print {
+            /* 全局打印设置 */
+            * {
+                orphans: 3;
+                widows: 3;
+            }
+            
             .theme-toggle {
                 display: none;
             }
@@ -444,12 +450,14 @@
             .resume-lang-item {
                 display: none !important;
             }
+            
             /* 确保头部布局正确 - 使用table布局确保打印兼容性 */
             .header {
                 display: table !important;
                 width: 100% !important;
                 table-layout: fixed !important;
                 page-break-inside: avoid;
+                page-break-after: avoid;
             }
             .header-content {
                 display: table-cell !important;
@@ -463,12 +471,24 @@
                 vertical-align: middle !important;
                 text-align: right !important;
             }
+            
+            /* 章节标题 - 避免标题单独在页面底部 */
+            .section {
+                page-break-inside: auto;
+                margin-bottom: 20px;
+            }
+            heading {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
             /* 确保时间戳不换行 - 使用table布局 */
             .item-header {
                 display: table !important;
                 width: 100% !important;
                 table-layout: fixed !important;
                 page-break-inside: avoid;
+                page-break-after: avoid;
             }
             /* 处理嵌套div的情况（如AI算法工程师） */
             .item-header > div[style*="flex"] {
@@ -505,18 +525,54 @@
                 vertical-align: top !important;
                 padding-left: 10px !important;
             }
-            /* 确保项目项不被分页 */
+            
+            /* 工作经历和项目 - 允许分页，但避免标题和第一行被分离 */
             .experience-item,
-            .project-item,
-            .sub-project-item {
-                page-break-inside: avoid;
+            .project-item {
+                page-break-inside: auto;
+                margin-bottom: 15px;
+                padding-bottom: 15px;
             }
+            
+            /* 子项目 - 允许分页，但避免标题和内容分离 */
+            .sub-project-item {
+                page-break-inside: auto;
+                margin-left: 20px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+            
+            /* 项目描述段落 - 允许分页 */
+            .item-description {
+                page-break-inside: auto;
+            }
+            
+            /* 列表项 - 避免单个列表项被截断，但允许列表项之间分页 */
+            .item-description ul {
+                page-break-inside: auto;
+                margin-left: 20px;
+                margin-top: 5px;
+            }
+            .item-description li {
+                page-break-inside: avoid;
+                page-break-after: auto;
+                margin-bottom: 4px;
+            }
+            
+            /* 教育背景项 - 允许分页 */
+            .education-item {
+                page-break-inside: auto;
+                margin-bottom: 3px;
+            }
+            
             /* 获奖情况模块 - 保持两列布局，不换行 */
             .awards-list,
             .certificates-list {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 1px 30px !important;
+                page-break-inside: auto;
             }
             .awards-list li,
             .certificates-list li {
@@ -525,10 +581,25 @@
                 text-overflow: ellipsis !important;
                 page-break-inside: avoid;
             }
+            
+            /* 技能网格 - 允许分页 */
+            .skills-grid {
+                page-break-inside: auto;
+            }
+            .skill-category {
+                page-break-inside: auto;
+            }
+            
             /* 打印时强制显示图片 */
             .header-image img {
                 display: block !important;
                 margin-left: auto !important;
+            }
+            
+            /* 避免在页面底部留下大量空白 - 允许内容在合理位置分页 */
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
             }
         }
 
@@ -678,8 +749,7 @@
                                 <li>实现了INT8/INT4量化推理引擎，在保持模型精度损失小于2%的前提下，推理速度提升3-4倍，显存占用降低60%</li>
                                 <li>设计了高效的KV缓存管理机制，支持多轮对话的上下文复用，将长文本推理延迟降低40%</li>
                                 <li>开发了动态批处理调度系统，根据请求队列自动调整批次大小，吞吐量提升2.5倍，GPU利用率达到85%以上</li>
-                                <li>构建了完整的服务化框架，支持模型热更新、负载均衡和自动扩缩容，QPS达到1000+，P99延迟控制在200ms以内</li>
-                                <li><a href="https://github.com/gpustack/gpustack/pull/3540" target="_blank">PR#3540</a></li>
+                                <li>构建了完整的服务化框架，支持模型热更新、负载均衡和自动扩缩容，QPS达到1000+，P99延迟控制在200ms以内<a href="https://github.com/gpustack/gpustack/pull/3540" target="_blank">PR#3540</a></li>
                             </ul>
                         </div>
                     </div>
