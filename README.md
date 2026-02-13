@@ -37,7 +37,7 @@ de-bao.github.io/
 │   │   └── main.css     # 主样式文件（纯CSS）
 │   ├── js/
 │   │   └── main.js      # 主脚本文件
-│   └── favicon.svg      # 网站图标
+│   └── photo.jpg        # 网站图标和个人照片
 ├── resume/              # 简历页面
 │   ├── index.html       # 个人简历
 │   └── photo.jpg        # 个人照片
