@@ -201,16 +201,18 @@
         }
 
         .footnote {
-            margin-top: 20px;
-            padding-top: 10px;
-            /* border-top: 1px solid #ddd; 移除横线，避免打印时被分页 */
+            margin-top: 0.5px;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: 1px solid #ddd;
             font-size: 12px;
             color: #666;
-            transition: color 0.3s ease;
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         body.dark-mode .footnote {
-            /* border-top-color: #444; 已移除横线 */
+            border-top-color: #444;
             color: #999;
         }
 
@@ -429,10 +431,10 @@
 
         /* 打印样式 */
         @media print {
-            /* 全局打印设置 */
+            /* 全局打印设置 - 控制孤行和寡行，设置为1允许单行在页面顶部/底部 */
             * {
-                orphans: 3;
-                widows: 3;
+                orphans: 1;
+                widows: 1;
             }
             
             .theme-toggle {
@@ -472,23 +474,35 @@
                 text-align: right !important;
             }
             
-            /* 章节标题 - 避免标题单独在页面底部 */
+            /* 章节标题 - 允许分页，只避免标题单独在页面底部 */
             .section {
                 page-break-inside: auto;
-                margin-bottom: 20px;
+                page-break-before: auto;
+                page-break-after: auto; /* 允许section后分页，包括获奖情况section */
+                margin-bottom: 20px !important;
+            }
+            /* 获奖情况section后面是脚注，强制减少空白 */
+            .section:last-of-type,
+            .section:last-child,
+            .section:has(+ .footnote) {
+                margin-bottom: 0.5px !important;
+            }
+            /* 如果section后面是脚注，减少空白 */
+            .section + .footnote {
+                margin-top: 0.5px !important;
             }
             heading {
-                page-break-after: avoid;
-                page-break-inside: avoid;
+                page-break-after: auto; /* 允许标题后分页，避免标题+内容被绑定导致脚注被推走 */
+                page-break-inside: avoid; /* 保持标题本身不被截断 */
             }
             
-            /* 确保时间戳不换行 - 使用table布局 */
+            /* 确保时间戳不换行 - 使用table布局，允许分页 */
             .item-header {
                 display: table !important;
                 width: 100% !important;
                 table-layout: fixed !important;
-                page-break-inside: avoid;
-                page-break-after: avoid;
+                page-break-inside: auto; /* 允许标题行分页 */
+                page-break-after: auto; /* 允许标题和内容之间分页，避免空白 */
             }
             /* 处理嵌套div的情况（如AI算法工程师） */
             .item-header > div[style*="flex"] {
@@ -526,17 +540,21 @@
                 padding-left: 10px !important;
             }
             
-            /* 工作经历和项目 - 允许分页，但避免标题和第一行被分离 */
+            /* 工作经历和项目 - 完全允许分页，充分利用页面空间 */
             .experience-item,
             .project-item {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
                 margin-bottom: 15px;
                 padding-bottom: 15px;
             }
             
-            /* 子项目 - 允许分页，但避免标题和内容分离 */
+            /* 子项目 - 完全允许分页 */
             .sub-project-item {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
                 margin-left: 20px;
                 margin-top: 10px;
                 margin-bottom: 10px;
@@ -548,54 +566,85 @@
                 page-break-inside: auto;
             }
             
-            /* 列表项 - 避免单个列表项被截断，但允许列表项之间分页 */
+            /* 列表项 - 只避免单个列表项被截断，其他完全允许分页 */
             .item-description ul {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
                 margin-left: 20px;
                 margin-top: 5px;
             }
             .item-description li {
-                page-break-inside: avoid;
+                page-break-inside: avoid; /* 单个列表项不要被截断 */
                 page-break-after: auto;
+                page-break-before: auto;
                 margin-bottom: 4px;
             }
             
-            /* 教育背景项 - 允许分页 */
+            /* 教育背景项 - 完全允许分页 */
             .education-item {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
                 margin-bottom: 3px;
             }
             
-            /* 获奖情况模块 - 保持两列布局，不换行 */
+            /* 获奖情况模块 - 保持两列布局，完全允许分页 */
             .awards-list,
             .certificates-list {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 1px 30px !important;
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
             }
             .awards-list li,
             .certificates-list li {
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
-                page-break-inside: avoid;
+                page-break-inside: avoid; /* 单个列表项不要被截断 */
+                page-break-after: auto;
+                page-break-before: auto;
             }
             
-            /* 技能网格 - 允许分页 */
+            /* 技能网格 - 完全允许分页 */
             .skills-grid {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
             }
             .skill-category {
                 page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
             }
             
-            /* 脚注 - 避免被分页，与上面内容保持在一起 */
+            /* 脚注 - 完全允许分页，可以放在页面底部，强制覆盖任何全局设置 */
             .footnote {
-                page-break-inside: avoid;
-                page-break-before: avoid;
-                margin-top: 15px;
-                padding-top: 5px;
+                page-break-inside: auto !important;
+                page-break-before: auto !important;
+                page-break-after: auto !important;
+                orphans: 1 !important; /* 允许单行在页面顶部 */
+                widows: 1 !important;  /* 允许单行在页面底部 */
+                margin-top: 0.5px !important;
+                margin-bottom: 0 !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                border-top: none !important; /* 打印时移除横线，避免被推到下一页 */
+            }
+            /* 确保section后面是脚注时，section的margin-bottom被覆盖 */
+            div.section:last-of-type {
+                margin-bottom: 0.5px !important;
+            }
+            /* 脚注段落 - 允许单行，强制覆盖 */
+            .footnote p {
+                orphans: 1 !important;
+                widows: 1 !important;
+                page-break-inside: auto !important;
+                page-break-before: auto !important;
+                page-break-after: auto !important;
             }
             
             /* 打印时强制显示图片 */
@@ -1036,19 +1085,19 @@
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        // 从localStorage读取保存的主题，如果没有保存则默认使用暗色
+        // 从localStorage读取保存的主题，如果没有保存则默认使用亮色
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            // 只有明确保存为light时才使用亮色
-            body.classList.remove('dark-mode');
-            themeToggle.textContent = '🌓';
-        } else {
-            // 默认使用暗色（包括savedTheme为null或'dark'的情况）
+        if (savedTheme === 'dark') {
+            // 只有明确保存为dark时才使用暗色
             body.classList.add('dark-mode');
             themeToggle.textContent = '☀️';
+        } else {
+            // 默认使用亮色（包括savedTheme为null或'light'的情况）
+            body.classList.remove('dark-mode');
+            themeToggle.textContent = '🌓';
             if (!savedTheme) {
-                // 如果是首次访问，保存默认暗色偏好
-                localStorage.setItem('theme', 'dark');
+                // 如果是首次访问，保存默认亮色偏好
+                localStorage.setItem('theme', 'light');
             }
         }
 

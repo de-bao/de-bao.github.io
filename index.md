@@ -89,8 +89,8 @@ description: Baud的个人网站 - 分享技术见解和生活思考
             <span class="skill-tag-item">TensorFlow</span>
             <span class="skill-tag-item">LangChain</span>
             <span class="skill-tag-item">NLP</span>
-        </div>
-        
+            </div>
+
     </section>
 
     <!-- 最新文章 -->
