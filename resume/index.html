@@ -797,16 +797,16 @@
                     <div class="sub-project-item">
                         <div class="item-header">
                             <div class="item-title">大模型轻量化推理平台</div>
-                            <div class="item-date">2025.12 - 2026.02</div>
+                            <div class="item-date">2025.12 - 2026.03</div>
                         </div>
                         <div class="item-subtitle">参与人 | 团队项目</div>
                         <div class="item-description">
-                            <p>面向生产环境，通过模型量化、KV缓存优化和动态批处理等技术，实现高吞吐、低延迟的推理服务。</p>
+                            <p>面向小规模集群环境，通过选择和调优vLLM或SGLang等引擎直接在GPU上进行性能提升，以提供轻量快捷的AI推理服务</p>
                             <ul>
-                                <li>实现了INT8/INT4量化推理引擎，在保持模型精度损失小于2%的前提下，推理速度提升3-4倍，显存占用降低60%</li>
-                                <li>设计了高效的KV缓存管理机制，支持多轮对话的上下文复用，将长文本推理延迟降低40%</li>
-                                <li>开发了动态批处理调度系统，根据请求队列自动调整批次大小，吞吐量提升2.5倍，GPU利用率达到85%以上</li>
-                                <li>构建了完整的服务化框架，支持模型热更新、负载均衡和自动扩缩容，QPS达到1000+，P99延迟控制在200ms以内<a href="https://github.com/gpustack/gpustack/pull/3540" target="_blank">PR#3540</a></li>
+                                <li>深入vLLM的源码，分析其Scheduler和Connector的实现，尤其是LMCache对KVCacheManager的插件化应用</li>
+                                <li>开发推理平台对vLLM及LMCache的层级适配，实现了NVIDIA/AMD下的三级KVCacheOffoading功能，同时完成benchmark
+                                <li>对社区场景支持SGLang和Hicache的开源贡献<a href="https://github.com/gpustack/gpustack/pull/3540" target="_blank">PR#3540</a>补齐主流推理引擎的three-tier缓存卸载</li>
+                                <li>深入server/worker架构，开发了多机场景下的kvcache磁盘管理，在worker层实现实例清缴和缓存命中，从而提高推理速度和吞吐量</li>
                             </ul>
                         </div>
                     </div>
