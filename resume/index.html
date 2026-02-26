@@ -818,12 +818,12 @@
                         </div>
                         <div class="item-subtitle">负责人 | 团队项目</div>
                         <div class="item-description">
-                            <p>针对领域适配的后训练，通过全量微调和参数高效微调技术提升模型在特定任务上的性能，实现模型轻量化部署。</p>
+                            <p>针对openstack云计算领域适配的后训练，通过全量微调和参数高效微调技术提升模型在特定任务上的性能，实现模型CPU部署。</p>
                             <ul>
                                 <li>构建了高质量的训练数据集（Alpaca/ShareGPT），通过数据清洗、去重和增强，提升模型的数据质量</li>
-                                <li>采用SFT和DFT等FFT技术</li>
-                                <li>采用LoRA/QLoRA等PEFT技术，将训练参数量降低至全量微调的1%以下，显著降低显存占用和训练成本</li>
-                                <li>进行强化学习PPO和GRPO</li>
+                                <li>采用SFT和DFT等FFT技术，通过llamafactory进行微调，使1.7B模型充分吸收领域QA对，完成RLHF前的冷启动</li>
+                                <li>采用LoRA等PEFT技术，将训练参数量降低至全量微调的5%以下，拼接Adapter在微调时保留更多的泛化性</li>
+                                <li>通过OpenRLHF进行强化学习PPO和GRPO，使模型在特定任务上达到最优，包括对tool_call的奖励和cli的泛化性提升</li>
                             </ul>
                         </div>
                     </div>
