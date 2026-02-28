@@ -1,0 +1,95 @@
+.resume-lang-item {
+  position: fixed;
+  bottom: 30px;
+  right: 55px;
+  z-index: 1000;
+}
+
+.resume-lang-btn {
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 8px;
+  cursor: pointer;
+  padding: 3px;
+  transition: color 0.3s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume-lang-btn:hover {
+  color: #000;
+}
+
+body.dark-mode .resume-lang-btn {
+  color: #e0e0e0;
+}
+
+body.dark-mode .resume-lang-btn:hover {
+  color: #fff;
+}
+
+.resume-lang-menu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 4px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 4px;
+  min-width: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .resume-lang-menu {
+  background: #1a1a1a !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.resume-lang-option {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+body.dark-mode .resume-lang-option {
+  color: #b3b3b3 !important;
+}
+
+body.dark-mode .resume-lang-option:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.resume-lang-option:hover {
+  color: #333 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.resume-lang-option.active {
+  color: #6366f1 !important;
+  font-weight: 600 !important;
+  background: rgba(99, 102, 241, 0.1) !important;
+}
+
+body.dark-mode .resume-lang-option.active {
+  color: #6366f1 !important;
+}
+
+@media print {
+  .resume-lang-item {
+    display: none !important;
+  }
+}

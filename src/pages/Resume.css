@@ -1,0 +1,467 @@
+/* Resume页面样式 - 从原Jekyll版本迁移 */
+
+/* 导入Lato字体 */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.resume-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 章节样式 */
+.section {
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.section-title {
+  font-size: 22px;
+  margin-bottom: 2px;
+  font-weight: normal;
+}
+
+heading {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 22px;
+}
+
+papertitle {
+  font-weight: 700;
+  color: #1772d0;
+}
+
+body.dark-mode papertitle {
+  color: #4a9eff;
+}
+
+.footnote {
+  margin-top: 0.5px;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  color: #666;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .footnote {
+  border-top-color: #444;
+  color: #999;
+}
+
+/* 教育背景 */
+.education-item {
+  margin-bottom: 3px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.experience-item,
+.project-item {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+body.dark-mode .experience-item,
+body.dark-mode .project-item {
+  border-bottom-color: #444;
+}
+
+.experience-item:last-child,
+.project-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* 子项目样式 */
+.sub-project-item {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+body.dark-mode .sub-project-item {
+  border-bottom-color: #444;
+}
+
+.sub-project-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sub-project-item .item-title {
+  font-size: 15px;
+}
+
+.sub-project-item .item-subtitle {
+  font-size: 13px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+}
+
+.item-subtitle {
+  font-size: 14px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .item-subtitle {
+  color: #999;
+}
+
+.item-date {
+  color: #666;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+body.dark-mode .item-date {
+  color: #999;
+}
+
+.item-description {
+  line-height: 1.0;
+  margin-top: 3px;
+}
+
+.education-item .item-description {
+  margin-top: 2px;
+}
+
+.item-description ul {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.item-description li {
+  margin-bottom: 4px;
+}
+
+/* 论文发表模块 */
+.publications-content {
+  line-height: 1.15;
+}
+
+.publications-content br + br {
+  line-height: 0.5;
+  display: block;
+  margin-top: -0.95em;
+}
+
+/* 获奖情况 */
+.awards-list,
+.certificates-list {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.1px 30px;
+}
+
+.awards-list li,
+.certificates-list li {
+  padding: 1.5px 0;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+/* 下载按钮 */
+.download-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 3px;
+  text-decoration: none;
+  font-size: 8px;
+  z-index: 1000;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  color: #000;
+}
+
+body.dark-mode .download-btn {
+  color: #e0e0e0;
+}
+
+body.dark-mode .download-btn:hover {
+  color: #fff;
+}
+
+/* 打印样式 */
+@media print {
+  * {
+    orphans: 1;
+    widows: 1;
+  }
+  
+  .theme-toggle,
+  .download-btn,
+  .nav-btn,
+  .resume-lang-item {
+    display: none !important;
+  }
+  
+  .resume-container {
+    padding: 0;
+  }
+  
+  .header {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+  
+  .header-content {
+    display: table-cell !important;
+    width: 70% !important;
+    vertical-align: middle !important;
+    padding-right: 20px !important;
+  }
+  
+  .header-image {
+    display: table-cell !important;
+    width: 30% !important;
+    vertical-align: middle !important;
+    text-align: right !important;
+  }
+  
+  .section {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+    margin-bottom: 20px !important;
+  }
+  
+  .section:last-of-type,
+  .section:last-child,
+  .section:has(+ .footnote) {
+    margin-bottom: 0.5px !important;
+  }
+  
+  .section + .footnote {
+    margin-top: 0.5px !important;
+  }
+  
+  heading {
+    page-break-after: auto;
+    page-break-inside: avoid;
+  }
+  
+  .item-header {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+    page-break-inside: auto;
+    page-break-after: auto;
+  }
+  
+  .item-header > .item-title {
+    display: table-cell !important;
+    width: auto !important;
+    vertical-align: top !important;
+  }
+  
+  .item-header > .item-date {
+    display: table-cell !important;
+    width: 180px !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    vertical-align: top !important;
+    padding-left: 10px !important;
+  }
+  
+  .experience-item,
+  .project-item {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+  
+  .sub-project-item {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .item-description {
+    page-break-inside: auto;
+  }
+  
+  .item-description ul {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  
+  .item-description li {
+    page-break-inside: avoid;
+    page-break-after: auto;
+    page-break-before: auto;
+    margin-bottom: 4px;
+  }
+  
+  .education-item {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+    margin-bottom: 3px;
+  }
+  
+  .awards-list,
+  .certificates-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1px 30px !important;
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+  
+  .awards-list li,
+  .certificates-list li {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    page-break-inside: avoid;
+    page-break-after: auto;
+    page-break-before: auto;
+  }
+  
+  .footnote {
+    page-break-inside: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    orphans: 1 !important;
+    widows: 1 !important;
+    margin-top: 0.5px !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-top: none !important;
+  }
+  
+  div.section:last-of-type {
+    margin-bottom: 0.5px !important;
+  }
+  
+  .footnote p {
+    orphans: 1 !important;
+    widows: 1 !important;
+    page-break-inside: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+  }
+  
+  .header-image img {
+    display: block !important;
+    margin-left: auto !important;
+  }
+  
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .resume-container {
+    padding: 15px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .header-image {
+    order: -1;
+  }
+  
+  .header-image img {
+    width: 150px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .item-header {
+    flex-direction: column;
+  }
+  
+  .awards-list,
+  .certificates-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .sub-project-item {
+    margin-left: 10px;
+  }
+}
+
+/* 隐藏 ClustrMaps 地图但保留统计功能 */
+#clustrmaps-widget-v2,
+.clustrmaps-map-control,
+.clustrmaps-map-container,
+.clustrmaps-map,
+[id*="clustr"],
+[id*="clustrmaps"],
+[class*="clustr"],
+[class*="clustrmaps"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}

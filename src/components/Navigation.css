@@ -1,0 +1,47 @@
+/* 导航链接按钮 */
+.nav-btn {
+  position: fixed;
+  bottom: 30px;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 3px;
+  text-decoration: none;
+  font-size: 8px;
+  z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+.nav-btn:hover {
+  color: #000;
+}
+
+body.dark-mode .nav-btn {
+  color: #e0e0e0;
+}
+
+body.dark-mode .nav-btn:hover {
+  color: #fff;
+}
+
+.nav-btn-home {
+  left: 20px;
+}
+
+.nav-btn-blog {
+  left: 50px;
+}
+
+.nav-btn-future {
+  left: 80px;
+}
+
+.nav-btn-life {
+  left: 110px;
+}
+
+@media print {
+  .nav-btn {
+    display: none;
+  }
+}

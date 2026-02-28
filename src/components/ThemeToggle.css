@@ -1,0 +1,32 @@
+/* 明暗模式切换按钮 */
+.theme-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 80px;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 8px;
+  z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: #000;
+}
+
+body.dark-mode .theme-toggle {
+  color: #e0e0e0;
+}
+
+body.dark-mode .theme-toggle:hover {
+  color: #fff;
+}
+
+@media print {
+  .theme-toggle {
+    display: none;
+  }
+}

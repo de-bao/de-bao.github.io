@@ -1,0 +1,78 @@
+/* 页脚样式 - 从main.css迁移 */
+
+.footer {
+  background: #141414;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6rem 0 2.5rem;
+  margin-top: 6rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.footer-section p {
+  color: #b3b3b3;
+  line-height: 1.8;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #b3b3b3;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #808080;
+  font-size: 0.9rem;
+}
+
+.footer-bottom a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #818cf8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}

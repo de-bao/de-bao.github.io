@@ -1,0 +1,75 @@
+/* 头部信息 */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+.header-content {
+  flex: 1;
+  text-align: center;
+}
+
+.header-image {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.header-image img {
+  width: 200px;
+  border-radius: 15px;
+  display: block;
+}
+
+.header-image img[style*="display: none"] {
+  display: none !important;
+}
+
+.header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.header .subtitle {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .header .subtitle {
+  color: #999;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.contact-item {
+  font-size: 14px;
+}
+
+.contact-item a {
+  color: #1772d0;
+}
+
+.contact-item a:hover {
+  color: #f09228;
+}
+
+name {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 32px;
+}
+
+subname {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 20px;
+}

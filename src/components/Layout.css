@@ -1,0 +1,12 @@
+/* Layout样式已在main.css中定义，这里只做补充 */
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 4rem 0;
+}

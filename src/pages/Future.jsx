@@ -1,0 +1,254 @@
+import { useEffect, useState } from 'react'
+import './Future.css'
+
+function Future() {
+  const [stats, setStats] = useState({ years: 0, skills: 0, projects: 0, academic: 0 })
+
+  useEffect(() => {
+    // 统计数据动画
+    const animateValue = (start, end, duration, callback) => {
+      const startTime = performance.now()
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        const value = start + (end - start) * progress
+        callback(Math.floor(value))
+        if (progress < 1) {
+          requestAnimationFrame(animate)
+        }
+      }
+      requestAnimationFrame(animate)
+    }
+
+    const targets = { years: 5, skills: 10, projects: 6, academic: 1 }
+    animateValue(0, targets.years, 2000, (val) => setStats(prev => ({ ...prev, years: val })))
+    animateValue(0, targets.skills, 2000, (val) => setStats(prev => ({ ...prev, skills: val })))
+    animateValue(0, targets.projects, 2000, (val) => setStats(prev => ({ ...prev, projects: val })))
+    animateValue(0, targets.academic, 2000, (val) => setStats(prev => ({ ...prev, academic: val })))
+  }, [])
+
+  return (
+    <div className="future-container">
+      <div className="home-section fade-in">
+        <div className="container">
+          <header className="page-header">
+            <h1>🌟 未来</h1>
+            <p>规划未来，成就更好的自己</p>
+          </header>
+
+          {/* 统计数据 */}
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-number">{stats.years}</div>
+              <div className="stat-label">年职业规划</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">{stats.skills}</div>
+              <div className="stat-label">技能提升目标</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">{stats.projects}</div>
+              <div className="stat-label">项目计划</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">{stats.academic}</div>
+              <div className="stat-label">学术深造计划</div>
+            </div>
+          </div>
+
+          <section className="home-section">
+            <h2>职业目标</h2>
+            <p>作为一名计算机专业硕士研究生，我计划在未来五年内成为一名资深的软件工程师，专注于人工智能和机器学习领域的研究与开发。我希望能够在AI应用、分布式系统和Web技术等领域深耕，成为行业内的技术专家。</p>
+            <p>短期目标（1-2年）：在优秀的科技公司担任全栈开发工程师或软件工程师，积累实际项目经验，提升工程实践能力。同时继续深入研究RAG系统、大语言模型应用等前沿技术。</p>
+            <p>中期目标（3-5年）：成为技术专家或架构师，能够独立设计和实现大型分布式系统，在AI应用和系统架构方面有深入的理解和实践经验。考虑攻读博士学位，深入研究深度学习和自然语言处理领域的前沿技术。</p>
+            
+            <h3>重点发展方向</h3>
+            <div className="skill-tags-container">
+              <span className="skill-tag-item">AI & LLM</span>
+              <span className="skill-tag-item">分布式系统</span>
+              <span className="skill-tag-item">全栈开发</span>
+              <span className="skill-tag-item">系统架构</span>
+              <span className="skill-tag-item">云原生</span>
+              <span className="skill-tag-item">知识图谱</span>
+              <span className="skill-tag-item">RAG系统</span>
+              <span className="skill-tag-item">微服务</span>
+            </div>
+          </section>
+
+          <section className="home-section">
+            <h2>未来项目计划</h2>
+            <div className="projects-grid">
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>🚀 增强RAG系统</h3>
+                  <p>在现有智能RAG系统基础上，进一步优化知识图谱构建和向量检索算法，提升系统的准确性和响应速度。计划集成更多数据源，支持多模态检索（文本、图像、音频），并探索大模型微调技术。</p>
+                  <p><strong>技术方向：</strong>知识图谱优化、多模态AI、模型微调、性能优化</p>
+                  <p><strong>时间规划：</strong>2025-2026年</p>
+                </div>
+              </div>
+              
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>💻 开源贡献</h3>
+                  <p>积极参与开源社区，为知名的AI和Web开发框架贡献代码。计划创建自己的开源项目，分享技术实践和最佳方案。通过GitHub、技术博客等平台建立个人技术品牌。</p>
+                  <p><strong>技术方向：</strong>开源项目、技术博客、社区贡献、知识分享</p>
+                  <p><strong>时间规划：</strong>持续进行</p>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📊 学术研究</h3>
+                  <p>考虑攻读博士学位，深入研究深度学习和自然语言处理领域。计划发表高质量学术论文，参与国际会议，与学术界和工业界建立深度合作。研究方向包括：大模型应用、知识图谱推理、多模态学习等。</p>
+                  <p><strong>研究方向：</strong>深度学习、NLP、知识图谱、多模态学习</p>
+                  <p><strong>时间规划：</strong>2026-2030年</p>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>🤖 企业级AI平台</h3>
+                  <p>设计和开发面向企业的AI应用平台，整合RAG、知识图谱、大模型等核心技术，为企业提供智能问答、文档分析、知识管理等服务。注重系统的可扩展性、安全性和易用性。</p>
+                  <p><strong>技术方向：</strong>企业AI应用、平台架构、系统设计、SaaS服务</p>
+                  <p><strong>时间规划：</strong>2025-2027年</p>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>☁️ 云原生架构实践</h3>
+                  <p>深入学习云原生技术栈，包括Kubernetes、服务网格、Serverless等。计划在大型分布式系统中实践云原生架构，提升系统的弹性、可扩展性和运维效率。获得相关云平台认证。</p>
+                  <p><strong>技术方向：</strong>Kubernetes、云原生、微服务、DevOps</p>
+                  <p><strong>时间规划：</strong>2025-2026年</p>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📚 技术书籍创作</h3>
+                  <p>基于项目实践和技术积累，计划撰写技术书籍或系列技术文章。内容涵盖RAG系统实践、分布式系统设计、AI应用开发等主题，帮助更多人学习和应用这些技术。</p>
+                  <p><strong>内容方向：</strong>技术书籍、实战教程、最佳实践、系统设计</p>
+                  <p><strong>时间规划：</strong>2026-2027年</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="home-section">
+            <h2>技能提升计划</h2>
+            <div className="timeline">
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>📚 深度学习与AI</strong> - 深入学习PyTorch、TensorFlow等框架，掌握大模型训练和微调技术，研究多模态AI应用</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>🔧 系统架构</strong> - 学习大型分布式系统设计，掌握微服务架构、云原生技术，提升系统设计和优化能力</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>☁️ 云计算与DevOps</strong> - 获得AWS、Azure等云平台认证，深入学习Kubernetes、Docker、CI/CD等DevOps工具链</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>💻 编程语言</strong> - 继续深入学习Python、Java、Go等语言的高级特性，掌握函数式编程、并发编程等高级概念</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>📖 技术书籍学习</strong> - 计划阅读《深度学习》、《设计数据密集型应用》、《系统设计面试》等经典技术书籍</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>🎓 学术深造</strong> - 考虑攻读博士学位，深入研究AI和分布式系统理论，发表高质量学术论文</p>
+                </div>
+              </div>
+            </div>
+            
+            <h3>📅 最新动态</h3>
+            <div className="timeline">
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年11月</strong> - 开始学习新的前端框架Next.js，并开始构建个人博客系统</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年10月</strong> - 发布了新的技术博客文章《构建高性能RAG系统的实践与思考》</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年9月</strong> - 创建开源项目，获得1000+ GitHub Stars，社区反响热烈</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年8月</strong> - 完成了大型企业级项目的架构设计和开发工作</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年7月</strong> - 参加了技术大会，分享了《微服务架构实践》主题演讲</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <p><strong>2025年6月</strong> - 开始深入研究AI和LLM技术，启动了知识图谱RAG项目</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="home-section">
+            <h2>推荐阅读书籍</h2>
+            <div className="projects-grid">
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《深度学习》（Deep Learning）</h3>
+                  <p>Ian Goodfellow等著。深度学习领域的经典教材，系统介绍神经网络、卷积网络、循环网络等核心概念和算法</p>
+                </div>
+              </div>
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《设计数据密集型应用》</h3>
+                  <p>Martin Kleppmann著。深入讲解分布式系统的设计原理，涵盖数据存储、数据复制、分片、事务等核心主题</p>
+                </div>
+              </div>
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《系统设计面试》</h3>
+                  <p>Alex Xu著。系统设计面试必备指南，涵盖如何设计可扩展、高性能的分布式系统</p>
+                </div>
+              </div>
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《人工智能：现代方法》</h3>
+                  <p>Stuart Russell等著。AI领域的权威教材，全面介绍搜索、知识表示、机器学习、自然语言处理等AI核心技术</p>
+                </div>
+              </div>
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《微服务设计》</h3>
+                  <p>Chris Richardson著。微服务架构实践指南，介绍服务拆分、服务通信、数据管理、部署等微服务设计模式</p>
+                </div>
+              </div>
+              <div className="project-card">
+                <div className="project-content">
+                  <h3>📖 《高性能网站建设指南》</h3>
+                  <p>Steve Souders著。Web性能优化经典书籍，涵盖前端优化、后端优化、缓存策略等提升网站性能的方法</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Future
