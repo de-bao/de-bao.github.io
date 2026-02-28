@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true  # 改为 true，取消正在进行的运行
 
 jobs:
   build:
@@ -41,6 +41,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+          name: github-pages  # 明确指定 artifact 名称
 
   deploy:
     runs-on: ubuntu-latest
