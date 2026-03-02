@@ -922,6 +922,12 @@ a:hover {
     box-shadow: var(--shadow-lg);
 }
 
+.post-card-header {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+}
+
 .post-card-header h2,
 .post-card-header h3 {
     font-size: 1.5rem;
