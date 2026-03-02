@@ -1055,6 +1055,11 @@ a:hover {
     line-height: 1.1;
 }
 
+/* 隐藏post-header中的标题（因为文章内容中已经有标题了） */
+.post-header .post-title {
+    display: none;
+}
+
 .post-content {
     line-height: 1.9;
     font-size: 1.1rem;
