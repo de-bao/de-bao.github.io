@@ -895,7 +895,7 @@ a:hover {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
     transition: all var(--transition-base);
     display: flex;
     flex-direction: column;
@@ -925,13 +925,20 @@ a:hover {
 .post-card-header {
     display: flex;
     gap: var(--spacing-lg);
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-read-more {
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 .post-card-header h2,
 .post-card-header h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-sm);
+    font-size: 1.25rem;
+    margin: 0;
+    flex: 1;
 }
 
 .post-card-header h2 a,
@@ -1079,7 +1086,7 @@ a:hover {
 }
 
 .post-content pre {
-    background: var(--color-bg-secondary);
+    background: #1e1e1e;
     padding: var(--spacing-lg);
     border-radius: var(--radius-md);
     overflow-x: auto;
@@ -1093,6 +1100,73 @@ a:hover {
     padding: 0;
     border: none;
     color: var(--color-text-primary);
+    font-family: 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* Highlight.js 代码高亮样式增强 */
+.post-content pre.hljs,
+.post-content pre code.hljs {
+    background: #1e1e1e !important;
+    color: #d4d4d4 !important;
+}
+
+.post-content .hljs-keyword,
+.post-content .hljs-selector-tag,
+.post-content .hljs-literal,
+.post-content .hljs-section,
+.post-content .hljs-link {
+    color: #569cd6 !important;
+}
+
+.post-content .hljs-function .hljs-keyword {
+    color: #dcdcaa !important;
+}
+
+.post-content .hljs-subst {
+    color: #d4d4d4 !important;
+}
+
+.post-content .hljs-string,
+.post-content .hljs-title,
+.post-content .hljs-name,
+.post-content .hljs-type,
+.post-content .hljs-attribute,
+.post-content .hljs-symbol,
+.post-content .hljs-bullet,
+.post-content .hljs-addition,
+.post-content .hljs-variable,
+.post-content .hljs-template-tag,
+.post-content .hljs-template-variable {
+    color: #ce9178 !important;
+}
+
+.post-content .hljs-comment,
+.post-content .hljs-quote,
+.post-content .hljs-deletion,
+.post-content .hljs-meta {
+    color: #6a9955 !important;
+}
+
+.post-content .hljs-keyword,
+.post-content .hljs-selector-tag,
+.post-content .hljs-literal,
+.post-content .hljs-title,
+.post-content .hljs-section,
+.post-content .hljs-doctag,
+.post-content .hljs-type,
+.post-content .hljs-name,
+.post-content .hljs-strong {
+    font-weight: bold;
+}
+
+.post-content .hljs-number {
+    color: #b5cea8 !important;
+}
+
+.post-content .hljs-emphasis {
+    font-style: italic;
 }
 
 .post-content blockquote {
