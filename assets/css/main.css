@@ -984,6 +984,23 @@ a:hover {
     flex: 1;
 }
 
+.post-date-large {
+    flex-shrink: 0;
+    min-width: 140px;
+    padding-top: 0.25rem;
+}
+
+.post-date-large time {
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.post-content-wrapper {
+    flex: 1;
+}
+
 .post-card-footer {
     margin-top: var(--spacing-sm);
     padding-top: var(--spacing-sm);
@@ -1628,7 +1645,27 @@ a:hover {
         padding: var(--spacing-xl) 0;
     }
     
-    .posts-list,
+    .posts-list {
+        padding-left: 1.5rem;
+    }
+    
+    .post-card {
+        margin-left: var(--spacing-sm);
+    }
+    
+    .post-card-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .post-date-large {
+        min-width: auto;
+    }
+    
+    .post-date-large time {
+        font-size: 0.85rem;
+    }
+    
     .projects-grid,
     .skills-grid {
         grid-template-columns: 1fr;
