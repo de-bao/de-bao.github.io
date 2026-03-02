@@ -93,43 +93,4 @@ description: Baud的个人网站 - 分享技术见解和生活思考
 
     </section>
 
-    <!-- 最新文章 -->
-    <section class="home-section fade-in">
-        <h2>📝 最新文章</h2>
-        <div class="posts-list">
-            {% for post in site.posts limit: 3 %}
-            <article class="post-card">
-                <div class="post-card-header">
-                    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                    <div class="post-meta">
-                        <time datetime="{{ post.date | date: '%Y-%m-%d' }}">
-                            <i class="far fa-calendar"></i> {{ post.date | date: "%Y年%m月%d日" }}
-                        </time>
-                        {% if post.tags.size > 0 %}
-                        <div class="post-tags">
-                            {% for tag in post.tags limit: 3 %}
-                            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag">#{{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="post-card-content">
-                    {% if post.excerpt %}
-                    <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-                    {% endif %}
-                </div>
-                <div class="post-card-footer">
-                    <a href="{{ post.url | relative_url }}" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-        <div class="text-center mt-lg">
-            <a href="{{ '/blog/' | relative_url }}" class="btn-primary">
-                查看所有文章 <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </section>
-
 </div>
