@@ -27,32 +27,49 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
+      
       - name: Build with Jekyll
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+      
+      - name: Check build output
+        run: |
+          echo "Checking _site directory..."
+          ls -la _site/ || echo "_site directory not found!"
+          echo "Build completed"
+      
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
+          path: gh-pages
+      
       - name: Deploy to gh-pages branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # 删除gh-pages分支的所有文件（除了.git和.github）
+          
+          # 进入 gh-pages 目录
+          cd gh-pages
+          
+          # 删除 gh-pages 分支的所有文件（除了 .git 和 .github）
           find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name '.github' -exec rm -rf {} +
-          # 复制构建后的文件
-          cp -r ${{ github.workspace }}/_site/* .
+          
+          # 从主工作目录复制构建后的文件
+          cp -r ../_site/* .
+          
+          # 提交并推送
           git add -A
           git commit -m "Deploy from main branch [skip ci]" || exit 0
           git push origin gh-pages
-        working-directory: ${{ github.workspace }}
 
   # Deployment job - deploy gh-pages to GitHub Pages
   deploy:
