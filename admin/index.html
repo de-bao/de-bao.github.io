@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客后台管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .auth-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 100px auto;
+        }
+
+        .auth-section h2 {
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: #6366f1;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #818cf8;
+        }
+
+        .btn-secondary {
+            background: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+        }
+
+        .btn-success {
+            background: #10b981;
+        }
+
+        .btn-success:hover {
+            background: #34d399;
+        }
+
+        .posts-list {
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .post-item {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-info h3 {
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .post-meta {
+            font-size: 12px;
+            color: #808080;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .post-actions .btn {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .status-draft {
+            background: #f59e0b;
+            color: #000;
+        }
+
+        .status-published {
+            background: #10b981;
+            color: #000;
+        }
+
+        .editor-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .editor-section h2 {
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .tags-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #333;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        .tag-input {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #10b981;
+            color: #000;
+        }
+
+        .alert-error {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #808080;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            background: #333;
+            border: none;
+            border-radius: 4px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-tab.active {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 登录界面 -->
+        <div id="auth-section" class="auth-section">
+            <h2>登录</h2>
+            <div class="form-group">
+                <label>用户名</label>
+                <input type="text" id="username" value="admin">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="password" placeholder="输入密码">
+            </div>
+            <button class="btn" onclick="login()">登录</button>
+            <div id="auth-error" class="alert alert-error hidden" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- 主界面 -->
+        <div id="main-section" class="hidden">
+            <div class="header">
+                <h1>📝 博客后台管理</h1>
+                <div>
+                    <span id="user-info" style="margin-right: 15px; color: #b3b3b3;"></span>
+                    <button class="btn btn-secondary" onclick="logout()">退出</button>
+                </div>
+            </div>
+
+            <div id="alert-container"></div>
+
+            <!-- 工具栏 -->
+            <div class="toolbar">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterPosts('all')">全部</button>
+                    <button class="filter-tab" onclick="filterPosts('published')">已发布</button>
+                    <button class="filter-tab" onclick="filterPosts('draft')">草稿</button>
+                </div>
+                <button class="btn" onclick="showEditor()">+ 新建文章</button>
+            </div>
+
+            <!-- 编辑器 -->
+            <div id="editor-section" class="editor-section hidden">
+                <h2 id="editor-title">新建文章</h2>
+                <div class="form-group">
+                    <label>标题 *</label>
+                    <input type="text" id="post-title" placeholder="文章标题">
+                </div>
+                <div class="form-group">
+                    <label>摘要</label>
+                    <textarea id="post-excerpt" placeholder="文章摘要"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>内容 (Markdown) *</label>
+                    <textarea id="post-content" placeholder="# 标题&#10;&#10;文章内容..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>标签（用逗号分隔）</label>
+                    <input type="text" id="post-tags" placeholder="技术, 教程, 前端">
+                </div>
+                <div class="form-group">
+                    <label>分类（用逗号分隔）</label>
+                    <input type="text" id="post-categories" placeholder="前端开发">
+                </div>
+                <div class="form-group">
+                    <label>日期</label>
+                    <input type="date" id="post-date">
+                </div>
+                <div class="form-group">
+                    <label>阅读时间（分钟）</label>
+                    <input type="number" id="post-read-time" value="5" min="0">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" onclick="savePost()">保存草稿</button>
+                    <button class="btn btn-success" onclick="publishPost()">发布文章</button>
+                    <button class="btn btn-secondary" onclick="cancelEdit()">取消</button>
+                </div>
+            </div>
+
+            <!-- 文章列表 -->
+            <div id="posts-list" class="posts-list">
+                <div class="loading">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://api.debao.qzz.io/api';
+        let currentToken = localStorage.getItem('token');
+        let currentPostId = null;
+        let currentFilter = 'all';
+
+        // 初始化
+        if (currentToken) {
+            checkAuth();
+        }
+
+        async function checkAuth() {
+            try {
+                // 简单验证 token 是否有效（通过获取文章列表）
+                const response = await fetch(`${API_BASE}/posts?status=all`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    showMain();
+                } else {
+                    throw new Error('Token invalid');
+                }
+            } catch (error) {
+                localStorage.removeItem('token');
+                currentToken = null;
+            }
+        }
+
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('auth-error');
+
+            if (!username || !password) {
+                errorDiv.textContent = '请输入用户名和密码';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentToken = data.token;
+                    localStorage.setItem('token', data.token);
+                    showMain();
+                } else {
+                    errorDiv.textContent = data.error || '登录失败';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                errorDiv.textContent = '网络错误，请稍后重试';
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            currentToken = null;
+            document.getElementById('auth-section').classList.remove('hidden');
+            document.getElementById('main-section').classList.add('hidden');
+        }
+
+        function showMain() {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('main-section').classList.remove('hidden');
+            document.getElementById('user-info').textContent = '已登录';
+            loadPosts();
+        }
+
+        async function loadPosts() {
+            const listDiv = document.getElementById('posts-list');
+            listDiv.innerHTML = '<div class="loading">加载中...</div>';
+
+            try {
+                const url = currentFilter === 'all' 
+                    ? `${API_BASE}/posts?status=all`
+                    : `${API_BASE}/posts?status=${currentFilter}`;
+                
+                const response = await fetch(url, {
+                    headers: currentFilter === 'all' ? {
+                        'Authorization': `Bearer ${currentToken}`
+                    } : {}
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    renderPosts(data.posts || []);
+                } else {
+                    listDiv.innerHTML = '<div class="alert alert-error">加载失败</div>';
+                }
+            } catch (error) {
+                listDiv.innerHTML = '<div class="alert alert-error">网络错误</div>';
+            }
+        }
+
+        function renderPosts(posts) {
+            const listDiv = document.getElementById('posts-list');
+            
+            if (posts.length === 0) {
+                listDiv.innerHTML = '<div class="loading">暂无文章</div>';
+                return;
+            }
+
+            listDiv.innerHTML = posts.map(post => `
+                <div class="post-item">
+                    <div class="post-info">
+                        <h3>${post.title || '无标题'}</h3>
+                        <div class="post-meta">
+                            ${post.date || ''} | 
+                            ${(post.tags || []).join(', ') || '无标签'} |
+                            <span class="status-badge status-${post.status}">${post.status === 'published' ? '已发布' : '草稿'}</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <button class="btn btn-secondary" onclick="editPost('${post.id}')">编辑</button>
+                        ${post.status === 'draft' ? `<button class="btn btn-success" onclick="publishPostById('${post.id}')">发布</button>` : ''}
+                        <button class="btn btn-danger" onclick="deletePost('${post.id}')">删除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterPosts(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            loadPosts();
+        }
+
+        function showEditor(postId = null) {
+            currentPostId = postId;
+            document.getElementById('editor-section').classList.remove('hidden');
+            document.getElementById('editor-title').textContent = postId ? '编辑文章' : '新建文章';
+            
+            if (postId) {
+                loadPost(postId);
+            } else {
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-excerpt').value = '';
+                document.getElementById('post-content').value = '';
+                document.getElementById('post-tags').value = '';
+                document.getElementById('post-categories').value = '';
+                document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+                document.getElementById('post-read-time').value = 5;
+            }
+        }
+
+        async function loadPost(id) {
+            try {
+                const response = await fetch(`${API_BASE}/posts/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const post = await response.json();
+                    document.getElementById('post-title').value = post.title || '';
+                    document.getElementById('post-excerpt').value = post.excerpt || '';
+                    document.getElementById('post-content').value = post.content || '';
+                    document.getElementById('post-tags').value = (post.tags || []).join(', ');
+                    document.getElementById('post-categories').value = (post.categories || []).join(', ');
+                    document.getElementById('post-date').value = post.date || new Date().toISOString().split('T')[0];
+                    document.getElementById('post-read-time').value = post.read_time || 5;
+                }
+            } catch (error) {
+                showAlert('加载文章失败', 'error');
+            }
+        }
+
+        async function editPost(id) {
+            currentPostId = id;
+            showEditor(id);
+        }
+
+        async function savePost() {
+            const title = document.getElementById('post-title').value.trim();
+            const content = document.getElementById('post-content').value.trim();
+            
+            if (!title || !content) {
+                showAlert('标题和内容不能为空', 'error');
+                return;
+            }
+
+            const postData = {
+                title,
+                content,
+                excerpt: document.getElementById('post-excerpt').value.trim(),
+                tags: document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                categories: document.getElementById('post-categories').value.split(',').map(c => c.trim()).filter(c => c),
+                date: document.getElementById('post-date').value || new Date().toISOString().split('T')[0],
+                read_time: parseInt(document.getElementById('post-read-time').value) || 0,
+                status: 'draft'
+            };
+
+            try {
+                const url = currentPostId 
+                    ? `${API_BASE}/posts/${currentPostId}`
+                    : `${API_BASE}/posts`;
+                
+                const method = currentPostId ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify(postData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('保存成功', 'success');
+                    cancelEdit();
+                    loadPosts();
+                } else {
+                    showAlert(data.error || '保存失败', 'error');
+                }
+            } catch (error) {
+                showAlert('网络错误', 'error');
+            }
+        }
+
+        async function publishPost() {
+            if (!currentPostId) {
+                // 先保存
+                await savePost();
+                // 获取刚创建的文章 ID
+                const response = await fetch(`${API_BASE}/posts?status=draft`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+                const data = await response.json();
+                if (data.posts && data.posts.length > 0) {
+                    currentPostId = data.posts[0].id;
+                }
+            }
+
+            if (!currentPostId) {
+                showAlert('请先保存文章', 'error');
+                return;
+            }
+
+            try {
+                // 1. 发布文章（生成 Markdown）
+                const response = await fetch(`${API_BASE}/posts/${currentPostId}/publish`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('发布成功！文章已发布，前端页面将实时显示', 'success');
+                    cancelEdit();
+                    loadPosts();
+                } else {
+                    showAlert(data.error || '发布失败', 'error');
+                }
+            } catch (error) {
+                showAlert('网络错误', 'error');
+            }
+        }
+
+
+        async function publishPostById(id) {
+            try {
+                const response = await fetch(`${API_BASE}/posts/${id}/publish`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('发布成功！文章已发布，前端页面将实时显示', 'success');
+                    loadPosts();
+                } else {
+                    showAlert(data.error || '发布失败', 'error');
+                }
+            } catch (error) {
+                showAlert('网络错误', 'error');
+            }
+        }
+
+        async function deletePost(id) {
+            if (!confirm('确定要删除这篇文章吗？')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/posts/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    showAlert('删除成功', 'success');
+                    loadPosts();
+                } else {
+                    showAlert('删除失败', 'error');
+                }
+            } catch (error) {
+                showAlert('网络错误', 'error');
+            }
+        }
+
+        function cancelEdit() {
+            document.getElementById('editor-section').classList.add('hidden');
+            currentPostId = null;
+        }
+
+        function showAlert(message, type = 'success') {
+            const container = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+    </script>
+</body>
+</html>

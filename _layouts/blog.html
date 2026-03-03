@@ -72,10 +72,11 @@ layout: default
 
         <!-- 文章列表 - 时间轴样式 -->
         <div class="posts-list" id="posts-list">
+            <!-- 静态文章（Jekyll 构建时生成，作为后备） -->
             {% if site.posts.size > 0 %}
             {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
             {% for post in sorted_posts %}
-            <article class="post-card" 
+            <article class="post-card static-post" 
                      data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}"
                      data-year="{{ post.date | date: '%Y' }}"
                      data-title="{{ post.title | downcase }}"
@@ -95,11 +96,17 @@ layout: default
                 </div>
             </article>
             {% endfor %}
-            {% else %}
-            <div style="text-align: center; padding: 4rem 0;">
-                <p style="font-size: 1.2rem; color: var(--color-text-secondary);">暂无文章，敬请期待！</p>
-        </div>
             {% endif %}
+            <!-- 动态文章（从 API 加载） -->
+            <div id="dynamic-posts-container"></div>
+            <!-- 加载提示 -->
+            <div id="posts-loading" style="text-align: center; padding: 2rem 0; display: none;">
+                <p style="color: var(--color-text-secondary);">正在加载最新文章...</p>
+            </div>
+            <!-- 空状态 -->
+            <div id="posts-empty" style="text-align: center; padding: 4rem 0; display: none;">
+                <p style="font-size: 1.2rem; color: var(--color-text-secondary);">暂无文章，敬请期待！</p>
+            </div>
         </div>
 
         <!-- 无结果提示 -->
@@ -111,13 +118,217 @@ layout: default
 </div>
 
 <script>
-// 筛选功能
+// API 配置
+const API_BASE = 'https://api.debao.qzz.io/api';
+let allPosts = []; // 存储所有文章（静态 + 动态）
+
+// 从 API 加载文章
+async function loadPostsFromAPI() {
+    const loadingDiv = document.getElementById('posts-loading');
+    const emptyDiv = document.getElementById('posts-empty');
+    const dynamicContainer = document.getElementById('dynamic-posts-container');
+    
+    try {
+        loadingDiv.style.display = 'block';
+        
+        const response = await fetch(`${API_BASE}/posts?status=published`);
+        const data = await response.json();
+        
+        if (data.posts && data.posts.length > 0) {
+            // 渲染动态文章
+            renderDynamicPosts(data.posts);
+            // 合并到 allPosts
+            allPosts = allPosts.concat(data.posts);
+        }
+        
+        loadingDiv.style.display = 'none';
+        
+        // 如果没有静态文章也没有动态文章，显示空状态
+        const staticPosts = document.querySelectorAll('.static-post');
+        if (staticPosts.length === 0 && (!data.posts || data.posts.length === 0)) {
+            emptyDiv.style.display = 'block';
+        } else {
+            emptyDiv.style.display = 'none';
+        }
+        
+        // 重新筛选（包含动态文章）
+        filterPosts();
+    } catch (error) {
+        console.error('加载文章失败:', error);
+        loadingDiv.style.display = 'none';
+        // API 失败不影响静态文章显示
+    }
+}
+
+// 渲染动态文章
+function renderDynamicPosts(posts) {
+    const container = document.getElementById('dynamic-posts-container');
+    container.innerHTML = '';
+    
+    // 获取已有的静态文章 slug，避免重复
+    const existingSlugs = new Set();
+    document.querySelectorAll('.static-post').forEach(post => {
+        const link = post.querySelector('a');
+        if (link) {
+            const href = link.getAttribute('href');
+            // 从 href 提取 slug（例如：/技术/文章标题/）
+            const match = href.match(/\/([^\/]+)\/([^\/]+)\//);
+            if (match) {
+                existingSlugs.add(match[2]);
+            }
+        }
+    });
+    
+    posts.forEach(post => {
+        // 检查是否已存在（通过 slug）
+        if (existingSlugs.has(post.slug)) {
+            return; // 跳过已存在的文章
+        }
+        
+        // 格式化日期
+        const date = new Date(post.date);
+        const dateStr = date.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // 生成文章 URL（使用 slug）
+        const postUrl = `/技术/${post.slug}/`; // 可以根据 categories 动态生成
+        
+        // 创建文章卡片
+        const article = document.createElement('article');
+        article.className = 'post-card dynamic-post';
+        article.setAttribute('data-tags', (post.tags || []).map(t => t.toLowerCase().replace(/\s+/g, '-')).join(' '));
+        article.setAttribute('data-year', date.getFullYear().toString());
+        article.setAttribute('data-title', post.title.toLowerCase());
+        article.setAttribute('data-content', (post.excerpt || '').toLowerCase());
+        article.setAttribute('data-slug', post.slug);
+        
+        article.innerHTML = `
+            <div class="post-card-header">
+                <div class="post-date-large">
+                    <time datetime="${post.date}">${dateStr}</time>
+                </div>
+                <div class="post-content-wrapper">
+                    <h2><a href="${postUrl}" data-api-slug="${post.slug}">${post.title}</a></h2>
+                </div>
+                <div class="post-read-more">
+                    <a href="${postUrl}" class="read-more" data-api-slug="${post.slug}">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(article);
+    });
+    
+    // 为动态文章链接添加点击事件（从 API 加载内容）
+    container.querySelectorAll('a[data-api-slug]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const slug = this.getAttribute('data-api-slug');
+            if (slug) {
+                // 检查是否应该从 API 加载
+                const shouldLoadFromAPI = !document.querySelector(`.static-post a[href*="${slug}"]`);
+                if (shouldLoadFromAPI) {
+                    e.preventDefault();
+                    loadPostFromAPI(slug);
+                }
+            }
+        });
+    });
+}
+
+// 从 API 加载单篇文章
+async function loadPostFromAPI(slug) {
+    try {
+        const response = await fetch(`${API_BASE}/posts/${encodeURIComponent(slug)}`);
+        const post = await response.json();
+        
+        if (post) {
+            // 创建文章详情页
+            showPostDetail(post);
+        }
+    } catch (error) {
+        console.error('加载文章详情失败:', error);
+        // 如果 API 失败，尝试跳转到静态页面
+        window.location.href = `/技术/${slug}/`;
+    }
+}
+
+// 显示文章详情（动态创建页面）
+function showPostDetail(post) {
+    // 格式化日期
+    const date = new Date(post.date);
+    const dateStr = date.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // 创建文章详情页 HTML
+    const html = `
+        <article class="post">
+            <header class="post-header">
+                <div class="container">
+                    <h1 class="post-title">${post.title}</h1>
+                    <div class="post-meta">
+                        <time datetime="${post.date}">
+                            <i class="far fa-calendar"></i> ${dateStr}
+                        </time>
+                        ${post.read_time ? `<span class="read-time"><i class="far fa-clock"></i> ${post.read_time} 分钟阅读</span>` : ''}
+                    </div>
+                    ${post.tags && post.tags.length > 0 ? `
+                    <div class="post-tags">
+                        ${post.tags.map(tag => `<a href="/tags/#${tag.toLowerCase().replace(/\s+/g, '-')}" class="tag">#${tag}</a>`).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            </header>
+            <div class="post-content container">
+                ${renderMarkdown(post.content)}
+            </div>
+        </article>
+    `;
+    
+    // 使用 history API 更新 URL 和内容
+    window.history.pushState({ post, html }, post.title, `/技术/${post.slug}/`);
+    document.querySelector('.blog-page').innerHTML = html;
+    
+    // 添加返回按钮
+    const backBtn = document.createElement('button');
+    backBtn.textContent = '← 返回博客列表';
+    backBtn.className = 'btn';
+    backBtn.style.margin = '20px';
+    backBtn.onclick = () => {
+        window.history.back();
+        location.reload();
+    };
+    document.querySelector('.post-header .container').prepend(backBtn);
+}
+
+// 简单的 Markdown 渲染（可以使用 marked.js 等库）
+function renderMarkdown(content) {
+    // 简单的 Markdown 转 HTML
+    return content
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/^\n/g, '<p>')
+        .replace(/\n$/g, '</p>');
+}
+
+// 筛选功能（更新为支持动态文章）
 let activeTag = 'all';
 let activeYear = 'all';
 let searchQuery = '';
 let searchType = 'posts'; // 'posts' 或 'wiki'
 
 function filterPosts() {
+    // 同时筛选静态和动态文章
     const posts = document.querySelectorAll('.post-card');
     let visibleCount = 0;
 
@@ -397,5 +608,39 @@ searchInput.addEventListener('keydown', function(e) {
         wikiSearch();
     }
 });
+
+// 页面加载时从 API 获取文章
+document.addEventListener('DOMContentLoaded', function() {
+    loadPostsFromAPI();
+    
+    // 更新标签和年份筛选（包含动态文章）
+    updateFilters();
+});
+
+// 更新筛选器（包含动态文章的标签和年份）
+function updateFilters() {
+    // 收集所有文章的标签和年份
+    const allTags = new Set();
+    const allYears = new Set();
+    
+    // 从静态文章收集
+    document.querySelectorAll('.static-post').forEach(post => {
+        const tags = (post.getAttribute('data-tags') || '').split(' ').filter(t => t);
+        tags.forEach(tag => allTags.add(tag));
+        const year = post.getAttribute('data-year');
+        if (year) allYears.add(year);
+    });
+    
+    // 从动态文章收集
+    document.querySelectorAll('.dynamic-post').forEach(post => {
+        const tags = (post.getAttribute('data-tags') || '').split(' ').filter(t => t);
+        tags.forEach(tag => allTags.add(tag));
+        const year = post.getAttribute('data-year');
+        if (year) allYears.add(year);
+    });
+    
+    // 更新标签筛选器（如果需要）
+    // 这里可以动态添加新的标签按钮
+}
 </script>
 

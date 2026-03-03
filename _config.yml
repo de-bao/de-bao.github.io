@@ -28,6 +28,7 @@ exclude:
   - vendor
   - README.md
   - .gitignore
+  # admin 目录作为静态文件，不需要 Jekyll 处理
 
 # 包含文件
 # include:
