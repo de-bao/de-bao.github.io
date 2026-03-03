@@ -211,10 +211,10 @@ function renderDynamicPosts(posts) {
                     <time datetime="${post.date}">${dateStr}</time>
                 </div>
                 <div class="post-content-wrapper">
-                    <h2><a href="${postUrl}" data-api-slug="${post.slug}">${post.title}</a></h2>
+                    <h2><a href="${postUrl}" data-api-id="${post.id}" data-api-slug="${post.slug}">${post.title}</a></h2>
                 </div>
                 <div class="post-read-more">
-                    <a href="${postUrl}" class="read-more" data-api-slug="${post.slug}">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                    <a href="${postUrl}" class="read-more" data-api-id="${post.id}" data-api-slug="${post.slug}">阅读全文 <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         `;
@@ -223,35 +223,65 @@ function renderDynamicPosts(posts) {
     });
     
     // 为动态文章链接添加点击事件（从 API 加载内容）
-    container.querySelectorAll('a[data-api-slug]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            const slug = this.getAttribute('data-api-slug');
-            if (slug) {
+    // 使用事件委托，确保动态添加的元素也能响应点击
+    container.addEventListener('click', function(e) {
+        const link = e.target.closest('a[data-api-id]');
+        if (link) {
+            e.preventDefault();
+            const postId = link.getAttribute('data-api-id');
+            const slug = link.getAttribute('data-api-slug');
+            if (postId) {
                 // 检查是否应该从 API 加载
                 const shouldLoadFromAPI = !document.querySelector(`.static-post a[href*="${slug}"]`);
                 if (shouldLoadFromAPI) {
-                    e.preventDefault();
-                    loadPostFromAPI(slug);
+                    // 优先使用 ID，如果失败则使用 slug
+                    loadPostFromAPI(postId, slug);
+                } else {
+                    // 如果是静态文章，正常跳转
+                    window.location.href = link.getAttribute('href');
                 }
             }
-        });
+        }
     });
 }
 
 // 从 API 加载单篇文章
-async function loadPostFromAPI(slug) {
+async function loadPostFromAPI(postId, slug) {
     try {
-        const response = await fetch(`${API_BASE}/posts/${encodeURIComponent(slug)}`);
-        const post = await response.json();
+        console.log('正在加载文章:', postId, slug);
         
-        if (post) {
+        // 先尝试通过 ID 获取（更可靠）
+        let response = await fetch(`${API_BASE}/posts/id/${postId}`);
+        let post = null;
+        
+        if (response.ok) {
+            post = await response.json();
+        } else {
+            // 如果 ID 失败，尝试通过 slug
+            console.log('通过 ID 获取失败，尝试通过 slug:', slug);
+            response = await fetch(`${API_BASE}/posts/${encodeURIComponent(slug)}`);
+            if (response.ok) {
+                post = await response.json();
+            }
+        }
+        
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({ error: '未知错误' }));
+            console.error('API 错误:', error);
+            alert('加载文章失败: ' + (error.error || '文章不存在'));
+            return;
+        }
+        
+        if (post && !post.error) {
             // 创建文章详情页
             showPostDetail(post);
+        } else {
+            console.error('文章数据无效:', post);
+            alert('文章数据无效');
         }
     } catch (error) {
         console.error('加载文章详情失败:', error);
-        // 如果 API 失败，尝试跳转到静态页面
-        window.location.href = `/技术/${slug}/`;
+        alert('加载文章失败: ' + error.message);
     }
 }
 
@@ -292,18 +322,37 @@ function showPostDetail(post) {
     
     // 使用 history API 更新 URL 和内容
     window.history.pushState({ post, html }, post.title, `/技术/${post.slug}/`);
-    document.querySelector('.blog-page').innerHTML = html;
+    
+    // 查找容器并更新内容
+    const blogPage = document.querySelector('.blog-page');
+    const container = document.querySelector('.container');
+    
+    if (blogPage) {
+        blogPage.innerHTML = html;
+    } else if (container) {
+        // 如果没有 .blog-page，直接更新容器
+        container.innerHTML = html;
+    } else {
+        // 如果都没有，更新 body
+        document.body.innerHTML = html;
+    }
     
     // 添加返回按钮
-    const backBtn = document.createElement('button');
-    backBtn.textContent = '← 返回博客列表';
-    backBtn.className = 'btn';
-    backBtn.style.margin = '20px';
-    backBtn.onclick = () => {
-        window.history.back();
-        location.reload();
-    };
-    document.querySelector('.post-header .container').prepend(backBtn);
+    const postHeader = document.querySelector('.post-header');
+    if (postHeader) {
+        const backBtn = document.createElement('button');
+        backBtn.textContent = '← 返回博客列表';
+        backBtn.className = 'btn';
+        backBtn.style.margin = '20px';
+        backBtn.onclick = () => {
+            window.history.back();
+            location.reload();
+        };
+        const headerContainer = postHeader.querySelector('.container');
+        if (headerContainer) {
+            headerContainer.prepend(backBtn);
+        }
+    }
 }
 
 // 简单的 Markdown 渲染（可以使用 marked.js 等库）
